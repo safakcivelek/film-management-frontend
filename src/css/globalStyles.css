@@ -1,0 +1,18 @@
+/* Tüm sayfa için varsayılan ayarlar */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+  
+  /* Root container için flex ayarları */
+  #root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  /* Footer'ı sayfanın en altına itmek için */
+  footer {
+    margin-top: auto;
+  }
