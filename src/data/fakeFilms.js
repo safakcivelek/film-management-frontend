@@ -1,0 +1,28 @@
+const fakeFilms = [
+  { title: 'Film 1', description: 'Description for Film 1', image: 'images/image1.jpg', genre: 'Aksiyon', year: '2023 - 2024', duration: 'Orta (90 - 150 dk)', imdb: '9' },
+  { title: 'Film 2', description: 'Description for Film 2', image: 'images/image1.jpg', genre: 'Komedi', year: '2020 - 2022', duration: 'Kısa (0 - 90 dk)', imdb: '8' },
+  { title: 'Film 3', description: 'Description for Film 3', image: 'images/image1.jpg', genre: 'Dram', year: '2010 - 2019', duration: 'Uzun (150+ dk)', imdb: '8' },
+  { title: 'Film 4', description: 'Description for Film 4', image: 'images/image1.jpg', genre: 'Korku', year: '2000 - 2009', duration: 'Orta (90 - 150 dk)', imdb: '7' },
+  { title: 'Film 5', description: 'Description for Film 5', image: 'images/image1.jpg', genre: 'Bilim Kurgu', year: '1980 - 1999', duration: 'Kısa (0 - 90 dk)', imdb: '8' },
+  { title: 'Film 6', description: 'Description for Film 6', image: 'images/image1.jpg', genre: 'Romantik', year: '1979 ve öncesi', duration: 'Uzun (150+ dk)', imdb: '7' },
+  { title: 'Film 7', description: 'Description for Film 7', image: 'images/image1.jpg', genre: 'Belgesel', year: '2023 - 2024', duration: 'Orta (90 - 150 dk)', imdb: '9' },
+  { title: 'Film 8', description: 'Description for Film 8', image: 'images/image1.jpg', genre: 'Animasyon', year: '2020 - 2022', duration: 'Kısa (0 - 90 dk)', imdb: '8' },
+  { title: 'Film 9', description: 'Description for Film 9', image: 'images/image1.jpg', genre: 'Gerilim', year: '2010 - 2019', duration: 'Uzun (150+ dk)', imdb: '7' },
+  { title: 'Film 10', description: 'Description for Film 10', image: 'images/image1.jpg', genre: 'Müzikal', year: '2000 - 2009', duration: 'Orta (90 - 150 dk)', imdb: '6' },
+  { title: 'Film 11', description: 'Description for Film 11', image: 'images/image1.jpg', genre: 'Aksiyon', year: '1980 - 1999', duration: 'Kısa (0 - 90 dk)', imdb: '8' },
+  { title: 'Film 12', description: 'Description for Film 12', image: 'images/image1.jpg', genre: 'Komedi', year: '1979 ve öncesi', duration: 'Uzun (150+ dk)', imdb: '8' },
+  { title: 'Film 13', description: 'Description for Film 13', image: 'images/image1.jpg', genre: 'Dram', year: '2023 - 2024', duration: 'Orta (90 - 150 dk)', imdb: '7' },
+  { title: 'Film 14', description: 'Description for Film 14', image: 'images/image1.jpg', genre: 'Korku', year: '2020 - 2022', duration: 'Kısa (0 - 90 dk)', imdb: '7' },
+  { title: 'Film 15', description: 'Description for Film 15', image: 'images/image1.jpg', genre: 'Bilim Kurgu', year: '2010 - 2019', duration: 'Uzun (150+ dk)', imdb: '8' },
+  { title: 'Film 16', description: 'Description for Film 16', image: 'images/image1.jpg', genre: 'Romantik', year: '2000 - 2009', duration: 'Orta (90 - 150 dk)', imdb: '9' },
+  { title: 'Film 17', description: 'Description for Film 17', image: 'images/image1.jpg', genre: 'Belgesel', year: '1980 - 1999', duration: 'Kısa (0 - 90 dk)', imdb: '6' },
+  { title: 'Film 18', description: 'Description for Film 18', image: 'images/image1.jpg', genre: 'Animasyon', year: '1979 ve öncesi', duration: 'Uzun (150+ dk)', imdb: '7' },
+  { title: 'Film 19', description: 'Description for Film 19', image: 'images/image1.jpg', genre: 'Gerilim', year: '2023 - 2024', duration: 'Orta (90 - 150 dk)', imdb: '7' },
+  { title: 'Film 20', description: 'Description for Film 20', image: 'images/image1.jpg', genre: 'Müzikal', year: '2020 - 2022', duration: 'Kısa (0 - 90 dk)', imdb: '8' },
+  { title: 'Film 21', description: 'Description for Film 21', image: 'images/image1.jpg', genre: 'Aksiyon', year: '2010 - 2019', duration: 'Uzun (150+ dk)', imdb: '7' },
+  { title: 'Film 22', description: 'Description for Film 22', image: 'images/image1.jpg', genre: 'Komedi', year: '2000 - 2009', duration: 'Orta (90 - 150 dk)', imdb: '7' },
+  { title: 'Film 23', description: 'Description for Film 23', image: 'images/image1.jpg', genre: 'Dram', year: '1980 - 1999', duration: 'Kısa (0 - 90 dk)', imdb: '6' },
+  { title: 'Film 24', description: 'Description for Film 24', image: 'images/image1.jpg', genre: 'Korku', year: '1979 ve öncesi', duration: 'Uzun (150+ dk)', imdb: '7' },
+];
+
+export default fakeFilms;

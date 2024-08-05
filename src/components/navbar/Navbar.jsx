@@ -90,7 +90,7 @@ function Navbar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ bgcolor: '#15161D' }}>
+      <AppBar position="static" sx={{ bgcolor: '#1E1F29 ' }}>
         <Toolbar sx={{ 
           mx: { xs: 2, sm: 3, md: 20 }, 
           height: '90px', 

@@ -11,7 +11,7 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 
 const FooterContainer = styled(Box)(({ theme }) => ({
-  backgroundColor: '#15161D',
+  backgroundColor: '#1E1F29 ',
   padding: theme.spacing(4, 2),
   color: 'white',
   marginTop: 'auto',
@@ -25,27 +25,7 @@ const Footer = () => {
     <FooterContainer>
       <Box sx={{ px: { xs: 2, sm: 3, md: 20 } }}>
         <Grid container spacing={0} sx={{ mx: { xs: 0, md: 0 } }}>
-          <Grid item xs={12} md={3} sx={{ mt: 5, mb: 5 }}>
-            <Typography variant="subtitle1" gutterBottom sx={{ color: 'white', fontWeight: 'bold' }}>
-              POPÜLER TÜRLER
-            </Typography>
-            <Box sx={{ mt: 4, display: 'flex', flexWrap: 'wrap' }}>
-              <Box sx={{ width: '50%' }}>
-                <Link href="#" variant="body2" sx={{ display: 'block', color: '#B9BABC', mb: 2, textDecoration: 'none' }}>Aksiyon</Link>
-                <Link href="#" variant="body2" sx={{ display: 'block', color: '#B9BABC', mb: 2, textDecoration: 'none' }}>Komedi</Link>
-                <Link href="#" variant="body2" sx={{ display: 'block', color: '#B9BABC', mb: 2, textDecoration: 'none' }}>Dram</Link>
-                <Link href="#" variant="body2" sx={{ display: 'block', color: '#B9BABC', mb: 2, textDecoration: 'none' }}>Korku</Link>
-                <Link href="#" variant="body2" sx={{ display: 'block', color: '#B9BABC', textDecoration: 'none' }}>Bilim Kurgu</Link>
-              </Box>
-              <Box sx={{ width: '50%' }}>
-                <Link href="#" variant="body2" sx={{ display: 'block', color: '#B9BABC', mb: 2, textDecoration: 'none' }}>Belgesel</Link>
-                <Link href="#" variant="body2" sx={{ display: 'block', color: '#B9BABC', mb: 2, textDecoration: 'none' }}>Romantik</Link>
-                <Link href="#" variant="body2" sx={{ display: 'block', color: '#B9BABC', mb: 2, textDecoration: 'none' }}>Animasyon</Link>
-                <Link href="#" variant="body2" sx={{ display: 'block', color: '#B9BABC', mb: 2, textDecoration: 'none' }}>Gerilim</Link>
-                <Link href="#" variant="body2" sx={{ display: 'block', color: '#B9BABC', textDecoration: 'none' }}>Müzikal</Link>
-              </Box>
-            </Box>
-          </Grid>
+          
           <Grid item xs={12} md={3} sx={{ mt: 5, mb: 5 }}>
             <Typography variant="subtitle1" gutterBottom sx={{ color: 'white', fontWeight: 'bold' }}>
               DESTEK VE BİLGİ
@@ -101,6 +81,27 @@ const Footer = () => {
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <YouTubeIcon sx={{ mr: 1, color: '#B9BABC' }} />
                 <Typography variant="body2" sx={{ color: '#B9BABC' }}>YouTube</Typography>
+              </Box>
+            </Box>
+          </Grid>
+          <Grid item xs={12} md={3} sx={{ mt: 5, mb: 5 }}>
+            <Typography variant="subtitle1" gutterBottom sx={{ color: 'white', fontWeight: 'bold' }}>
+              POPÜLER TÜRLER
+            </Typography>
+            <Box sx={{ mt: 4, display: 'flex', flexWrap: 'wrap' }}>
+              <Box sx={{ width: '50%' }}>
+                <Link href="#" variant="body2" sx={{ display: 'block', color: '#B9BABC', mb: 2, textDecoration: 'none' }}>Aksiyon</Link>
+                <Link href="#" variant="body2" sx={{ display: 'block', color: '#B9BABC', mb: 2, textDecoration: 'none' }}>Komedi</Link>
+                <Link href="#" variant="body2" sx={{ display: 'block', color: '#B9BABC', mb: 2, textDecoration: 'none' }}>Dram</Link>
+                <Link href="#" variant="body2" sx={{ display: 'block', color: '#B9BABC', mb: 2, textDecoration: 'none' }}>Korku</Link>
+                <Link href="#" variant="body2" sx={{ display: 'block', color: '#B9BABC', textDecoration: 'none' }}>Bilim Kurgu</Link>
+              </Box>
+              <Box sx={{ width: '50%' }}>
+                <Link href="#" variant="body2" sx={{ display: 'block', color: '#B9BABC', mb: 2, textDecoration: 'none' }}>Belgesel</Link>
+                <Link href="#" variant="body2" sx={{ display: 'block', color: '#B9BABC', mb: 2, textDecoration: 'none' }}>Romantik</Link>
+                <Link href="#" variant="body2" sx={{ display: 'block', color: '#B9BABC', mb: 2, textDecoration: 'none' }}>Animasyon</Link>
+                <Link href="#" variant="body2" sx={{ display: 'block', color: '#B9BABC', mb: 2, textDecoration: 'none' }}>Gerilim</Link>
+                <Link href="#" variant="body2" sx={{ display: 'block', color: '#B9BABC', textDecoration: 'none' }}>Müzikal</Link>
               </Box>
             </Box>
           </Grid>
