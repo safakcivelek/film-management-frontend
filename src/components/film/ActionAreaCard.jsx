@@ -1,28 +1,61 @@
 import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
+import { Card, CardActionArea, CardContent, Typography } from '@mui/material';
+import { styled } from '@mui/material/styles';
 
-export default function ActionAreaCard({ title, description, image }) {
+const CustomCard = styled(Card)(({ theme }) => ({
+  border: '3px solid black',
+  borderRadius: '6px',
+  boxShadow: theme.shadows[1],
+  '&:hover': {
+    boxShadow: theme.shadows[4],
+  },
+  display: 'flex',
+  flexDirection: 'column',
+  height: '100%', 
+}));
+
+const CustomCardMedia = styled('div')({
+  position: 'relative',
+  width: '100%',
+  height: '0',
+  paddingBottom: '150%', // Aspect ratio ayarı
+  overflow: 'hidden',
+});
+
+const CustomImage = styled('img')({
+  position: 'absolute',
+  top: '0',
+  left: '0',
+  width: '100%',
+  height: '100%',
+  objectFit: 'cover',
+});
+
+const TitleOverlay = styled('div')({
+  position: 'absolute',
+  bottom: '0',
+  width: '100%',
+  backgroundColor: 'rgba(0, 0, 0, 0.7)', // Şeffaf siyah arkaplan
+  color: 'white', // Beyaz yazı rengi
+  padding: '10px',
+  boxSizing: 'border-box',
+});
+
+const ActionAreaCard = ({ title, image }) => {
   return (
-    <Card sx={{}}>
+    <CustomCard>
       <CardActionArea>
-        <CardMedia
-          component="img"
-          height="140"
-          image={image}
-          alt={title}
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            {title}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {description}       </Typography>
-        </CardContent>
+        <CustomCardMedia>
+          <CustomImage src={image} alt={title} />
+          <TitleOverlay>
+            <Typography variant="h6" component="div">
+              {title}
+            </Typography>
+          </TitleOverlay>
+        </CustomCardMedia>
       </CardActionArea>
-    </Card>
+    </CustomCard>
   );
-}
+};
+
+export default ActionAreaCard;

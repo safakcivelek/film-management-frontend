@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Grid, Box, Button } from '@mui/material';
+import { Grid, Box, Button, Typography } from '@mui/material';
 import ActionAreaCard from './ActionAreaCard';
 import CustomSelect from './CustomSelect';
 import '../../css/globalStyles.css';
@@ -14,30 +14,30 @@ const FilmListPage = () => {
   const [year, setYear] = React.useState('');
   const [duration, setDuration] = React.useState('');
   const [imdb, setIMDB] = React.useState('');
-  const [visibleFilms, setVisibleFilms] = React.useState(8);
+  const [visibleFilms, setVisibleFilms] = React.useState(12);
 
   const handleGenreChange = (event) => {
     setGenre(event.target.value);
-    setVisibleFilms(4);
+    setVisibleFilms(6);
   };
 
   const handleYearChange = (event) => {
     setYear(event.target.value);
-    setVisibleFilms(4);
+    setVisibleFilms(6);
   };
 
   const handleDurationChange = (event) => {
     setDuration(event.target.value);
-    setVisibleFilms(4);
+    setVisibleFilms(6);
   };
 
   const handleIMDBChange = (event) => {
     setIMDB(event.target.value);
-    setVisibleFilms(4);
+    setVisibleFilms(6);
   };
 
   const handleLoadMore = () => {
-    setVisibleFilms((prevVisibleFilms) => prevVisibleFilms + 4);
+    setVisibleFilms((prevVisibleFilms) => prevVisibleFilms + 6);
   };
 
   const getIMDBThreshold = (imdb) => {
@@ -56,27 +56,37 @@ const FilmListPage = () => {
 
   return (
     <Box sx={{ px: { xs: 2, sm: 3, md: 20 }, py: 4 }}>
-      <Grid container spacing={2} sx={{ mb: 4 }}>
-        <Grid item xs={12} sm={6} md={3}>
-          <CustomSelect label="Film Türü" value={genre} handleChange={handleGenreChange} options={fakeGenres} />
+      <Box sx={{ backgroundColor: '#1E1F29', p: 0, mt: 4, borderRadius: 1.5,border: '1px solid rgb(41 41 55)', }}>
+      <Grid container spacing={4} justifyContent="center">
+          <Grid item xs={12} sm={6} md={2.9} >
+            <CustomSelect label="Film Türü" value={genre} handleChange={handleGenreChange} options={fakeGenres} />
+          </Grid>
+          <Grid item xs={12} sm={6} md={2.9}>
+            <CustomSelect label="Film Yılı" value={year} handleChange={handleYearChange} options={fakeYears} />
+          </Grid>
+          <Grid item xs={12} sm={6} md={2.9}>
+            <CustomSelect label="Film Süresi" value={duration} handleChange={handleDurationChange} options={fakeDurations} />
+          </Grid>
+          <Grid item xs={12} sm={6} md={2.9} >
+            <CustomSelect label="IMDB Puanı" value={imdb} handleChange={handleIMDBChange} options={fakeIMDBScores} />
+          </Grid>
         </Grid>
-        <Grid item xs={12} sm={6} md={3}>
-          <CustomSelect label="Film Yılı" value={year} handleChange={handleYearChange} options={fakeYears} />
-        </Grid>
-        <Grid item xs={12} sm={6} md={3}>
-          <CustomSelect label="Film Süresi" value={duration} handleChange={handleDurationChange} options={fakeDurations} />
-        </Grid>
-        <Grid item xs={12} sm={6} md={3}>
-          <CustomSelect label="IMDB Puanı" value={imdb} handleChange={handleIMDBChange} options={fakeIMDBScores} />
-        </Grid>
-      </Grid>
-      <Grid container spacing={2}>
+      </Box>
+
+      <Box sx={{ mb: 4, mt: 2 }}>
+        <Typography variant="h6" component="div" sx={{ color: 'white' }}>
+          Toplam <span style={{ color: '#D10024' }}>{filteredFilms.length}</span> film bulundu
+        </Typography>
+      </Box>
+
+      <Grid container spacing={2} rowSpacing={6}>
         {visibleFilteredFilms.map((film, index) => (
-          <Grid item xs={12} sm={6} md={3} key={index}>
+          <Grid item xs={12} sm={6} md={2} key={index}>
             <ActionAreaCard title={film.title} description={film.description} image={film.image} />
           </Grid>
         ))}
       </Grid>
+
       {visibleFilms < filteredFilms.length && (
         <Box sx={{ textAlign: 'center', mt: 4, mb: 4 }}>
           <Button
@@ -86,9 +96,10 @@ const FilmListPage = () => {
               color: 'white',
               borderColor: '#D10024',
               backgroundColor: '#15161D',
-              padding: '12px 36px',
+              padding: '8px 24px',
               borderWidth: '2px',
               fontWeight: 'bold',
+              textTransform: 'none',
               '&:hover': {
                 backgroundColor: '#1E1F29',
                 borderColor: '#D10024',
@@ -96,7 +107,7 @@ const FilmListPage = () => {
             }}
             onClick={handleLoadMore}
           >
-            Daha Fazla
+            Daha fazla
           </Button>
         </Box>
       )}

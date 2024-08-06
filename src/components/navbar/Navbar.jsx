@@ -89,7 +89,7 @@ function Navbar() {
   );
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box className="navbar" sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ bgcolor: '#1E1F29 ' }}>
         <Toolbar sx={{ 
           mx: { xs: 2, sm: 3, md: 20 }, 
