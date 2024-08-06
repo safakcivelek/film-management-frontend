@@ -45,7 +45,7 @@ const FilmListPage = () => {
     return parseFloat(imdb.split(' ')[0]);
   };
 
-  const filteredFilms = fakeFilms.filter(film => 
+  const filteredFilms = fakeFilms.filter(film =>
     (genre ? film.genre === genre : true) &&
     (year ? film.year === year : true) &&
     (duration ? film.duration === duration : true) &&
@@ -56,8 +56,8 @@ const FilmListPage = () => {
 
   return (
     <Box sx={{ px: { xs: 2, sm: 3, md: 20 }, py: 4 }}>
-      <Box sx={{ backgroundColor: '#1E1F29', p: 0, mt: 4, borderRadius: 1.5,border: '1px solid rgb(41 41 55)', }}>
-      <Grid container spacing={4} justifyContent="center">
+      <Box sx={{ backgroundColor: '#1E1F29', p: 0, mt: 4, borderRadius: 1.5, border: '1px solid rgb(41 41 55)', }}>
+        <Grid container spacing={4} justifyContent="center">
           <Grid item xs={12} sm={6} md={2.9} >
             <CustomSelect label="Film Türü" value={genre} handleChange={handleGenreChange} options={fakeGenres} />
           </Grid>
@@ -82,7 +82,13 @@ const FilmListPage = () => {
       <Grid container spacing={2} rowSpacing={6}>
         {visibleFilteredFilms.map((film, index) => (
           <Grid item xs={12} sm={6} md={2} key={index}>
-            <ActionAreaCard title={film.title} description={film.description} image={film.image} />
+            <ActionAreaCard
+              title={film.title}
+              description={film.description}
+              image={film.image}
+              year={film.year}
+              imdb={film.imdb}
+            />
           </Grid>
         ))}
       </Grid>
