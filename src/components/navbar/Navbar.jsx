@@ -119,7 +119,7 @@ function Navbar() {
           )}
           <Box sx={{ display: 'flex', flexGrow: 1, alignItems: 'center' }}>
             {!isMobile && (
-              <Typography variant="h6" component="div" sx={{ mr: 5.4, color: '#D10024', fontWeight: 'bold', fontSize: '0.9rem' }}>
+              <Typography variant="h6" component="div" sx={{ mr: 5.4, color: '#D10024', fontWeight: 'bold', fontSize: '1.3rem' }}>
                 <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>ELECTROFILM</Link>
               </Typography>
             )}

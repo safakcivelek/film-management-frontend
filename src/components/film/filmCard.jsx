@@ -1,6 +1,15 @@
 import * as React from 'react';
-import { CardActionArea, Typography } from '@mui/material';
-import { CustomCard, CustomCardMedia, CustomImage, TitleOverlay, TitleText, DetailsContainer } from './filmCardStyles';
+import { CardActionArea } from '@mui/material';
+import {
+  CustomCard,
+  CustomCardMedia,
+  CustomImage,
+  TitleOverlay,
+  TitleText,
+  DetailsContainer,
+  YearText,
+  IMDBText,
+} from './filmCardStyles';
 
 const FilmCard = ({ title, image, year, imdb }) => {
   return (
@@ -9,20 +18,16 @@ const FilmCard = ({ title, image, year, imdb }) => {
         <CustomCardMedia>
           <CustomImage src={image} alt={title} />
           <TitleOverlay>
-            <TitleText 
-              variant="h2" 
-              component="div" 
-              sx={{ color: 'white', fontSize: '1.1rem' }}
-            >
+            <TitleText variant="h2" component="div">
               {title}
             </TitleText>
             <DetailsContainer>
-              <Typography variant="body2" color="white">
+              <YearText variant="body2">
                 {year}
-              </Typography>
-              <Typography variant="body2" sx={{ color: 'yellow' }}>
+              </YearText>
+              <IMDBText variant="body2">
                 IMDb: {imdb}
-              </Typography>
+              </IMDBText>
             </DetailsContainer>
           </TitleOverlay>
         </CustomCardMedia>

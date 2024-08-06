@@ -26,7 +26,7 @@ const TitleOverlay = styled('div')({
   position: 'absolute',
   bottom: '0',
   width: '100%',
-  backgroundColor: 'rgba(0, 0, 0, 0.5)', // Şeffaf siyah arkaplan
+  backgroundColor: 'rgba(0, 0, 0, 0.5)', // Şeffaf siyah arka plan
   color: 'white', // Beyaz yazı rengi
   padding: '8px',
   boxSizing: 'border-box',
@@ -36,6 +36,8 @@ const TitleText = styled(Typography)({
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
+  color: 'white', 
+  fontSize: '1.1rem', 
 });
 
 const DetailsContainer = styled(Box)({
@@ -44,11 +46,21 @@ const DetailsContainer = styled(Box)({
   marginTop: '8px',
 });
 
+const YearText = styled(Typography)(({ theme }) => ({
+  color: 'white', 
+}));
+
+const IMDBText = styled(Typography)(({ theme }) => ({
+  color: 'yellow', 
+}));
+
 export {
   CustomCard,
   CustomCardMedia,
   CustomImage,
   TitleOverlay,
   TitleText,
-  DetailsContainer
+  DetailsContainer,
+  YearText,
+  IMDBText,
 };
