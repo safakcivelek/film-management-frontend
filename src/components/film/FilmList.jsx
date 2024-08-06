@@ -1,13 +1,9 @@
 import * as React from 'react';
 import { Grid, Box, Button, Typography } from '@mui/material';
-import ActionAreaCard from './ActionAreaCard';
-import CustomSelect from './CustomSelect';
+import FilmCard from './filmCard';
 import '../../css/globalStyles.css';
 import fakeFilms from '../../data/fakeFilms';
-import fakeGenres from '../../data/fakeGenres';
-import fakeYears from '../../data/fakeYears';
-import fakeDurations from '../../data/fakeDurations';
-import fakeIMDBScores from '../../data/fakeIMDBScores';
+import FilmFilter from './filmFilter';
 
 const FilmListPage = () => {
   const [genre, setGenre] = React.useState('');
@@ -57,20 +53,16 @@ const FilmListPage = () => {
   return (
     <Box sx={{ px: { xs: 2, sm: 3, md: 20 }, py: 4 }}>
       <Box sx={{ backgroundColor: '#1E1F29', p: 0, mt: 4, borderRadius: 1.5, border: '1px solid rgb(41 41 55)', }}>
-        <Grid container spacing={4} justifyContent="center">
-          <Grid item xs={12} sm={6} md={2.9} >
-            <CustomSelect label="Film Türü" value={genre} handleChange={handleGenreChange} options={fakeGenres} />
-          </Grid>
-          <Grid item xs={12} sm={6} md={2.9}>
-            <CustomSelect label="Film Yılı" value={year} handleChange={handleYearChange} options={fakeYears} />
-          </Grid>
-          <Grid item xs={12} sm={6} md={2.9}>
-            <CustomSelect label="Film Süresi" value={duration} handleChange={handleDurationChange} options={fakeDurations} />
-          </Grid>
-          <Grid item xs={12} sm={6} md={2.9} >
-            <CustomSelect label="IMDB Puanı" value={imdb} handleChange={handleIMDBChange} options={fakeIMDBScores} />
-          </Grid>
-        </Grid>
+        <FilmFilter
+          genre={genre}
+          year={year}
+          duration={duration}
+          imdb={imdb}
+          handleGenreChange={handleGenreChange}
+          handleYearChange={handleYearChange}
+          handleDurationChange={handleDurationChange}
+          handleIMDBChange={handleIMDBChange}
+        />
       </Box>
 
       <Box sx={{ mb: 4, mt: 2 }}>
@@ -82,7 +74,7 @@ const FilmListPage = () => {
       <Grid container spacing={2} rowSpacing={6}>
         {visibleFilteredFilms.map((film, index) => (
           <Grid item xs={12} sm={6} md={2} key={index}>
-            <ActionAreaCard
+            <FilmCard
               title={film.title}
               description={film.description}
               image={film.image}
