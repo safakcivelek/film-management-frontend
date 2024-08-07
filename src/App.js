@@ -6,6 +6,7 @@ import Homepage from './components/homepage/Homepage';
 import Footer from './components/footer/Footer';
 import '../src/css/globalStyles.css';
 import FilmListPage from './components/film/filmList';
+import FilmDetail from './components/filmDetail/filmDetail';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Homepage />} /> {/* Ana sayfa route'u */}
             <Route path="/films" element={<FilmListPage />} /> {/* Filmler sayfası route'u */}
+            <Route path="/film/:id" element={<FilmDetail />} />
           </Routes>
         </main>
 

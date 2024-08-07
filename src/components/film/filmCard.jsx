@@ -10,11 +10,18 @@ import {
   YearText,
   IMDBText,
 } from './filmCardStyles';
+import { useNavigate } from 'react-router-dom';
 
-const FilmCard = ({ title, image, year, imdb }) => {
+const FilmCard = ({ id,title, image, year, imdb }) => {
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    navigate(`/film/${id}`);
+  };
+
   return (
     <CustomCard>
-      <CardActionArea>
+      <CardActionArea onClick={handleCardClick}>
         <CustomCardMedia>
           <CustomImage src={image} alt={title} />
           <TitleOverlay>

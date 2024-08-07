@@ -75,6 +75,7 @@ const FilmListPage = () => {
         {visibleFilteredFilms.map((film, index) => (
           <Grid item xs={12} sm={6} md={2} key={index}>
             <FilmCard
+              id={film.id}
               title={film.title}
               description={film.description}
               image={film.image}
