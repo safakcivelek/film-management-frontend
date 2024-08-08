@@ -7,6 +7,8 @@ import Footer from './components/footer/Footer';
 import '../src/css/globalStyles.css';
 import FilmListPage from './components/film/filmList';
 import FilmDetail from './components/filmDetail/filmDetail';
+import Register from './components/auth/register';
+import Login from './components/auth/login';
 
 function App() {
   return (
@@ -14,17 +16,19 @@ function App() {
     <Router>
       <div id="root">
         
-        <Navbar /> {/* Navbar, uygulamanın üst kısmında sabit olarak görünecek */}
+        <Navbar /> 
 
         <main style={{ flex: '1' }}>
           <Routes>
-            <Route path="/" element={<Homepage />} /> {/* Ana sayfa route'u */}
-            <Route path="/films" element={<FilmListPage />} /> {/* Filmler sayfası route'u */}
+            <Route path="/" element={<Homepage />} /> 
+            <Route path="/films" element={<FilmListPage />} /> 
             <Route path="/film/:id" element={<FilmDetail />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />   
           </Routes>
         </main>
 
-        <Footer /> {/* Footer, uygulamanın alt kısmında sabit olarak görünecek */}
+        <Footer /> 
 
       </div>
     </Router>
