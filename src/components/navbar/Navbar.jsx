@@ -81,6 +81,9 @@ function Navbar() {
         <ListItem button component={Link} to="/aboutus">
           <ListItemText primary="Hakkımızda" sx={{ fontSize: '0.9rem' }} />
         </ListItem>
+        <ListItem button component={Link} to="/contactus">
+          <ListItemText primary="İletişim" sx={{ fontSize: '0.9rem' }} />
+        </ListItem>
         <ListItem button component={Link} to="/login">
           <ListItemText primary="Giriş Yap" sx={{ fontSize: '0.9rem' }} />
         </ListItem>
@@ -169,6 +172,7 @@ function Navbar() {
               <>
                 <Button color="inherit" sx={{ ml: 1.8, mr: 3.6, fontSize: '0.9rem' }}><Link to="/films" style={{ textDecoration: 'none', color: 'inherit' }}>Filmler</Link></Button>
                 <Button color="inherit" sx={{ mr: 2.7, fontSize: '0.9rem' }}><Link to="/aboutus" style={{ textDecoration: 'none', color: 'inherit' }}>Hakkımızda</Link></Button>
+                <Button color="inherit" sx={{ mr: 2.7, fontSize: '0.9rem' }}><Link to="/contactus" style={{ textDecoration: 'none', color: 'inherit' }}>İletişim</Link></Button>
               </>
             )}
           </Box>

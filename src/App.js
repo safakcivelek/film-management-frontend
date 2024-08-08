@@ -9,6 +9,8 @@ import FilmListPage from './components/film/filmList';
 import FilmDetail from './components/filmDetail/filmDetail';
 import Register from './components/auth/register';
 import Login from './components/auth/login';
+import AboutUs from './components/about/aboutUs';
+import ContactUs from './components/contact/contactUs';
 
 function App() {
   return (
@@ -24,7 +26,9 @@ function App() {
             <Route path="/films" element={<FilmListPage />} /> 
             <Route path="/film/:id" element={<FilmDetail />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />   
+            <Route path="/register" element={<Register />} />  
+            <Route path="/aboutus" element={<AboutUs />} />   
+            <Route path="/contactus" element={<ContactUs />} />  
           </Routes>
         </main>
 

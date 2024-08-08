@@ -100,7 +100,7 @@ const Register = () => {
     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: '#15161D' }}>
       <Box sx={{ flex: 1, minHeight: '100px' }} /> 
       <StyledContainer>
-        <Typography variant="h4" sx={{ mb: 7, color: '#D10024', fontWeight: 'bold' }}>Hesabını Oluştur</Typography>
+        <Typography variant="h4" sx={{ mb: 7, color: '#D10024' }}>Hesabını Oluştur</Typography>
         <StyledTextField
           label="Email"
           type="email"
