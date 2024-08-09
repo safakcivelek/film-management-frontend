@@ -23,18 +23,6 @@ const FilmDetail = () => {
         }
     };
 
-    // videoya ilerler ve videoyu başlatır.
-    //   const handleWatchClick = () => {
-    //     if (videoRef.current) {
-    //       videoRef.current.scrollIntoView({ behavior: 'smooth' });
-    //       const iframe = videoRef.current.querySelector('iframe');
-    //       if (iframe) {
-    //         const src = iframe.src;
-    //         iframe.src = src.includes('?') ? `${src}&autoplay=1` : `${src}?autoplay=1`;
-    //       }
-    //     }
-    //   };
-
     return (
         <>
             <Container maxWidth="lg" sx={{ py: 4, mt: 4 }}>

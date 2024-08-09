@@ -3,11 +3,10 @@ import { Box, Button, TextField, Typography, Link, Container } from '@mui/materi
 import { styled } from '@mui/system';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 
-// Styled Container for the register form
-const StyledContainer = styled(Container)({
+const StyledContainer = styled(Container)(({ theme }) => ({
   backgroundColor: '#1E1F29',
-  width: 1000, // Increased width to 1000px
-  height: 650, // Adjusted height
+  width: 1000, 
+  height: 650, 
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
@@ -15,12 +14,16 @@ const StyledContainer = styled(Container)({
   borderRadius: '8px',
   padding: '24px',
   border: '1px solid silver',
-});
+  [theme.breakpoints.down('sm')]: {
+    width: '95%', 
+    height: 'auto', 
+  },
+}));
 
-// Styled TextField for all input fields
-const StyledTextField = styled(TextField)({
+
+const StyledTextField = styled(TextField)(({ theme }) => ({
   backgroundColor: '#15161D',
-  marginBottom: '40px', // Same margin as in Login form
+  marginBottom: '40px',
   width: '90%',
   '& .MuiInputBase-root': {
     color: 'white',
@@ -39,18 +42,25 @@ const StyledTextField = styled(TextField)({
       borderColor: 'rgba(255, 255, 255, 0.7)',
     },
   },
-});
+  [theme.breakpoints.down('sm')]: {
+    marginBottom: '20px', 
+  },
+}));
 
-// Styled Box for fields that are side by side
-const SideBySideBox = styled(Box)({
+
+const SideBySideBox = styled(Box)(({ theme }) => ({
   display: 'flex',
   justifyContent: 'space-between',
   width: '90%',
-  marginBottom: '40px', // Same margin as in Login form
-});
+  marginBottom: '40px',
+  [theme.breakpoints.down('sm')]: {
+    flexDirection: 'column',
+    marginBottom: '20px', 
+  },
+}));
 
-// Styled TextField for side by side fields
-const SideBySideTextField = styled(TextField)({
+
+const SideBySideTextField = styled(TextField)(({ theme }) => ({
   backgroundColor: '#15161D',
   width: '48%',
   '& .MuiInputBase-root': {
@@ -70,15 +80,19 @@ const SideBySideTextField = styled(TextField)({
       borderColor: 'rgba(255, 255, 255, 0.7)',
     },
   },
-});
+  [theme.breakpoints.down('sm')]: {
+    width: '100%', 
+    marginBottom: '20px', 
+  },
+}));
 
-// Styled Button for the sign-up button
+
 const StyledButton = styled(Button)({
   backgroundColor: '#D10024',
   color: 'white',
   marginBottom: '16px',
-  width: '55%', // Adjusted width to cover more area
-  height: '40px', // Reverted height to original
+  width: '55%',
+  height: '40px',
   '&:hover': {
     backgroundColor: '#B0001B',
   },

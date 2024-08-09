@@ -5,15 +5,29 @@ import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import fakeFilms from '../../data/fakeFilms';
 
 const FilmSlider = ({ setSelectedFilm }) => {
+  const filmsToDisplay = fakeFilms.slice(0, 6); // İlk 6 filmi alıyoruz
   const [startIndex, setStartIndex] = useState(0);
-  const visibleFilms = fakeFilms.slice(startIndex, startIndex + 3);
+  
+  const visibleFilms = [
+    filmsToDisplay[(startIndex) % filmsToDisplay.length],
+    filmsToDisplay[(startIndex + 1) % filmsToDisplay.length],
+    filmsToDisplay[(startIndex + 2) % filmsToDisplay.length],
+  ];
 
   const handleSlideUp = () => {
-    setStartIndex((prevIndex) => (prevIndex === 0 ? fakeFilms.length - 3 : prevIndex - 1));
+    setStartIndex((prevIndex) => {
+      const newIndex = (prevIndex - 1 + filmsToDisplay.length) % filmsToDisplay.length;
+      setSelectedFilm(filmsToDisplay[newIndex]); // Ana resmi güncelle
+      return newIndex;
+    });
   };
 
   const handleSlideDown = () => {
-    setStartIndex((prevIndex) => (prevIndex === fakeFilms.length - 3 ? 0 : prevIndex + 1));
+    setStartIndex((prevIndex) => {
+      const newIndex = (prevIndex + 1) % filmsToDisplay.length;
+      setSelectedFilm(filmsToDisplay[newIndex]); // Ana resmi güncelle
+      return newIndex;
+    });
   };
 
   return (
@@ -57,7 +71,7 @@ const FilmSlider = ({ setSelectedFilm }) => {
             border: '3px solid #D10024', 
             borderRadius: '1px' 
           }}
-          onClick={() => setSelectedFilm(film)} // Bu kısmın doğru çalıştığından emin olun
+          onClick={() => setSelectedFilm(film)} 
         />
       ))}
       <IconButton

@@ -106,6 +106,7 @@ function Navbar() {
               color="inherit"
               aria-label="menu"
               onClick={handleDrawerToggle}
+         
             >
               <MenuIcon sx={{ fontSize: '1.8rem' }} />
             </IconButton>
@@ -122,8 +123,8 @@ function Navbar() {
           )}
           <Box sx={{ display: 'flex', flexGrow: 1, alignItems: 'center' }}>
             {!isMobile && (
-              <Typography variant="h6" component="div" sx={{ mr: 5.4, color: '#D10024', fontWeight: 'bold', fontSize: '1.3rem' }}>
-                <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>ELECTROFILM</Link>
+              <Typography variant="h6" component="div" sx={{ mr: 5.4, color: '#D10024', fontWeight: 'bold', fontSize: '1.3rem', }}>
+                <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>ELECTROFİLM</Link>
               </Typography>
             )}
             {!isMobile && (
@@ -170,14 +171,14 @@ function Navbar() {
             )}
             {!isMobile && (
               <>
-                <Button color="inherit" sx={{ ml: 1.8, mr: 3.6, fontSize: '0.9rem' }}><Link to="/films" style={{ textDecoration: 'none', color: 'inherit' }}>Filmler</Link></Button>
-                <Button color="inherit" sx={{ mr: 2.7, fontSize: '0.9rem' }}><Link to="/aboutus" style={{ textDecoration: 'none', color: 'inherit' }}>Hakkımızda</Link></Button>
-                <Button color="inherit" sx={{ mr: 2.7, fontSize: '0.9rem' }}><Link to="/contactus" style={{ textDecoration: 'none', color: 'inherit' }}>İletişim</Link></Button>
+                <Button color="inherit" sx={{ ml: 1.8, mr: 3.6, fontSize: '0.9rem',textTransform: 'none' }}><Link to="/films" style={{ textDecoration: 'none', color: 'inherit' }}>FİLMLER</Link></Button>
+                <Button color="inherit" sx={{ mr: 2.7, fontSize: '0.9rem',textTransform: 'none' }}><Link to="/aboutus" style={{ textDecoration: 'none', color: 'inherit' }}>HAKKIMIZDA</Link></Button>
+                <Button color="inherit" sx={{ mr: 2.7, fontSize: '0.9rem',textTransform: 'none' }}><Link to="/contactus" style={{ textDecoration: 'none', color: 'inherit' }}>İLETİŞİM</Link></Button>
               </>
             )}
           </Box>
           {!isMobile && (
-            <Button color="inherit" sx={{ fontSize: '0.9rem' }}><Link to="/login" style={{ textDecoration: 'none', color: 'inherit' }}>Giriş Yap</Link></Button>
+            <Button color="inherit" sx={{ fontSize: '0.9rem',textTransform: 'none' }}><Link to="/login" style={{ textDecoration: 'none', color: 'inherit' }}>GİRİŞ YAP</Link></Button>
           )}
         </Toolbar>
       </AppBar>

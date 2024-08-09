@@ -4,10 +4,11 @@ import { styled } from '@mui/system';
 import LoginIcon from '@mui/icons-material/Login';
 
 
-const StyledContainer = styled(Container)({
+const StyledContainer = styled(Container)(({ theme }) => ({
   backgroundColor: '#1E1F29',
-  width: 610,
-  height: 550,
+  width: '90%', 
+  maxWidth: 610, 
+  height: 'auto', // Yüksekliği otomatik hale getirdik
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
@@ -15,13 +16,21 @@ const StyledContainer = styled(Container)({
   borderRadius: '8px',
   padding: '24px',
   border: '1px solid silver',
-});
+  margin: '0 auto', // Ortalanmasını sağladık
+  [theme.breakpoints.up('md')]: { 
+    width: 610, // 
+    height: 550, // Geniş ekranlar için sabit yükseklik
+  },
+}));
 
-
-const StyledTextField = styled(TextField)({
+const StyledTextField = styled(TextField)(({ theme }) => ({
   backgroundColor: '#15161D',
-  marginBottom: '40px', 
-  width: '90%',
+  marginBottom: '24px', 
+  width: '100%', // Mobil için genişlik yüzdeye çevrildi
+  [theme.breakpoints.up('md')]: { 
+    width: '90%', 
+    marginBottom: '40px', // Geniş ekranlarda orijinal margin
+  },
   '& .MuiInputBase-root': {
     color: 'white',
   },
@@ -39,18 +48,21 @@ const StyledTextField = styled(TextField)({
       borderColor: 'rgba(255, 255, 255, 0.7)',
     },
   },
-});
+}));
 
-
-const StyledButton = styled(Button)({
+const StyledButton = styled(Button)(({ theme }) => ({
   backgroundColor: '#D10024',
   color: 'white',
   marginBottom: '16px',
-  width: '90%',
+  width: '100%', // Mobil için genişlik yüzdeye çevrildi
+  [theme.breakpoints.up('md')]: { 
+    width: '90%', // Geniş ekranlar için genişlik 90%
+  },
   '&:hover': {
     backgroundColor: '#B0001B',
   },
-});
+}));
+
 
 
 const Login = () => {
