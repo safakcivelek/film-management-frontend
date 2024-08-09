@@ -51,7 +51,7 @@ const FilmListPage = () => {
   const visibleFilteredFilms = filteredFilms.slice(0, visibleFilms);
 
   return (
-    <Box sx={{ px: { xs: 2, sm: 3, md: 20 }, py: 4 }}>
+    <Box sx={{px: { xs: 2, sm: 3, md: 20 }, py: 4 }}>
       <Box sx={{ backgroundColor: '#1E1F29', p: 0, mt: 4, borderRadius: 1.5, border: '1px solid rgb(41 41 55)', }}>
         <FilmFilter
           genre={genre}
