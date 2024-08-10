@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { Grid, Box, Typography, IconButton } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import FilmCard from '../film/filmCard';
+import FilmCard from '../../components/films/FilmCard';
 import fakeFilms from '../../data/fakeFilms';
 
-const BestFilmsList = () => {
+const PopularFilmsList = () => {
   const [startIndex, setStartIndex] = useState(0);
   const filmsPerSlide = 6;
   const visibleFilms = fakeFilms.slice(startIndex, startIndex + filmsPerSlide);
@@ -22,7 +22,7 @@ const BestFilmsList = () => {
     <Box sx={{ px: { xs: 2, sm: 3, md: 20 }, py: 4 }}>
       <Box sx={{ mb: 4 }}>
         <Typography variant="h6" component="div" sx={{ color: 'white' }}>
-          En İyi Filmler
+          Popüler Filmler
         </Typography>
       </Box>
       <Box sx={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
@@ -89,4 +89,4 @@ const BestFilmsList = () => {
   );
 };
 
-export default BestFilmsList;
+export default PopularFilmsList;

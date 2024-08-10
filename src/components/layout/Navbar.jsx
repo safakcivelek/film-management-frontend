@@ -78,10 +78,10 @@ function Navbar() {
         <ListItem button component={Link} to="/films">
           <ListItemText primary="Filmler" sx={{ fontSize: '0.9rem' }} />
         </ListItem>
-        <ListItem button component={Link} to="/aboutus">
+        <ListItem button component={Link} to="/about">
           <ListItemText primary="Hakkımızda" sx={{ fontSize: '0.9rem' }} />
         </ListItem>
-        <ListItem button component={Link} to="/contactus">
+        <ListItem button component={Link} to="/contact">
           <ListItemText primary="İletişim" sx={{ fontSize: '0.9rem' }} />
         </ListItem>
         <ListItem button component={Link} to="/login">
@@ -172,8 +172,8 @@ function Navbar() {
             {!isMobile && (
               <>
                 <Button color="inherit" sx={{ ml: 1.8, mr: 3.6, fontSize: '0.9rem',textTransform: 'none' }}><Link to="/films" style={{ textDecoration: 'none', color: 'inherit' }}>FİLMLER</Link></Button>
-                <Button color="inherit" sx={{ mr: 2.7, fontSize: '0.9rem',textTransform: 'none' }}><Link to="/aboutus" style={{ textDecoration: 'none', color: 'inherit' }}>HAKKIMIZDA</Link></Button>
-                <Button color="inherit" sx={{ mr: 2.7, fontSize: '0.9rem',textTransform: 'none' }}><Link to="/contactus" style={{ textDecoration: 'none', color: 'inherit' }}>İLETİŞİM</Link></Button>
+                <Button color="inherit" sx={{ mr: 2.7, fontSize: '0.9rem',textTransform: 'none' }}><Link to="/about" style={{ textDecoration: 'none', color: 'inherit' }}>HAKKIMIZDA</Link></Button>
+                <Button color="inherit" sx={{ mr: 2.7, fontSize: '0.9rem',textTransform: 'none' }}><Link to="/contact" style={{ textDecoration: 'none', color: 'inherit' }}>İLETİŞİM</Link></Button>
               </>
             )}
           </Box>

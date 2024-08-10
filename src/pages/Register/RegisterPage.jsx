@@ -99,7 +99,7 @@ const StyledButton = styled(Button)({
 });
 
 // Register component
-const Register = () => {
+const RegisterPage = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -172,4 +172,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default RegisterPage;

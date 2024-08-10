@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Grid, Box, Button, Typography } from '@mui/material';
-import FilmCard from './filmCard';
 import '../../css/globalStyles.css';
 import fakeFilms from '../../data/fakeFilms';
-import FilmFilter from './filmFilter';
+import FilmFilter from '../../components/films/FilmFilter';
+import FilmCard from '../../components/films/FilmCard';
 
 const FilmListPage = () => {
   const [genre, setGenre] = React.useState('');

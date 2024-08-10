@@ -9,19 +9,20 @@ import {
   DetailsContainer,
   YearText,
   IMDBText,
-} from './filmCardStyles';
-import { useNavigate } from 'react-router-dom';
+} from './FilmCardStyles';
+import { Link, useNavigate } from 'react-router-dom';
 
 const FilmCard = ({ id,title, image, year, imdb }) => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const handleCardClick = () => {
-    navigate(`/film/${id}`);
-  };
+  // const handleCardClick = () => {
+  //   navigate(`/film/${id}`);
+  // };
 
   return (
     <CustomCard>
-      <CardActionArea onClick={handleCardClick}>
+      {/* <CardActionArea onClick={handleCardClick}> */}
+      <CardActionArea component={Link} to={`/film/${id}`}>
         <CustomCardMedia>
           <CustomImage src={image} alt={title} />
           <TitleOverlay>

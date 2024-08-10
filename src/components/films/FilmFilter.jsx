@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Grid } from '@mui/material';
-import FilterSelect from './filterSelect';
+import FilterSelect from './FilterSelect';
 import fakeGenres from '../../data/fakeGenres';
 import fakeYears from '../../data/fakeYears';
 import fakeDurations from '../../data/fakeDurations';

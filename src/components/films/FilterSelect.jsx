@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { InputLabel, Select, MenuItem } from '@mui/material';
-import FilterFormControl from './filterSelectStyles';
+import FilterFormControl from './FilterSelectStyles';
 
 const FilterSelect = ({ label, value, handleChange, options }) => {
   return (

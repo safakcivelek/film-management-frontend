@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { CardMedia, Typography, Box, Grid, Button, Paper, Container } from '@mui/material';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
@@ -8,11 +8,16 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import StarIcon from '@mui/icons-material/Star';
 import fakeFilms from '../../data/fakeFilms';
 
-const FilmDetail = () => {
+const FilmDetailPage = () => {
     const { id } = useParams();
     const film = fakeFilms.find(film => film.id === parseInt(id));
     const videoRef = useRef(null);
-
+    
+    useEffect(() => {
+        // Sayfa yüklendiğinde veya film ID değiştiğinde, başa kaydır
+        window.scrollTo(0, 0);
+    }, [id]);
+    
     if (!film) {
         return <Typography variant="h6" component="div" sx={{ color: 'white' }}>Film bulunamadı</Typography>;
     }
@@ -147,6 +152,6 @@ const FilmDetail = () => {
     );
 };
 
-export default FilmDetail;
+export default FilmDetailPage;
 
 

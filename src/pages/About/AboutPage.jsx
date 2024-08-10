@@ -15,9 +15,9 @@ const SocialButton = ({ icon: Icon, label, href }) => (
       color: 'white',
       borderColor: '#D10024',
       marginBottom: '10px',
-      width: '100%', // Full width
-      height: '40px', // Reduced height
-      fontSize: '14px', // Reduced font size
+      width: '100%', 
+      height: '40px', 
+      fontSize: '14px', 
       '&:hover': {
         backgroundColor: '#D10024',
         color: 'white',
@@ -29,7 +29,7 @@ const SocialButton = ({ icon: Icon, label, href }) => (
   </Button>
 );
 
-const AboutUs = () => {
+const AboutPage = () => {
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: '#15161D', paddingTop: '120px', paddingBottom: '120px', position: 'relative' }}>
       <Typography variant="h3" sx={{ mb: 4, color: 'white', fontWeight: 'bold' }}>Hakkımızda</Typography>
@@ -54,4 +54,4 @@ const AboutUs = () => {
   );
 };
 
-export default AboutUs;
+export default AboutPage;

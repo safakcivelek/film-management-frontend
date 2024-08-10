@@ -35,7 +35,7 @@ const StyledTextField = styled(TextField)({
   },
 });
 
-const ContactUs = () => {
+const ContactPage = () => {
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: '#15161D', paddingTop: '50px', paddingBottom: '50px' }}>
       <Typography variant="h3" sx={{ mb: 4, color: 'white', fontWeight: 'bold' }}>İletişim</Typography>
@@ -85,4 +85,4 @@ const ContactUs = () => {
   );
 };
 
-export default ContactUs;
+export default ContactPage;
