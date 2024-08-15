@@ -13,37 +13,40 @@ import ContactPage from './pages/Contact/ContactPage';
 import LoginPage from './pages/Login/LoginPage';
 import RegisterPage from './pages/Register/RegisterPage';
 import FilmDetailPage from './pages/FilmDetail/FilmDetailPage';
+import { FilmProvider } from './contextApi/FilmContext';
 
 function App() {
   return (
     <Router>
-      <div id="root">
-        <Navbar />
+      <FilmProvider>
+        <div id="root">
 
-        <ToastContainer
-          position="top-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
+          <Navbar />
 
-        <main style={{ flex: '1' }}>
+          <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
 
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/films" element={<FilmListPage />} />
-            <Route path="/film/:id" element={<FilmDetailPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/about" element={< AboutPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-          </Routes>
-        </main>
+          <main style={{ flex: '1' }}>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/films" element={<FilmListPage />} />
+              <Route path="/film/:id" element={<FilmDetailPage />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/register" element={<RegisterPage />} />
+              <Route path="/about" element={< AboutPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+            </Routes>
+          </main>
 
-        <Footer />
-      </div>
+          <Footer />
+          
+        </div>
+      </FilmProvider>
     </Router>
-
   );
 }
 
