@@ -8,6 +8,8 @@ import PopularFilmsList from './PopularFilmsList';
 import BestFilmsList from './BestFilmsList';
 import FilmSlider from './FilmSlider.jsx';
 
+//Geçiş
+
 const HomePage = () => {
   const [selectedFilm, setSelectedFilm] = useState(fakeFilms[0]);
   const navigate = useNavigate();
