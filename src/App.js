@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import HomePage from './pages/Home/Homepage';
@@ -16,21 +18,29 @@ function App() {
   return (
     <Router>
       <div id="root">
-        <Navbar /> 
+        <Navbar />
+
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
 
         <main style={{ flex: '1' }}>
+
           <Routes>
-            <Route path="/" element={<HomePage />} /> 
-            <Route path="/films" element={<FilmListPage />} /> 
+            <Route path="/" element={<HomePage />} />
+            <Route path="/films" element={<FilmListPage />} />
             <Route path="/film/:id" element={<FilmDetailPage />} />
             <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />  
-            <Route path="/about" element={< AboutPage/>} />   
-            <Route path="/contact" element={<ContactPage />} />  
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/about" element={< AboutPage />} />
+            <Route path="/contact" element={<ContactPage />} />
           </Routes>
         </main>
 
-        <Footer /> 
+        <Footer />
       </div>
     </Router>
 
