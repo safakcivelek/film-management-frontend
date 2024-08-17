@@ -10,6 +10,12 @@ export class FilmService extends BaseService {
             .then(response => response.data)
             .catch(this.handleError);
     }
+
+    getBestFilms() {
+        return this.httpClient.get(`${this.apiUrl}/best`)
+            .then(response => response.data)
+            .catch(this.handleError);
+    }
 }
 
 export default new FilmService();

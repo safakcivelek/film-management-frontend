@@ -10,18 +10,18 @@ class BaseService {
         if (error.response) {
             switch (error.response.status) {
                 case 401:
-                    toast.error("Yetkisiz erişim. Lütfen giriş yapın.");
+                    toast.error("Yetkisiz erişim. Lütfen giriş yapın.(baseService)");
                     break;
                 case 500:
-                    toast.error("Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin.");
+                    toast.error("Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin.(baseService)");
                     break;
                 default:
-                    toast.error("Bir hata oluştu. Lütfen tekrar deneyin.");
+                    toast.error("Bir hata oluştu. Lütfen tekrar deneyin.(baseService)");
             }
         } else if (error.request) {
-            toast.error("Sunucudan yanıt alınamıyor. Lütfen bağlantınızı kontrol edin.");
+            toast.error("Sunucudan yanıt alınamıyor. Lütfen bağlantınızı kontrol edin.(baseService)");
         } else {
-            toast.error(`Bir hata oluştu: ${error.message}`);
+            toast.error(`Bir hata oluştu(baseService): ${error.message}`);
         }
         return Promise.reject(error);
     }

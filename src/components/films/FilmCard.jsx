@@ -12,29 +12,28 @@ import {
 } from './FilmCardStyles';
 import { Link, useNavigate } from 'react-router-dom';
 
-const FilmCard = ({ id,title, image, year, imdb }) => {
+const FilmCard = ({ id, name, image, year, score }) => {
   // const navigate = useNavigate();
-
   // const handleCardClick = () => {
   //   navigate(`/film/${id}`);
   // };
 
+
   return (
     <CustomCard>
-      {/* <CardActionArea onClick={handleCardClick}> */}
       <CardActionArea component={Link} to={`/film/${id}`}>
         <CustomCardMedia>
-          <CustomImage src={image} alt={title} />
+          <CustomImage src={image} alt={name} />
           <TitleOverlay>
             <TitleText variant="h2" component="div">
-              {title}
+              {name}
             </TitleText>
             <DetailsContainer>
               <YearText variant="body2">
                 {year}
               </YearText>
               <IMDBText variant="body2">
-                IMDb: {imdb}
+                IMDb: {score}
               </IMDBText>
             </DetailsContainer>
           </TitleOverlay>

@@ -1,102 +1,85 @@
 import React, { useState } from 'react';
-import { Box, CardMedia, IconButton } from '@mui/material';
-import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import fakeFilms from '../../data/fakeFilms';
+import { Grid, Box, IconButton } from '@mui/material';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import FilmCard from '../../components/films/FilmCard';
 
-const FilmSlider = ({ setSelectedFilm }) => {
-  const filmsToDisplay = fakeFilms.slice(0, 6); // İlk 6 filmi alıyoruz
+const FilmSlider = ({ films }) => {
   const [startIndex, setStartIndex] = useState(0);
+  const filmsPerSlide = 6;
+
+  // Sadece ilk 12 filmi alıyoruz
+  const limitedFilms = films.slice(0, 12);
+  const visibleFilms = limitedFilms.slice(startIndex, startIndex + filmsPerSlide);
+
+  // Sol ok ile kaydırma işlemi
+  const handleSlideLeft = () => {
+    setStartIndex((prevIndex) => (prevIndex - filmsPerSlide + limitedFilms.length) % limitedFilms.length);
+  };
+
+  // Sağ ok ile kaydırma işlemi
+  const handleSlideRight = () => {
+    setStartIndex((prevIndex) => (prevIndex + filmsPerSlide) % limitedFilms.length);
+  };
   
-  const visibleFilms = [
-    filmsToDisplay[(startIndex) % filmsToDisplay.length],
-    filmsToDisplay[(startIndex + 1) % filmsToDisplay.length],
-    filmsToDisplay[(startIndex + 2) % filmsToDisplay.length],
-  ];
-
-  const handleSlideUp = () => {
-    setStartIndex((prevIndex) => {
-      const newIndex = (prevIndex - 1 + filmsToDisplay.length) % filmsToDisplay.length;
-      setSelectedFilm(filmsToDisplay[newIndex]); // Ana resmi güncelle
-      return newIndex;
-    });
-  };
-
-  const handleSlideDown = () => {
-    setStartIndex((prevIndex) => {
-      const newIndex = (prevIndex + 1) % filmsToDisplay.length;
-      setSelectedFilm(filmsToDisplay[newIndex]); // Ana resmi güncelle
-      return newIndex;
-    });
-  };
-
   return (
-    <Box sx={{ position: 'relative', width: '350px' }}>
+    <Box sx={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
       <IconButton
-        onClick={handleSlideUp}
+        onClick={handleSlideLeft}
         sx={{
           position: 'absolute',
-          top: '-20px',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          backgroundColor: 'transparent',
-          border: '2px solid white',
+          left: '-15px',
+          top: '50%',
+          transform: 'translateY(-50%)',
+          backgroundColor: 'white',
           borderRadius: '50%',
           width: '30px',
           height: '30px',
           zIndex: 2,
           '&:hover': {
-            backgroundColor: '#D10024',
-            borderColor: '#D10024',
+            backgroundColor: 'red',
             '& .MuiSvgIcon-root': {
               color: 'white',
             },
           },
         }}
       >
-        <ArrowUpwardIcon sx={{ color: 'white', fontSize: '16px' }} />
+        <ArrowBackIosIcon sx={{ fontSize: '16px', color: 'black' }} />
       </IconButton>
-      {visibleFilms.map((film, index) => (
-        <CardMedia
-          key={film.id}
-          component="img"
-          image={film.image}
-          alt={film.title}
-          sx={{ 
-            width: '350px', 
-            height: '200px', 
-            cursor: 'pointer', 
-            marginBottom: '20px', 
-            marginTop: '20px',
-            border: '3px solid #D10024', 
-            borderRadius: '1px' 
-          }}
-          onClick={() => setSelectedFilm(film)} 
-        />
-      ))}
+      <Grid container spacing={2} sx={{ overflow: 'hidden', width: '100%' }}>
+        {visibleFilms.map((film, index) => (
+          <Grid item xs={12} sm={6} md={2} key={index}>
+             <FilmCard
+              id={film.id}
+              name={film.name}
+              image={film.image}
+              year={film.year}
+              score={film.score}
+            />
+          </Grid>
+        ))}
+      </Grid>
       <IconButton
-        onClick={handleSlideDown}
+        onClick={handleSlideRight}
         sx={{
           position: 'absolute',
-          bottom: '-20px',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          backgroundColor: 'transparent',
-          border: '2px solid white',
+          right: '0px',
+          top: '50%',
+          transform: 'translateY(-50%)',
+          backgroundColor: 'white',
           borderRadius: '50%',
           width: '30px',
           height: '30px',
           zIndex: 2,
           '&:hover': {
-            backgroundColor: '#D10024',
-            borderColor: '#D10024',
+            backgroundColor: 'red',
             '& .MuiSvgIcon-root': {
               color: 'white',
             },
           },
         }}
       >
-        <ArrowDownwardIcon sx={{ color: 'white', fontSize: '16px' }} />
+        <ArrowForwardIosIcon sx={{ fontSize: '16px', color: 'black' }} />
       </IconButton>
     </Box>
   );
