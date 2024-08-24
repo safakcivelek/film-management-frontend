@@ -3,7 +3,6 @@ import { Box, Typography } from '@mui/material';
 import FilmSlider from './FilmSlider';
 import FilmService from '../../services/filmService';
 
-
 const BestFilmsList = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null)
@@ -15,7 +14,7 @@ const BestFilmsList = () => {
         const responseData = await FilmService.getAll(); //getBestFilmsList olarak güncellenecek.
         setFilms(responseData.data || [])
       } catch (error) {
-        setError(`İstek başarısız oldu (Durum Kodu: ${error.response.status})`);
+        setError(`İstek başarısız oldu(best) (Durum Kodu: ${error.response.status})`);
       } finally {
         setLoading(false);
       }

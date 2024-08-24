@@ -21,13 +21,14 @@ class BaseService {
         } else if (error.request) {
             toast.error("Sunucudan yanıt alınamıyor. Lütfen bağlantınızı kontrol edin.(baseService)");
         } else {
-            toast.error(`Bir hata oluştu(baseService): ${error.message}`);
+            toast.error(`Bir hata oluştu(baseService): ${error.message}`);          
         }
         return Promise.reject(error);
     }
 
-    getAll() {
-        return httpClient.get(this.apiUrl).then(response => response.data).catch(this.handleError);
+    getAll(start = 0, limit = 12) {
+        const params = { start, limit }
+        return httpClient.get(this.apiUrl, { params }).then(response => response.data).catch(this.handleError);
     }
 
     getById(id) {

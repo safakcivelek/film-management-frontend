@@ -15,7 +15,7 @@ const PopularFilmsList = () => {
         const responseData = await FilmService.getAll(); //getPopularFilmsList olarak güncellenecek.
         setFilms(responseData.data || []);         
       } catch (error) {       
-        setError(`İstek başarısız oldu (Durum Kodu: ${error.response.status})`);
+        setError(`İstek başarısız oldu(populer) (Durum Kodu: ${error.response.status})`);
       } finally {
         setLoading(false);
       }
