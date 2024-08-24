@@ -14,11 +14,13 @@ import LoginPage from './pages/Login/LoginPage';
 import RegisterPage from './pages/Register/RegisterPage';
 import FilmDetailPage from './pages/FilmDetail/FilmDetailPage';
 import { FilmProvider } from './contextApi/FilmContext';
+import { FilmFilterProvider } from './contextApi/FilmFilterContext';
 
 function App() {
   return (
     <Router>
       <FilmProvider>
+        <FilmFilterProvider>
         <div id="root">
 
           <Navbar />
@@ -45,6 +47,7 @@ function App() {
           <Footer />
           
         </div>
+        </FilmFilterProvider>
       </FilmProvider>
     </Router>
   );
