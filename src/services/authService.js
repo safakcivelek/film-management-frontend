@@ -1,5 +1,6 @@
+import apiClient from "./apiClient";
 import BaseService from "./baseService";
-import httpClient from "./httpClient";
+//import httpClient from "./httpClient";
 
 class AuthService extends BaseService {
     constructor() {
@@ -7,13 +8,13 @@ class AuthService extends BaseService {
     }
 
     login(email, password) {
-        return httpClient.post(`${this.apiUrl}/login`, { email, password })
+        return apiClient.post(`${this.apiUrl}/login`, { email, password })
             .then(response => response.data)
             .catch(this.handleError);
     }
 
     testAuthorize() {
-        return httpClient.get(`${this.apiUrl}/test-authorize`)
+        return apiClient.get(`${this.apiUrl}/test-authorize`)
             .then(response => response.data)
             .catch(this.handleError);
     }

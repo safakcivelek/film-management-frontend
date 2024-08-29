@@ -1,4 +1,5 @@
-import httpClient from "./httpClient";
+import apiClient from "./apiClient";
+//import httpClient from "./httpClient";
 import { toast } from 'react-toastify';
 
 class BaseService {
@@ -28,23 +29,23 @@ class BaseService {
 
     getAll(start = 0, limit = 12) {
         const params = { start, limit }
-        return httpClient.get(this.apiUrl, { params }).then(response => response.data).catch(this.handleError);
+        return apiClient.get(this.apiUrl, { params }).then(response => response.data).catch(this.handleError);
     }
 
     getById(id) {
-        return httpClient.get(`${this.apiUrl}/${id}`).then(response => response.data).catch(this.handleError);
+        return apiClient.get(`${this.apiUrl}/${id}`).then(response => response.data).catch(this.handleError);
     }
 
     add(request) {
-        return httpClient.post(this.apiUrl, request).then(response => response.data).catch(this.handleError);
+        return apiClient.post(this.apiUrl, request).then(response => response.data).catch(this.handleError);
     }
 
     update(request) {
-        return httpClient.put(this.apiUrl, request).then(response => response.data).catch(this.handleError);
+        return apiClient.put(this.apiUrl, request).then(response => response.data).catch(this.handleError);
     }
 
     delete(id) {
-        return httpClient.delete(`${this.apiUrl}/${id}`).then(response => response.data).catch(this.handleError);
+        return apiClient.delete(`${this.apiUrl}/${id}`).then(response => response.data).catch(this.handleError);
     }
 }
 
