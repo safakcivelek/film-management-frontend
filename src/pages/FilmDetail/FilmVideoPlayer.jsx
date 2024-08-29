@@ -7,9 +7,9 @@ const FilmVideoPlayer = ({ videoUrl, videoRef }) => {
             <Typography variant="h5" component="div" sx={{ mb: 2 }}>
                 Filmi İzle
             </Typography>
-            <Box sx={{ position: 'relative', paddingTop: '56.25%' /* 16:9 aspect ratio */ }}>
+            <Box sx={{ position: 'relative', paddingTop: '56.25%' }}>
                 <iframe
-                    src={videoUrl || ''} 
+                    src={videoUrl || ''}
                     title="Film Video"
                     style={{
                         position: 'absolute',

@@ -3,7 +3,7 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Navbar from './components/layout/Navbar';
+import Navbar from './components/layout/navbar/Navbar';
 import Footer from './components/layout/Footer';
 import HomePage from './pages/Home/Homepage';
 import '../src/css/globalStyles.css';
@@ -15,14 +15,15 @@ import RegisterPage from './pages/Register/RegisterPage';
 import FilmDetailPage from './pages/FilmDetail/FilmDetailPage';
 import { FilmProvider } from './contextApi/FilmContext';
 import { FilmFilterProvider } from './contextApi/FilmFilterContext';
+import { AuthProvider } from './contextApi/AuthContext';
 
-function App() {
+function App() { // AuthProvider nerde olacak?
   return (
     <Router>
+      <AuthProvider>
       <FilmProvider>
         <FilmFilterProvider>
         <div id="root">
-
           <Navbar />
 
           <ToastContainer
@@ -44,11 +45,11 @@ function App() {
             </Routes>
           </main>
 
-          <Footer />
-          
+          <Footer />         
         </div>
         </FilmFilterProvider>
       </FilmProvider>
+      </AuthProvider>
     </Router>
   );
 }
