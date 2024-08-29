@@ -1,15 +1,39 @@
 import React from 'react';
-import { CardMedia, Typography, Box, Grid, Button, Paper } from '@mui/material';
+import { CardMedia, Typography, Box, Grid, Button, Paper, Alert, AlertTitle } from '@mui/material';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import StarIcon from '@mui/icons-material/Star';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import apiClient from '../../services/apiClient';
 
 const FilmDetailsCard = ({ film, onWatchClick }) => {
     const directorName = film.director ? `${film.director.firstName} ${film.director.lastName}` : 'Bilinmiyor';
     const actorNames = film.actors ? film.actors.map(actor => `${actor.firstName} ${actor.lastName}`).join(', ') : 'Bilinmiyor';
     const genreNames = film.genres ? film.genres.map(genre => genre.name).join(', ') : 'Bilinmiyor';
+
+    const [alertMessage, setAlertMessage] = useState('');
+    const navigate = useNavigate();
+
+    const handleBuyClick = async () => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            try {
+                // Kullanıcının yetkilendirilmiş olup olmadığını TestAuthorize endpoint'i ile test ediyoruz
+                const response = await apiClient.get('/Auth/test-authorize');
+                setAlertMessage(response.data);  // Başarı mesajını göster
+            } catch (error) {
+                console.error('Yetkilendirme başarısız:', error);
+                setAlertMessage('Satın alma işlemi başarısız. Lütfen giriş yapınız.');
+                navigate('/login');  
+            }
+        } else {
+            setAlertMessage('Filmi satın almak için giriş yapmalısınız!');
+            navigate('/login');  
+        }
+    };
 
     return (
         <Paper sx={{ p: 0, backgroundColor: '#1E1F29', color: 'white', mb: 4 }}>
@@ -81,9 +105,9 @@ const FilmDetailsCard = ({ film, onWatchClick }) => {
                             display: '-webkit-box',
                             overflow: 'hidden',
                             WebkitBoxOrient: 'vertical',
-                            WebkitLineClamp: 3, // 3 satır sınırı
+                            WebkitLineClamp: 3, 
                             textOverflow: 'ellipsis',
-                            height: '4.5em' // 3 satırlık alanı kaplamak için sabit yükseklik
+                            height: '4.5em' 
                         }}
                     >
                         {film.description}
@@ -104,11 +128,22 @@ const FilmDetailsCard = ({ film, onWatchClick }) => {
                                 variant="outlined"
                                 startIcon={<ShoppingCartIcon />}
                                 sx={{ width: '100%', maxWidth: '280px', borderColor: '#D10024', color: '#D10024', '&:hover': { backgroundColor: '#D10024', color: 'white' } }}
+                                onClick={handleBuyClick}
                             >
                                 Satın Al
                             </Button>
                         </Grid>
                     </Grid>
+                    {alertMessage && (
+                        <Alert severity={alertMessage.includes('başarısız') ? 'warning' : 'success'} sx={{ mt: 2 }}>
+                            <AlertTitle>{alertMessage}</AlertTitle>
+                            {alertMessage === 'Filmi satın almak için giriş yapmalısınız!' && (
+                                <Button variant='outlined' onClick={() => navigate('/login')}>
+                                    Giriş Yap
+                                </Button>
+                            )}
+                        </Alert>
+                    )}
                 </Grid>
             </Grid>
         </Paper>
