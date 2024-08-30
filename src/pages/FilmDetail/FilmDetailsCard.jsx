@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { CardMedia, Typography, Box, Grid, Button, Paper, Alert, AlertTitle } from '@mui/material';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -6,50 +6,13 @@ import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import StarIcon from '@mui/icons-material/Star';
 import { useNavigate } from 'react-router-dom';
-import PurchaseService from '../../services/purchaseService';
 
-const FilmDetailsCard = ({ film, onWatchClick }) => {
+const FilmDetailsCard = ({ film, onWatchClick, isPurchased, onBuyClick, alertMessage }) => {
     const directorName = film.director ? `${film.director.firstName} ${film.director.lastName}` : 'Bilinmiyor';
     const actorNames = film.actors ? film.actors.map(actor => `${actor.firstName} ${actor.lastName}`).join(', ') : 'Bilinmiyor';
     const genreNames = film.genres ? film.genres.map(genre => genre.name).join(', ') : 'Bilinmiyor';
 
-    const [alertMessage, setAlertMessage] = useState('');
-    const [isPurchased, setIsPurchased] = useState(false);
     const navigate = useNavigate();
-
-    // Film daha önce satın alınmış mı kontrol et
-    useEffect(() => {
-        const checkIfPurchased = async () => {
-            try {
-                const response = await PurchaseService.checkIfPurchased(film.id);
-                if (response.data) {  // `response.data` true ise satın alınmış demektir
-                    setIsPurchased(true);
-                } else {
-                    setIsPurchased(false);
-                }
-            } catch (error) {
-                console.error('Satın alma durumu kontrol edilirken hata oluştu:', error);
-            }
-        };
-    
-        checkIfPurchased();
-    }, [film.id]);
-    const handleBuyClick = async () => {
-        const token = localStorage.getItem('token');
-        if (token) {
-            try {
-                const responseData = await PurchaseService.purchaseFilm(film.id);
-                setAlertMessage("Film başarıyla satın alındı!");
-                setIsPurchased(true);
-            } catch (error) {
-                console.error('Satın alma işlemi başarısız:', error);
-                setAlertMessage('Satın alma işlemi başarısız. Lütfen tekrar deneyin.');
-            }
-        } else {
-            setAlertMessage('Filmi satın almak için giriş yapmalısınız!');
-            navigate('/login');
-        }
-    };
 
     return (
         <Paper sx={{ p: 0, backgroundColor: '#1E1F29', color: 'white', mb: 4 }}>
@@ -154,7 +117,7 @@ const FilmDetailsCard = ({ film, onWatchClick }) => {
                                         color: 'white' 
                                     } 
                                 }}
-                                onClick={handleBuyClick}
+                                onClick={onBuyClick}  // Satın alma işlemini burada çağır
                                 disabled={isPurchased}  
                             >
                                 {isPurchased ? 'Satın Alındı' : 'Satın Al'}  
