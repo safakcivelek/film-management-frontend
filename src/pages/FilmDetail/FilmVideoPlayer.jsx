@@ -1,6 +1,6 @@
 import React from 'react';
 import { Paper, Typography, Box } from '@mui/material';
-import LockRoundedIcon from '@mui/icons-material/LockRounded'; // Farklı bir kilit ikonu
+import LockRoundedIcon from '@mui/icons-material/LockRounded'; 
 
 const FilmVideoPlayer = ({ videoUrl, videoRef, isPurchased, filmImage }) => {
     return (
@@ -44,8 +44,8 @@ const FilmVideoPlayer = ({ videoUrl, videoRef, isPurchased, filmImage }) => {
                                 top: '40%',
                                 left: '50%',
                                 transform: 'translate(-50%, -50%)',
-                                fontSize: 120, // İkon boyutu artırıldı
-                                color: '#FFFFFF', // Kilit simgesi beyaz yapıldı
+                                fontSize: 120, 
+                                color: '#FFFFFF', 
                                 zIndex: 3, // Kilit simgesi en üstte yer alır
                             }}
                         />
@@ -53,12 +53,12 @@ const FilmVideoPlayer = ({ videoUrl, videoRef, isPurchased, filmImage }) => {
                             variant="h5"
                             sx={{
                                 position: 'absolute',
-                                top: '58%', // İkon ile yazı arasındaki mesafe azaltıldı
+                                top: '58%',
                                 left: '50%',
                                 transform: 'translate(-50%, -50%)',
-                                color: '#FF3D00', // Yazı rengi kırmızı
+                                color: '#FF3D00', 
                                 fontWeight: 'bold',
-                                fontFamily: 'Arial, sans-serif', // Daha net bir font
+                                fontFamily: 'Arial, sans-serif', 
                                 textAlign: 'center',
                                 zIndex: 3, // Yazı en üstte yer alır
                             }}

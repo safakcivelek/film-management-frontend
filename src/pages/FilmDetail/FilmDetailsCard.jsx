@@ -117,7 +117,7 @@ const FilmDetailsCard = ({ film, onWatchClick, isPurchased, onBuyClick, alertMes
                                         color: 'white' 
                                     } 
                                 }}
-                                onClick={onBuyClick}  // Satın alma işlemini burada çağır
+                                onClick={onBuyClick} 
                                 disabled={isPurchased}  
                             >
                                 {isPurchased ? 'Satın Alındı' : 'Satın Al'}  
