@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AppBar, Box, Toolbar, IconButton, Drawer, useMediaQuery, Typography, ListItemText, ListItem, List, Button } from '@mui/material';
+import { AppBar, Box, Toolbar, IconButton, Drawer, Typography, ListItemText, ListItem, List, Button, useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useAuth } from '../../../contextApi/AuthContext';
@@ -7,6 +7,7 @@ import NavbarSearchBar from './NavbarSearchBar';
 import NavbarMenuItems from './NavbarMenuItems';
 import NavbarUserMenu from './NavbarUserMenu';
 import { Link, useNavigate } from 'react-router-dom';
+
 
 const menuItems = [
   { text: "FİLMLER", to: "/films" },
@@ -42,12 +43,17 @@ function Navbar() {
         <NavbarMenuItems menuItems={menuItems} />
         {user ? (
           <ListItem button onClick={handleLogout}>
-            <ListItemText primary="Çıkış Yap" sx={{ fontSize: '0.9rem', color: 'black' }} />
+            <ListItemText primary="ÇIKIŞ YAP" sx={{ fontSize: '0.8rem', color: 'black' }} />
           </ListItem>
         ) : (
-          <ListItem button component={Link} to="/login">
-            <ListItemText primary="Giriş Yap" sx={{ fontSize: '0.9rem', color: 'black' }} />
-          </ListItem>
+          <>
+            <ListItem button component={Link} to="/login">
+              <ListItemText primary="OTURUM AÇ" sx={{ fontSize: '0.8rem', color: 'black' }} />
+            </ListItem>
+            <ListItem button component={Link} to="/register">
+              <ListItemText primary="KAYDOL" sx={{ fontSize: '0.8rem', color: 'black' }} />
+            </ListItem>
+          </>
         )}
       </List>
     </Box>
@@ -71,9 +77,46 @@ function Navbar() {
             user ? (
               <NavbarUserMenu user={user} handleLogout={handleLogout} handleMenuClick={handleMenuClick} handleMenuClose={handleMenuClose} anchorEl={anchorEl} />
             ) : (
-              <Button color="inherit" sx={{ fontSize: '0.9rem', textTransform: 'uppercase' }} component={Link} to="/login">
-                Giriş Yap
-              </Button>
+              <>
+                <Button 
+                  variant="outlined" 
+                  color="inherit" 
+                  sx={{ 
+                    fontSize: '0.8rem', 
+                    textTransform: 'uppercase', 
+                    borderColor: '#FFFFFF', 
+                    color: '#FFFFFF', 
+                    ml: 2, 
+                    '&:hover': {
+                      backgroundColor: 'rgba(255, 255, 255, 0.1)', 
+                      borderColor: '#FFFFFF'
+                    }
+                  }} 
+                  component={Link} 
+                  to="/login"
+                >
+                  Oturum Aç
+                </Button>
+                <Button 
+                  variant="outlined" 
+                  color="inherit" 
+                  sx={{ 
+                    fontSize: '0.8rem', 
+                    textTransform: 'uppercase', 
+                    borderColor: '#FFFFFF', 
+                    color: '#FFFFFF', 
+                    ml: 2, 
+                    '&:hover': {
+                      backgroundColor: 'rgba(255, 255, 255, 0.1)',  
+                      borderColor: '#FFFFFF'
+                    }
+                  }} 
+                  component={Link} 
+                  to="/register"
+                >
+                  Kaydol
+                </Button>
+              </>
             )
           )}
         </Toolbar>
