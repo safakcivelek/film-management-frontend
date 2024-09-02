@@ -7,8 +7,7 @@ import FilmVideoPlayer from './FilmVideoPlayer';
 import PurchaseService from '../../services/purchaseService';
 import PurchaseDialog from './PurchaseDialog';
 import ConfirmPurchaseDialog from './ConfirmPurchaseDialog';
-import SuccessPurchaseDialog from './SuccessPurchaseDialog ';
-
+import SuccessPurchaseDialog from './SuccessPurchaseDialog';
 
 const FilmDetailPage = () => {
     const { id } = useParams();
