@@ -25,11 +25,14 @@ const BackgroundImage = () => {
                 left: 0,
                 width: '100%',
                 height: { xs: 'auto', md: '1080px' },
-                backgroundImage: `url(${currentImage})`,
+                backgroundImage: `
+                    radial-gradient(circle at center, rgba(0, 0, 0, 0.00), rgba(0, 0, 0, 0.85) 85%), 
+                    url(${currentImage})
+                `,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 zIndex: -1,
-                filter: 'brightness(40%)',
+                filter: 'brightness(70%)',
                 transition: 'opacity 1s ease-in-out', // Yumuşak solma
                 opacity: fading ? 0 : 1, // Solma efekti
             }}
@@ -37,4 +40,4 @@ const BackgroundImage = () => {
     );
 };
 
-export default BackgroundImage;
+export default BackgroundImage;//Kabul gören.1
