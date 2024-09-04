@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
-import { useFilms } from '../../contextApi/FilmContext';
+import { useFilms } from '../../contextApi/HomePageFilmContext';
 
 const BackgroundImage = () => {
     const { selectedFilm } = useFilms();

@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Paper, Grid, Typography, Button } from '@mui/material';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import StarIcon from '@mui/icons-material/Star';
-import { useFilms } from '../../contextApi/FilmContext';
+import { useFilms } from '../../contextApi/HomePageFilmContext';
 
 const SelectedFilmDetails = ({ handleWatchNow }) => {
     const { selectedFilm } = useFilms();

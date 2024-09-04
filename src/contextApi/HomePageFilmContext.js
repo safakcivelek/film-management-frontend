@@ -1,9 +1,9 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import FilmService from "../services/filmService";
 
-const FilmContext = createContext();
+const HomePageFilmContext = createContext();
 
-export const FilmProvider = ({ children }) => {
+export const HomePageFilmProvider = ({ children }) => {
     const [films, setFilms] = useState([]);
     const [selectedFilm, setSelectedFilm] = useState(null)
     const [loading, setLoading] = useState(true);
@@ -26,9 +26,9 @@ export const FilmProvider = ({ children }) => {
     }, [])
 
     return (
-        <FilmContext.Provider value={{ films, selectedFilm, setSelectedFilm, loading, error }}>
+        <HomePageFilmContext.Provider value={{ films, selectedFilm, setSelectedFilm, loading, error }}>
             {children}
-        </FilmContext.Provider>
+        </HomePageFilmContext.Provider>
     );
 };
-export const useFilms = () => useContext(FilmContext);
+export const useFilms = () => useContext(HomePageFilmContext);

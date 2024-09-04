@@ -6,7 +6,7 @@ import MainFilmSlider from './MainFilmSlider';
 import SelectedFilmDetails from './SelectedFilmDetails';
 import BackgroundImage from './BackgroundImage';
 import { useNavigate } from 'react-router-dom';
-import { useFilms } from '../../contextApi/FilmContext';
+import { useFilms } from '../../contextApi/HomePageFilmContext';
 
 const HomePage = () => {
   const { films, selectedFilm, setSelectedFilm, loading, error } = useFilms();

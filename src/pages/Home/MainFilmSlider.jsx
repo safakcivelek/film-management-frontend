@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box, CardMedia, IconButton } from '@mui/material';
 import { KeyboardArrowUpTwoTone, KeyboardArrowDownTwoTone } from '@mui/icons-material';
-import { useFilms } from '../../contextApi/FilmContext';
+import { useFilms } from '../../contextApi/HomePageFilmContext';
 
 const MainFilmSlider = () => {
   const { films, setSelectedFilm, selectedFilm } = useFilms();
