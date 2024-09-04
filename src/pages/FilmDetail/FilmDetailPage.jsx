@@ -1,78 +1,51 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React, { useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Typography, Container } from '@mui/material';
-import FilmService from '../../services/filmService';
 import FilmDetailsCard from './FilmDetailsCard';
 import FilmVideoPlayer from './FilmVideoPlayer';
-import PurchaseService from '../../services/purchaseService';
 import PurchaseDialog from './PurchaseDialog';
 import ConfirmPurchaseDialog from './ConfirmPurchaseDialog';
 import SuccessPurchaseDialog from './SuccessPurchaseDialog';
+import { useFilmDetail } from '../../contextApi/FilmDetailContext';
+import PurchaseService from '../../services/purchaseService';
 
 const FilmDetailPage = () => {
-    const { id } = useParams();
-    const [film, setFilm] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const [isPurchased, setIsPurchased] = useState(false);
-    const [alertMessage, setAlertMessage] = useState('');
-    const [openDialog, setOpenDialog] = useState(false);
-    const [openConfirmDialog, setOpenConfirmDialog] = useState(false);
-    const [openSuccessDialog, setOpenSuccessDialog] = useState(false); 
+    const { film, loading, error,isPurchased, fetchFilmDetail } = useFilmDetail();
+    const [alertMessage, setAlertMessage] = React.useState('');
+    const [openDialog, setOpenDialog] = React.useState(false);
+    const [openConfirmDialog, setOpenConfirmDialog] = React.useState(false);
+    const [openSuccessDialog, setOpenSuccessDialog] = React.useState(false);
     const videoRef = useRef(null);
     const navigate = useNavigate();
-
-    useEffect(() => {
-        const fetchFilmDetail = async () => {
-            try {
-                const responseData = await FilmService.getById(id);
-                setFilm(responseData.data);
-
-                const token = localStorage.getItem('token');
-                if (token) {
-                    const purchaseResponse = await PurchaseService.checkIfPurchased(id);
-                    setIsPurchased(purchaseResponse.data);
-                } else {
-                    setIsPurchased(false);
-                }
-            } catch (error) {
-                setError('Film detayları alınırken bir hata oluştu.');
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchFilmDetail();
-    }, [id]);
 
     const handleBuyClick = () => {
         const token = localStorage.getItem('token');
         if (token) {
-            setOpenConfirmDialog(true); 
+            setOpenConfirmDialog(true);
         } else {
-            setOpenDialog(true); 
+            setOpenDialog(true);
         }
     };
 
     const handleConfirmPurchase = async () => {
-        try {
-            const responseData = await PurchaseService.purchaseFilm(film.id);
-            
-            setIsPurchased(true);
-            setOpenConfirmDialog(false); 
-            setOpenSuccessDialog(true); 
+        try {         
+            const response = await PurchaseService.purchaseFilm(film.id)
+            setOpenConfirmDialog(false);
+            setOpenSuccessDialog(true);
+            // Satın alındı durumunu günceller
+            await fetchFilmDetail();
         } catch (error) {
             console.error('Satın alma işlemi başarısız:', error);
             setAlertMessage('Satın alma işlemi başarısız. Lütfen tekrar deneyin.');
             setOpenConfirmDialog(false);
-            setOpenDialog(true); 
+            setOpenDialog(true);
         }
     };
 
     const handleCloseDialog = () => {
         setOpenDialog(false);
         setOpenConfirmDialog(false);
-        setOpenSuccessDialog(false); 
+        setOpenSuccessDialog(false);
     };
 
     const handleLogin = () => {
@@ -103,15 +76,22 @@ const FilmDetailPage = () => {
             <FilmDetailsCard
                 film={film}
                 onWatchClick={handleWatchClick}
-                isPurchased={isPurchased} 
-                onBuyClick={handleBuyClick} 
-                alertMessage={alertMessage} 
+                isPurchased={isPurchased}
+                onBuyClick={handleBuyClick}
+                alertMessage={alertMessage}
             />
-            <FilmVideoPlayer videoUrl={film.video} videoRef={videoRef} isPurchased={isPurchased} filmImage={film.image} />
+            <FilmVideoPlayer
+                videoUrl={film.video}
+                videoRef={videoRef}
+                isPurchased={isPurchased}
+                filmImage={film.image}
+                filmId={film.id}
+                averageRating={film.score}
+            />
 
-            <PurchaseDialog 
-                open={openDialog} 
-                handleClose={handleCloseDialog} 
+            <PurchaseDialog
+                open={openDialog}
+                handleClose={handleCloseDialog}
                 message={alertMessage}
                 handleLogin={handleLogin}
             />
