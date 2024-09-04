@@ -11,6 +11,11 @@ export const FilmFilterProvider = ({ children }) => {
         score: '',
     });
 
+    const [sortOptions, setSortOptions] = useState({
+        field: '', // Sıralama yapılacak alan
+        dir: '',   // 'asc' veya 'desc' sıralama yönü
+    });
+
     const [filterFilms, setFilterFilms] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -19,6 +24,13 @@ export const FilmFilterProvider = ({ children }) => {
         setFilters(prevFilters => ({
             ...prevFilters,
             ...newFilters
+        }));
+    };
+
+    const updateSort = (newSortOptions) => {
+        setSortOptions(prevSort => ({
+            ...prevSort,
+            ...newSortOptions
         }));
     };
 
@@ -69,13 +81,28 @@ export const FilmFilterProvider = ({ children }) => {
                     value: filters.score,
                     logic: 'and'
                 });
-            }           
+            }
+
+            const dynamicQuery = {};
+
+            // Boş olmayan sort alanını ekliyoruz
+            if (sortOptions.field) {
+                dynamicQuery.sort = [{
+                    field: sortOptions.field,
+                    dir: sortOptions.dir || 'asc'
+                }];
+            }
+
+            // Eğer filter.filters boş değilse, filter alanını ekliyoruz
+            if (filter.filters.length > 0) {
+                dynamicQuery.filter = filter;
+            }
 
             const data = {
                 start: 0,
-                limit: 13,
-                dynamicQuery: { filter }
-            };    
+                limit: 15,
+                dynamicQuery
+            };
 
             const responseData = await FilmService.getFilteredFilms(data);
             setFilterFilms(responseData.data || []);
@@ -88,10 +115,10 @@ export const FilmFilterProvider = ({ children }) => {
 
     useEffect(() => {
         fetchFilteredFilms();
-    }, [filters]);
+    }, [filters, sortOptions]);
 
     return (
-        <FilmFilterContext.Provider value={{ filters, updateFilters, filterFilms, loading, error }}>
+        <FilmFilterContext.Provider value={{ filters, updateFilters, sortOptions, updateSort, filterFilms, loading, error }}>
             {children}
         </FilmFilterContext.Provider>
     );
