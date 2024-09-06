@@ -7,7 +7,7 @@ const FilterSelect = ({ label, value, handleChange, options }) => {
     <FilterFormControl fullWidth variant="outlined">
       <InputLabel>{label}</InputLabel>
       <Select
-        value={value}
+        value={value || ''} // Eğer value boş ise, default olarak boş string verelim
         onChange={handleChange}
         label={label}
         MenuProps={{
@@ -23,7 +23,7 @@ const FilterSelect = ({ label, value, handleChange, options }) => {
           <em>Tümü</em>
         </MenuItem>
         {options.map((option, index) => (
-          <MenuItem key={index} value={option}>{option}</MenuItem>
+          <MenuItem key={index} value={option.value || option}>{option.label || option}</MenuItem>
         ))}
       </Select>
     </FilterFormControl>

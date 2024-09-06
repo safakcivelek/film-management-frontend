@@ -11,7 +11,7 @@ const BestFilmsList = () => {
   useEffect(() => {
     const fetchFilms = async () => {
       try {
-        const responseData = await FilmService.getAll(); //getBestFilmsList olarak güncellenecek.
+        const responseData = await FilmService.getAll(); 
         setFilms(responseData.data || [])
       } catch (error) {
         setError(`İstek başarısız oldu(best) (Durum Kodu: ${error.response.status})`);

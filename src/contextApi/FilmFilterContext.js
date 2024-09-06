@@ -6,8 +6,8 @@ const FilmFilterContext = createContext();
 export const FilmFilterProvider = ({ children }) => {
     const [filters, setFilters] = useState({
         genre: '',
-        year: '',
-        duration: '',
+        yearRange: { start: '', end: '' },
+        durationRange: { min: '', max: '' },
         score: '',
     });
 
@@ -47,6 +47,7 @@ export const FilmFilterProvider = ({ children }) => {
                 filters: []
             };
 
+            // Genre filtresi
             if (filters.genre) {
                 filter.filters.push({
                     field: 'FilmGenres.Genre.Name',
@@ -56,23 +57,39 @@ export const FilmFilterProvider = ({ children }) => {
                 });
             }
 
-            if (filters.year) {
+            // Year (yıl) aralığı filtresi
+            if (filters.yearRange.start && filters.yearRange.end) {
                 filter.filters.push({
                     field: 'year',
-                    operator: 'eq',
-                    value: filters.year,
-                    logic: 'and'
+                    operator: 'gte',
+                    value: filters.yearRange.start,
+                    logic: 'and',
+                    filters: [
+                        {
+                            field: 'year',
+                            operator:'lte',
+                            value: filters.yearRange.end
+                        }
+                    ]
                 });
             }
 
-            if (filters.duration) {
-                filter.filters.push({
-                    field: 'duration',
-                    operator: 'eq',
-                    value: filters.duration,
-                    logic: 'and'
-                });
-            }
+           // Duration (süre) aralığı filtresi
+           if (filters.durationRange.min && filters.durationRange.max) {
+            filter.filters.push({
+                field: 'duration',  // Süre alanı
+                operator: 'gte',  // Min süre
+                value: filters.durationRange.min,
+                logic: 'and',
+                filters: [
+                    {
+                        field: 'duration',  // Süre alanı
+                        operator: 'lte',  // Max süre
+                        value: filters.durationRange.max
+                    }
+                ]
+            });
+        }
 
             if (filters.score) {
                 filter.filters.push({
@@ -100,7 +117,7 @@ export const FilmFilterProvider = ({ children }) => {
 
             const data = {
                 start: 0,
-                limit: 15,
+                limit: 12,
                 dynamicQuery
             };
 
