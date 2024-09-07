@@ -7,14 +7,14 @@ const FilterSelect = ({ label, value, handleChange, options }) => {
     <FilterFormControl fullWidth variant="outlined">
       <InputLabel>{label}</InputLabel>
       <Select
-        value={value || ''} // Eğer value boş ise, default olarak boş string verelim
+        value={value || ''} 
         onChange={handleChange}
         label={label}
         MenuProps={{
           PaperProps: {
             style: {
-              maxHeight: '200px', // Dropdown menüsünün maksimum yüksekliği
-              overflowY: 'auto', // Dikey scroll bar
+              maxHeight: '200px', 
+              overflowY: 'auto', 
             },
           },
         }}

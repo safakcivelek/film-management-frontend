@@ -7,10 +7,10 @@ const FilterFormControl = styled(FormControl)(({ theme }) => ({
   backgroundColor: '#15161D',
   borderRadius: 4,
   '& .MuiInputLabel-root': {
-    color: 'white', // Label rengi
+    color: 'white', 
     top: '-11%', 
     '&.Mui-focused': {
-      color: 'white', // Focus durumunda label rengi
+      color: 'white', 
     },
   },
   '& .MuiOutlinedInput-root': {
@@ -26,7 +26,7 @@ const FilterFormControl = styled(FormControl)(({ theme }) => ({
   },
   '& .MuiSelect-select': {
     backgroundColor: '#15161D',
-    color: 'white', // Metin rengi
+    color: 'white', 
     paddingTop: theme.spacing(1.5),
     paddingBottom: theme.spacing(1.5),
   },
