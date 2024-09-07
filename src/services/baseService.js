@@ -27,7 +27,7 @@ class BaseService {
         return Promise.reject(error);
     }
 
-    getAll(start = 0, limit = 12) {
+    getAll(start, limit) {
         const params = { start, limit }
         return apiClient.get(this.apiUrl, { params }).then(response => response.data).catch(this.handleError);
     }

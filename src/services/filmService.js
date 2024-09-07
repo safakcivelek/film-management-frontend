@@ -7,18 +7,6 @@ export class FilmService extends BaseService {
         super('films')
     }
 
-    getPopularFilms() {
-        return this.apiClient.get(`${this.apiUrl}/popular`)
-            .then(response => response.data)
-            .catch(this.handleError);
-    }
-
-    getBestFilms() {
-        return this.apiClient.get(`${this.apiUrl}/best`)
-            .then(response => response.data)
-            .catch(this.handleError);
-    }
-
     getFilteredFilms(data) {
         return apiClient.post(`${this.apiUrl}/filtered-list`, data)
             .then(response => response.data)

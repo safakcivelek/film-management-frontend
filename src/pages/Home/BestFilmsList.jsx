@@ -1,27 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Typography } from '@mui/material';
 import FilmSlider from './FilmSlider';
-import FilmService from '../../services/filmService';
+import useBestFilms from '../../hooks/useBestFilms';  
 
 const BestFilmsList = () => {
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null)
-  const [films, setFilms] = useState([])
-
-  useEffect(() => {
-    const fetchFilms = async () => {
-      try {
-        const responseData = await FilmService.getAll(); 
-        setFilms(responseData.data || [])
-      } catch (error) {
-        setError(`İstek başarısız oldu(best) (Durum Kodu: ${error.response.status})`);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchFilms();
-  }, [])
+  // Custom hook
+  const { films, loading, error } = useBestFilms();
 
   if (loading) return <p>Yükleniyor...</p>;
   if (error) return <p>Hata: {error}</p>;

@@ -9,15 +9,16 @@ const FilmSlider = ({ films }) => {
   const filmsPerSlide = 6;
   const totalFilms = films.length;
 
-  const limitedFilms = films.slice(0, 12);
-  const visibleFilms = limitedFilms.slice(startIndex, startIndex + filmsPerSlide);
+  const visibleFilms = films.slice(startIndex, startIndex + filmsPerSlide);
 
   const handleSlideLeft = () => {
-    setStartIndex((prevIndex) => prevIndex - 1);
+    setStartIndex((prevIndex) => Math.max(prevIndex - filmsPerSlide, 0)); // Sol sınırlama
   };
 
   const handleSlideRight = () => {
-    setStartIndex((prevIndex) => prevIndex + 1);
+    setStartIndex((prevIndex) =>
+      Math.min(prevIndex + filmsPerSlide, totalFilms - filmsPerSlide) // Sağ sınırlama
+    );
   };
 
   return (
