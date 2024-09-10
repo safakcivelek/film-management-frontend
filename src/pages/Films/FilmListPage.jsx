@@ -2,12 +2,16 @@ import { Box, Typography } from '@mui/material';
 import '../../css/globalStyles.css';
 import FilmFilter from '../../components/films/FilmFilter';
 import FilmList from '../../components/films/FilmList';
-import { useFilteredFilms } from '../../contextApi/FilmFilterContext';
-import { useState } from 'react';
 import SortSelect from '../../components/films/SortSelect'; 
+import useFilmFilter from '../../hooks/useFilmFilter';
+import useSort from '../../hooks/useSort';
+import { useFilteredFilms } from '../../contextApi/FilmFilterContext';
+import { useEffect, useState } from 'react';
 
 const FilmListPage = () => {
-  const { filterFilms, loading, error, updateSort } = useFilteredFilms();
+  const { filterFilms, fetchFilteredFilms, loading, error } = useFilteredFilms();
+  const { filters, updateFilters, getDynamicFilterQuery } = useFilmFilter();
+  const { sortOptions, updateSort, getDynamicSortQuery } = useSort();
   const [sortOrder, setSortOrder] = useState('');
 
   const handleSortChange = (event) => {
@@ -21,13 +25,21 @@ const FilmListPage = () => {
     }
   };
 
+  useEffect(() => {
+    const dynamicFilter = getDynamicFilterQuery();
+    const dynamicSort = getDynamicSortQuery();
+    const dynamicQuery = { filter: dynamicFilter, sort: dynamicSort };
+    
+    fetchFilteredFilms(0, 15, dynamicQuery);
+  }, [filters, sortOptions]);
+
   if (loading) return <p>Yükleniyor...</p>;
   if (error) return <p>Hata: {error}</p>;
 
   return (
     <Box sx={{ px: { xs: 2, sm: 3, md: 20 }, py: 4 }}>
       <Box sx={{ backgroundColor: '#1E1F29', p: 0, mt: 4, borderRadius: 1.5, border: '1px solid rgb(41 41 55)' }}>
-        <FilmFilter />
+        <FilmFilter filters={filters} updateFilters={updateFilters} />
       </Box>
 
       <Box sx={{ mb: 3, mt: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
