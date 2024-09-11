@@ -2,8 +2,8 @@ import { useState } from "react";
 
 const useSort = () => {
     const [sortOptions, setSortOptions] = useState({
-        field: 'score',
-        dir: 'asc',
+        field: '',
+        dir: '',
     });
 
     const updateSort = (newSortOptions) => {
