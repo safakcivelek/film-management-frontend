@@ -7,7 +7,7 @@ function NavbarSearchBar({ isMobile }) {
     <Box sx={{ display: 'flex', alignItems: 'center', height: '43px', width: isMobile ? '100%' : 'auto' }}>
       <IconButton
         onClick={() => console.log('Arama başlatıldı')}
-        sx={{ bgcolor: '#D10024', color: 'white', borderRadius: 0, height: '43px', width: '43px', '&:hover': { bgcolor: 'darkred' } }}
+        sx={{ bgcolor: '#D10024', color: 'white', borderRadius:'4px 0 0 4px', height: '43px', width: '43px', '&:hover': { bgcolor: 'darkred' } }}
       >
         <SearchIcon sx={{ fontSize: '1.8rem' }} />
       </IconButton>
@@ -17,7 +17,7 @@ function NavbarSearchBar({ isMobile }) {
         size="small"
         sx={{
           bgcolor: 'white',
-          borderRadius: 1,
+          borderRadius: '4px',
           width: isMobile ? '100%' : '486px',
           ml: 0,
           height: '43px',
