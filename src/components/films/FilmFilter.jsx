@@ -7,21 +7,25 @@ import ScoreFilter from './filters/ScoreFilter';
 
 const FilmFilter = ({ filters, updateFilters }) => {
   const handleGenreChange = (event) => {
-    updateFilters({ genre: event.target.value });
+    const newFilters = { ...filters, genre: event.target.value };
+    updateFilters(newFilters);
   };
 
   const handleYearRangeChange = (event) => {
     const [start, end] = event.target.value.split('-');
-    updateFilters({ yearRange: { start, end } });
+    const newFilters = { ...filters, yearRange: { start, end } };
+    updateFilters(newFilters);
   };
 
   const handleDurationRangeChange = (event) => {
     const [min, max] = event.target.value.split('-');
-    updateFilters({ durationRange: { min, max } });
+    const newFilters = { ...filters, durationRange: { min, max } };
+    updateFilters(newFilters);
   };
 
   const handleScoreChange = (event) => {
-    updateFilters({ score: event.target.value });
+    const newFilters = { ...filters, score: event.target.value };
+    updateFilters(newFilters);
   };
 
   return (
