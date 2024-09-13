@@ -1,5 +1,8 @@
 import { createContext, useContext, useState } from "react";
 import FilmService from '../services/filmService';
+import { useNavigate, useLocation } from 'react-router-dom';
+import queryString from 'query-string'; 
+
 
 const FilmFilterContext = createContext();
 
@@ -8,6 +11,8 @@ export const FilmFilterProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [hasMore, setHasMore] = useState(true); 
+    const navigate = useNavigate();
+    const location = useLocation();
 
     const fetchFilteredFilms = async (start, limit, dynamicQuery) => {
         setLoading(true);
@@ -32,8 +37,29 @@ export const FilmFilterProvider = ({ children }) => {
         }
     };
 
+    const updateURL = (newFilters, newSortOrder) => {
+        const query = queryString.stringify({
+          genre: newFilters.genre || undefined, 
+          yearRange: (newFilters.yearRange && newFilters.yearRange.start && newFilters.yearRange.end)
+            ? JSON.stringify(newFilters.yearRange) 
+            : undefined, 
+          durationRange: (newFilters.durationRange && newFilters.durationRange.min && newFilters.durationRange.max)
+            ? JSON.stringify(newFilters.durationRange) 
+            : undefined, // Eğer durationRange dolu değilse ekleme
+          score: newFilters.score || undefined, // Eğer score boşsa ekleme
+          sort: newSortOrder || undefined, 
+        }, { skipNull: true }); // Boş (null) değerleri atlar
+      
+        navigate(`/films?${query}`);
+      };
+      
+
+    const getQueryParams = () => {
+        return queryString.parse(location.search);
+    };
+
     return (
-        <FilmFilterContext.Provider value={{ filterFilms, fetchFilteredFilms, loading, error,hasMore }}>
+        <FilmFilterContext.Provider value={{ filterFilms, fetchFilteredFilms, loading, error,hasMore, updateURL, getQueryParams  }}>
             {children}
         </FilmFilterContext.Provider>
     );

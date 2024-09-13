@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react';
 import LoadMoreButton from '../../components/films/LoadMoreButton';
 
 const FilmListPage = () => {
-  const { filterFilms, fetchFilteredFilms, loading, error,hasMore } = useFilteredFilms();
+  const { filterFilms, fetchFilteredFilms, loading, error,hasMore, updateURL, getQueryParams  } = useFilteredFilms();
   const { filters, updateFilters, getDynamicFilterQuery } = useFilmFilter();
   const { sortOptions, updateSort, getDynamicSortQuery } = useSort();
 
@@ -18,15 +18,32 @@ const FilmListPage = () => {
   const [start, setStart] = useState(0);
   const limit = 6; 
 
+  const queryParams = getQueryParams();
+
+   // URL parametrelerini alıp filtreleri ve sıralamayı uygula
+   useEffect(() => {
+    if (queryParams.sort) {
+      setSortOrder(queryParams.sort);
+      updateSort({ field: 'name', dir: queryParams.sort === 'az' ? 'asc' : 'desc' });
+    }
+
+    if (queryParams.genre || queryParams.yearRange || queryParams.durationRange || queryParams.score) {
+      updateFilters({
+        genre: queryParams.genre || '',
+        yearRange: queryParams.yearRange ? JSON.parse(queryParams.yearRange) : { start: '', end: '' },
+        durationRange: queryParams.durationRange ? JSON.parse(queryParams.durationRange) : { min: '', max: '' },
+        score: queryParams.score || '',
+      });
+    }
+  }, []); // Sadece ilk mount'da çalışacak
+
+
   const handleSortChange = (event) => {
     const value = event.target.value;
     setSortOrder(value);
 
-    if (value === 'az') {
-      updateSort({ field: 'name', dir: 'asc' });
-    } else if (value === 'za') {
-      updateSort({ field: 'name', dir: 'desc' });
-    }
+    updateSort({ field: 'name', dir: value === 'az' ? 'asc' : 'desc' });
+     updateURL(filters, value);  // URL güncelleniyor
   };
 
   useEffect(() => {
@@ -36,7 +53,7 @@ const FilmListPage = () => {
 
     setStart(0);
     fetchFilteredFilms(0, limit, dynamicQuery);
-  }, [filters, sortOptions]);
+  }, [filters, sortOptions]); 
 
   // Load more butonuna tıklandığında çağrılacak fonksiyon
   const loadMoreFilms = () => {
