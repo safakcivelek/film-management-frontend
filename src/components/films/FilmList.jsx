@@ -4,7 +4,7 @@ import FilmCard from './FilmCard';
 
 const FilmList = ({ films }) => {
   return (
-    <Grid container spacing={2} rowSpacing={6}>
+    <Grid container spacing={2} rowSpacing={2}>
       {films.map((film, index) => (
         <Grid item xs={12} sm={6} md={2} key={index}>
           <FilmCard

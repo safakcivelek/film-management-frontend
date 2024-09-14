@@ -74,8 +74,8 @@ const SearchPage = () => {
             </Box>
 
             <Box sx={{ mb: 3, mt: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <Typography variant="h6" component="div" sx={{ color: 'white' }}>
-                    "{searchTerm}" için Arama sonuçları ({totalCount})
+                <Typography component="div" sx={{ color: 'white', fontSize: '1.1rem' }}>
+                    "<span style={{ color: '#D10024' }}>{searchTerm}</span>" için arama sonuçları... ({totalCount})
                 </Typography>
                 <SortSelect sortOrder={sortOrder} handleSortChange={handleSortChange} />
             </Box>
@@ -90,7 +90,7 @@ const SearchPage = () => {
             ) : (
                 <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', mt: 4 }}>
                     <Info sx={{ color: '#2196F3', mr: 1 }} />
-                    <Typography variant="h6" sx={{ textAlign: 'center', color: 'gray' }}>
+                    <Typography  sx={{ textAlign: 'center', color: 'gray',fontSize:'1.1rem' }}>
                         Tüm arama sonuçları listelendi
                     </Typography>
                 </Box>
