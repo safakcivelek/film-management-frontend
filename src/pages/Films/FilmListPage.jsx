@@ -8,13 +8,13 @@ import useSort from '../../hooks/useSort';
 import { useFilteredFilms } from '../../contextApi/FilmFilterContext';
 import { useEffect, useState } from 'react';
 import LoadMoreButton from '../../components/films/LoadMoreButton';
+import { Info } from '@mui/icons-material';
 
 
 const FilmListPage = () => {
-  const { filterFilms, fetchFilteredFilms, loading, error, hasMore, updateURL, getQueryParams } = useFilteredFilms();
+  const { filterFilms, fetchFilteredFilms, loading, error, hasMore, updateURL, getQueryParams, totalCount } = useFilteredFilms();
   const { filters, updateFilters, getDynamicFilterQuery } = useFilmFilter();
   const { sortOptions, updateSort, getDynamicSortQuery } = useSort();
-
   const [sortOrder, setSortOrder] = useState('');
   const [start, setStart] = useState(0);
   const limit = 6;
@@ -91,7 +91,19 @@ const FilmListPage = () => {
 
       <FilmList films={filterFilms} />
 
-      <LoadMoreButton onLoadMore={loadMoreFilms} isVisible={filterFilms.length > 0 && !loading && hasMore} />
+      {filterFilms.length < totalCount && hasMore ? (
+        <LoadMoreButton
+          onLoadMore={loadMoreFilms}
+          isVisible={filterFilms.length > 0 && filterFilms.length < totalCount && !loading && hasMore}
+        />
+      ) : (
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', mt: 4 }}>
+          <Info sx={{ color: '#2196F3', mr: 1 }} />
+          <Typography variant="h6" sx={{ textAlign: 'center', color: 'gray' }}>
+            Tüm filmler listelendi
+          </Typography>
+        </Box>
+      )}
 
     </Box>
   );
