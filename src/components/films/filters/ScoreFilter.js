@@ -1,24 +1,19 @@
 import React from 'react';
-import { Select, MenuItem, InputLabel } from '@mui/material';
-import FilterFormControl from '../FilterSelectStyles';
+import FilterSelect from '../FilterSelect';
 
 const ScoreFilter = ({ score, handleScoreChange }) => {
+  const scoreOptions = [1, 2, 3, 4, 5].map((scoreValue) => ({
+    label: scoreValue.toString(),
+    value: scoreValue.toString()
+  }));
+
   return (
-    <FilterFormControl fullWidth variant="outlined">
-      <InputLabel>Film Puanı</InputLabel>
-      <Select
-        value={score || ''}
-        onChange={handleScoreChange}
-        label="Film Puanı"
-      >
-        <MenuItem value="">
-          <em>Tümü</em>
-        </MenuItem>
-        {[1, 2, 3, 4, 5].map((scoreValue) => (
-          <MenuItem key={scoreValue} value={scoreValue.toString()}>{scoreValue}</MenuItem>
-        ))}
-      </Select>
-    </FilterFormControl>
+    <FilterSelect
+      label="Film Puanı"
+      value={score}
+      handleChange={handleScoreChange}
+      options={scoreOptions}
+    />
   );
 };
 

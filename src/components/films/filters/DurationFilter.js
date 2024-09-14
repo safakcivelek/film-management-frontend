@@ -1,6 +1,5 @@
 import React from 'react';
-import { Select, MenuItem, InputLabel } from '@mui/material';
-import FilterFormControl from '../FilterSelectStyles';
+import FilterSelect from '../FilterSelect';
 
 const DurationFilter = ({ durationRange, handleDurationRangeChange }) => {
   const durationRanges = [
@@ -12,21 +11,12 @@ const DurationFilter = ({ durationRange, handleDurationRangeChange }) => {
   ];
 
   return (
-    <FilterFormControl fullWidth variant="outlined">
-      <InputLabel>Film Süresi</InputLabel>
-      <Select
-        value={durationRange.min ? `${durationRange.min}-${durationRange.max}` : ''}
-        onChange={handleDurationRangeChange}
-        label="Film Süresi"
-      >
-        <MenuItem value="">
-          <em>Tümü</em>
-        </MenuItem>
-        {durationRanges.map((range, index) => (
-          <MenuItem key={index} value={range.value}>{range.label}</MenuItem>
-        ))}
-      </Select>
-    </FilterFormControl>
+    <FilterSelect
+      label="Film Süresi"
+      value={durationRange.min ? `${durationRange.min}-${durationRange.max}` : ''}
+      handleChange={handleDurationRangeChange}
+      options={durationRanges}
+    />
   );
 };
 
