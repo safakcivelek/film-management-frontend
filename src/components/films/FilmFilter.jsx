@@ -28,19 +28,25 @@ const FilmFilter = ({ filters, updateFilters }) => {
     updateFilters(newFilters);
   };
 
+  // filters ve genre undefined ise varsayılan bir değer veriyoruz
+  const genreValue = filters && filters.genre ? filters.genre : '';
+  const yearRangeValue = filters && filters.yearRange ? filters.yearRange : { start: '', end: '' };
+  const durationRangeValue = filters && filters.durationRange ? filters.durationRange : { min: '', max: '' };
+  const scoreValue = filters && filters.score ? filters.score : '';
+
   return (
     <Grid container spacing={4} justifyContent="center">
       <Grid item xs={12} sm={6} md={3}>
-        <GenreFilter genre={filters.genre} handleGenreChange={handleGenreChange} />
+        <GenreFilter genre={genreValue} handleGenreChange={handleGenreChange} />
       </Grid>
       <Grid item xs={12} sm={6} md={3}>
-        <YearFilter yearRange={filters.yearRange} handleYearRangeChange={handleYearRangeChange} />
+        <YearFilter yearRange={yearRangeValue} handleYearRangeChange={handleYearRangeChange} />
       </Grid>
       <Grid item xs={12} sm={6} md={3}>
-        <DurationFilter durationRange={filters.durationRange} handleDurationRangeChange={handleDurationRangeChange} />
+        <DurationFilter durationRange={durationRangeValue} handleDurationRangeChange={handleDurationRangeChange} />
       </Grid>
       <Grid item xs={12} sm={6} md={3}>
-        <ScoreFilter score={filters.score} handleScoreChange={handleScoreChange} />
+        <ScoreFilter score={scoreValue} handleScoreChange={handleScoreChange} />
       </Grid>
     </Grid>
   );
