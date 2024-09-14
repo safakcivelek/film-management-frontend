@@ -13,6 +13,8 @@ export const FilmFilterProvider = ({ children }) => {
     const [hasMore, setHasMore] = useState(true);
     const navigate = useNavigate();
     const location = useLocation();
+    const [totalCount, setTotalCount] = useState(0);
+
 
     const fetchFilteredFilms = async (start, limit, dynamicQuery) => {
         setLoading(true);
@@ -21,11 +23,12 @@ export const FilmFilterProvider = ({ children }) => {
             const responseData = await FilmService.getFilteredFilms(data);
 
             setFilterFilms(prevFilms => start === 0 ? responseData.data || [] : [...prevFilms, ...(responseData.data || [])]);
+            setTotalCount(responseData.totalCount);
 
             const totalCount = responseData.totalCount;
             const currentTotal = start + responseData.data.length;
 
-            if (currentTotal >= totalCount) {
+            if (currentTotal >= totalCount || responseData.data.length < limit) {
                 setHasMore(false);
             } else {
                 setHasMore(true);
@@ -42,21 +45,21 @@ export const FilmFilterProvider = ({ children }) => {
         const query = queryString.stringify({
             genre: newFilters.genre || undefined,
             yearRange: (newFilters.yearRange && newFilters.yearRange.start && newFilters.yearRange.end)
-                ? `${newFilters.yearRange.start}-${newFilters.yearRange.end}` 
+                ? `${newFilters.yearRange.start}-${newFilters.yearRange.end}`
                 : undefined,
             durationRange: (newFilters.durationRange && newFilters.durationRange.min && newFilters.durationRange.max)
-                ? `${newFilters.durationRange.min}-${newFilters.durationRange.max}` 
+                ? `${newFilters.durationRange.min}-${newFilters.durationRange.max}`
                 : undefined,
             score: newFilters.score || undefined,
             sort: newSortOrder || undefined,
         }, { skipNull: true }); // Boş değerleri atla
-    
+
         navigate(`/films?${query}`);
     };
- 
+
     const getQueryParams = () => {
         const query = queryString.parse(location.search);
-    
+
         return {
             ...query,
             yearRange: query.yearRange ? (() => {
@@ -69,9 +72,16 @@ export const FilmFilterProvider = ({ children }) => {
             })() : undefined,
         };
     };
-    
+
     return (
-        <FilmFilterContext.Provider value={{ filterFilms, fetchFilteredFilms, loading, error, hasMore, updateURL, getQueryParams }}>
+        <FilmFilterContext.Provider value={{
+            filterFilms,
+            fetchFilteredFilms,
+            loading, error,
+            hasMore,
+            updateURL, getQueryParams,
+            totalCount
+        }}>
             {children}
         </FilmFilterContext.Provider>
     );

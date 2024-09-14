@@ -17,6 +17,7 @@ import { FilmFilterProvider } from './contextApi/FilmFilterContext';
 import { AuthProvider } from './contextApi/AuthContext';
 import { FilmDetailProvider } from './contextApi/FilmDetailContext';
 import { HomePageFilmProvider } from './contextApi/HomePageFilmContext';
+import SearchPage from './pages/Search/SearchPage';
 
 function App() {
   return (
@@ -69,10 +70,22 @@ function App() {
                 }
               />
 
+              {/* SearchPage, FilmFilterProvider ile sarılıyor */}
+              <Route
+                path='/search'
+                element={
+                  <FilmFilterProvider>
+                    <SearchPage />
+                  </FilmFilterProvider>
+                }
+              />
+
               <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/contact" element={<ContactPage />} />
+              <Route path="/search" element={<SearchPage />} />
+
             </Routes>
           </main>
 

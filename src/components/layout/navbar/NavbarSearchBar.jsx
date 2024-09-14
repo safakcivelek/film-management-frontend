@@ -1,13 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, IconButton, TextField } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
+import { useNavigate } from 'react-router-dom';
 
 function NavbarSearchBar({ isMobile }) {
+  const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
+
+  const handleSearch = () => {
+    if (searchTerm.trim()) {
+      navigate(`/search?q=${encodeURIComponent(searchTerm.trim())}`);
+    }
+  };
+
   return (
     <Box sx={{ display: 'flex', alignItems: 'center', height: '43px', width: isMobile ? '100%' : 'auto' }}>
       <IconButton
-        onClick={() => console.log('Arama başlatıldı')}
-        sx={{ bgcolor: '#D10024', color: 'white', borderRadius:'4px 0 0 4px', height: '43px', width: '43px', '&:hover': { bgcolor: 'darkred' } }}
+        onClick={handleSearch}
+        sx={{ bgcolor: '#D10024', color: 'white', borderRadius: '4px 0 0 4px', height: '43px', width: '43px', '&:hover': { bgcolor: 'darkred' } }}
       >
         <SearchIcon sx={{ fontSize: '1.8rem' }} />
       </IconButton>
@@ -15,6 +25,10 @@ function NavbarSearchBar({ isMobile }) {
         variant="outlined"
         placeholder="Film Ara..."
         size="small"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        onKeyDown={(e) => e.key === 'Enter' && handleSearch()} 
+
         sx={{
           bgcolor: 'white',
           borderRadius: '4px',
