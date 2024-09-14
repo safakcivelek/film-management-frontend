@@ -1,17 +1,28 @@
 import React, { useState } from 'react';
 import { Box, IconButton, TextField } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 function NavbarSearchBar({ isMobile }) {
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
+  const location = useLocation();
+  const [currentPath, setCurrentPath] = useState(location.pathname);
 
   const handleSearch = () => {
     if (searchTerm.trim()) {
       navigate(`/search?q=${encodeURIComponent(searchTerm.trim())}`);
     }
   };
+
+   // Eğer sayfa değişirse arama terimi temizlenir
+   useEffect(() => {
+    if (location.pathname !== currentPath) {
+      setSearchTerm(''); // Yalnızca sayfa değiştiğinde temizler
+      setCurrentPath(location.pathname); // Yeni sayfayı currentPath olarak ayarlar
+    }
+  }, [location.pathname, currentPath]);
 
   return (
     <Box sx={{ display: 'flex', alignItems: 'center', height: '43px', width: isMobile ? '100%' : 'auto' }}>
