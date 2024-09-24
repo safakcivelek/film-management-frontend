@@ -18,6 +18,8 @@ import { AuthProvider } from './contextApi/AuthContext';
 import { FilmDetailProvider } from './contextApi/FilmDetailContext';
 import { HomePageFilmProvider } from './contextApi/HomePageFilmContext';
 import SearchPage from './pages/Search/SearchPage';
+import AddFilmPage from './pages/Admin/AddFilmPage';
+import AddEntities from './pages/Admin/AddEntitiesForm';
 
 function App() {
   return (
@@ -85,6 +87,10 @@ function App() {
               <Route path="/about" element={<AboutPage />} />
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/search" element={<SearchPage />} />
+
+              {/* Yeni film ekleme sayfası */}
+              <Route path="/add-film" element={<AddFilmPage />} />              
+              <Route path="/add-entities" element={<AddEntities />} /> 
 
             </Routes>
           </main>
