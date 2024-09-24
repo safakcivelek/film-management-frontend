@@ -63,7 +63,7 @@ const SearchPage = () => {
         setStart(prevStart => prevStart + limit);
     };
 
-    if (loading) return <p>Yükleniyor...</p>;
+    //if (loading) return <p>Yükleniyor...</p>;
     if (error) return <p>Hata: {error}</p>;
 
     return (
@@ -75,7 +75,7 @@ const SearchPage = () => {
 
             <Box sx={{ mb: 3, mt: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <Typography component="div" sx={{ color: 'white', fontSize: '1.1rem' }}>
-                    "<span style={{ color: '#D10024' }}>{searchTerm}</span>" için arama sonuçları... ({totalCount})
+                    "<span style={{ color: '#D10024' }}>{searchTerm}</span>" için arama sonuçları... ({filterFilms.length})
                 </Typography>
                 <SortSelect sortOrder={sortOrder} handleSortChange={handleSortChange} />
             </Box>

@@ -71,12 +71,12 @@ const StarRatingComponent = ({ onRatingSelect }) => {
   return (
     <div style={{ display: 'flex', alignItems: 'center' }}>
       <Typography variant="h5" component="span" sx={{ color: 'white', marginRight: '18px' }}>
-        Puan
+        Puan:
       </Typography>
       <div style={{ display: 'flex', alignItems: 'center' }}>
         {[...Array(5)].map((_, index) => renderStar(index))}
         <Typography variant="h5" component="span" sx={{ color: 'white', marginLeft: '8px' }}>
-          ({(film?.score ? film.score.toFixed(1) : '0.0')})
+          ({(film?.score ? film.score.toFixed(1) : '0')})
         </Typography>
       </div>
 

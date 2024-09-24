@@ -7,7 +7,11 @@ import FilmCard from '../../components/films/FilmCard';
 const FilmSlider = ({ films }) => {
   const [startIndex, setStartIndex] = useState(0);
   const filmsPerSlide = 6;
-  const totalFilms = films.length;
+  const totalFilms = films?.length || 0;
+
+  if (!films || films.length === 0) {
+    return null;  // Eğer films boşsa, slider'ı render etme
+  }
 
   const visibleFilms = films.slice(startIndex, startIndex + filmsPerSlide);
 

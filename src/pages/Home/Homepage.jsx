@@ -20,6 +20,14 @@ const HomePage = () => {
 
   if (loading) return <p>Yükleniyor...</p>;
   if (error) return <p>Hata: {error}</p>;
+  if (!films || films.length === 0 || !selectedFilm) {
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <p style={{ color: 'white', textAlign: 'center' }}>Veri bulunamadı...</p>
+      </div>
+    );
+  }
+  
 
   return (
     <>

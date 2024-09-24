@@ -3,10 +3,15 @@ import { Box, Paper, Grid, Typography, Button } from '@mui/material';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import StarIcon from '@mui/icons-material/Star';
 import { useFilms } from '../../contextApi/HomePageFilmContext';
+import formatDuration from '../../utils/formatDuration';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+
 
 const SelectedFilmDetails = ({ handleWatchNow }) => {
     const { selectedFilm } = useFilms();
-    const genreName = selectedFilm.genres?.length > 0 ? selectedFilm.genres[0].name : "Bilinmeyen Tür";
+
+    const filmScore = selectedFilm.score && selectedFilm.score > 0 ? selectedFilm.score : "Puan Yok";
+
     return (
         <Box sx={{ flexGrow: 1, ml: { xs: 0, md: 10 }, mt: { xs: 4, md: 0 } }}>
             <Paper sx={{
@@ -31,28 +36,51 @@ const SelectedFilmDetails = ({ handleWatchNow }) => {
                         >
                             {selectedFilm.name}
                         </Typography>
-                        <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                            <Box
-                                sx={{
-                                    width: '8px',
-                                    height: '8px',
-                                    backgroundColor: '#D10024',
-                                    borderRadius: '50%',
-                                    mr: 1
-                                }}
-                            />
-                            <Typography
-                                variant="body1"
-                                sx={{
-                                    fontSize: { xs: '0.875rem', md: '1rem' },
-                                    fontWeight: 'normal',
-                                    color: 'white',
-                                    textTransform: 'none'
-                                }}
-                            >
-                                {genreName}
-                            </Typography>
+
+                        <Box sx={{ display: 'flex', flexWrap: 'wrap', mb: 2 }}>
+                            {selectedFilm.genres?.length > 0 ? (
+                                selectedFilm.genres.map((genre, index) => (
+                                    <Box
+                                        key={index}
+                                        sx={{ display: 'flex', alignItems: 'center', mr: 2, mb: 1 }}
+                                    >
+                                        <Box
+                                            sx={{
+                                                width: '8px',
+                                                height: '8px',
+                                                backgroundColor: '#D10024',
+                                                borderRadius: '50%',
+                                                mr: 1
+                                            }}
+                                        />
+                                        <Typography
+                                            variant="body1"
+                                            sx={{
+                                                fontSize: { xs: '0.875rem', md: '1rem' },
+                                                fontWeight: 'normal',
+                                                color: 'white',
+                                                textTransform: 'none'
+                                            }}
+                                        >
+                                            {genre.name}
+                                        </Typography>
+                                    </Box>
+                                ))
+                            ) : (
+                                <Typography
+                                    variant="body1"
+                                    sx={{
+                                        fontSize: { xs: '0.875rem', md: '1rem' },
+                                        fontWeight: 'normal',
+                                        color: 'white',
+                                        textTransform: 'none'
+                                    }}
+                                >
+                                    Bilinmeyen Tür
+                                </Typography>
+                            )}
                         </Box>
+
                         <Typography
                             variant="body1"
                             sx={{
@@ -68,14 +96,18 @@ const SelectedFilmDetails = ({ handleWatchNow }) => {
                             {selectedFilm.description}
                         </Typography>
                         <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                            <StarIcon sx={{ color: '#FFD700', mr: 1 }} />
-                            <Typography variant="body1" sx={{ mr: 2 }}>
-                                {selectedFilm.score}
+                            <StarIcon sx={{ color: '#FFD700',fontSize: 18, mr: 1 }} />
+                            <Typography variant="body1" sx={{ mr: 3 }}>
+                                {filmScore}
                             </Typography>
-                            <Typography variant="body1">
-                                {selectedFilm.duration}
-                            </Typography>
+                            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                                <AccessTimeIcon sx={{ color: '#FFD700', fontSize: 18, mr: 1 }} />
+                                <Typography variant="body1">
+                                    {formatDuration(selectedFilm.duration)}
+                                </Typography>
+                            </Box>
                         </Box>
+
                         <Button
                             variant="contained"
                             startIcon={<PlayArrowIcon />}

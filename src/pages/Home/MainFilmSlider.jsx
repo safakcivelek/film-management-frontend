@@ -5,8 +5,12 @@ import { useFilms } from '../../contextApi/HomePageFilmContext';
 
 const MainFilmSlider = () => {
   const { films, setSelectedFilm, selectedFilm } = useFilms();
-  const filmsToDisplay = films.slice(0, 6); // İlk 6 filmi alıyoruz
+  const filmsToDisplay = films.slice(0, 6) || []; // İlk 6 filmi alıyoruz
   const [startIndex, setStartIndex] = useState(0);
+
+  if (!films || films.length === 0) {
+    return null; // Eğer filmler boşsa, sliderı render etme.
+  }
 
   const visibleFilms = [
     filmsToDisplay[(startIndex) % filmsToDisplay.length],
@@ -36,7 +40,7 @@ const MainFilmSlider = () => {
         onClick={handleSlideUp}
         sx={{
           position: 'absolute',
-          top: '-20px', // Okları biraz daha yaklaştırdık
+          top: '-20px', 
           left: '50%',
           transform: 'translateX(-75%)',
           backgroundColor: '#1E1F29',
@@ -88,7 +92,7 @@ const MainFilmSlider = () => {
         onClick={handleSlideDown}
         sx={{
           position: 'absolute',
-          bottom: '-20px', // Okları biraz daha yaklaştırdık
+          bottom: '-20px', 
           left: '50%',
           transform: 'translateX(-75%)',
           backgroundColor: '#1E1F29',

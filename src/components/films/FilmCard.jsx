@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { CardActionArea } from '@mui/material';
+import { CardActionArea, Box } from '@mui/material';
 import {
   CustomCard,
   CustomCardMedia,
@@ -10,14 +10,12 @@ import {
   YearText,
   IMDBText,
 } from './FilmCardStyles';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import StarIcon from '@mui/icons-material/Star';
 
 const FilmCard = ({ id, name, image, year, score }) => {
-  // const navigate = useNavigate();
-  // const handleCardClick = () => {
-  //   navigate(`/film/${id}`);
-  // };
-
+  
+  const hasScore = score && score > 0;
 
   return (
     <CustomCard>
@@ -32,9 +30,20 @@ const FilmCard = ({ id, name, image, year, score }) => {
               <YearText variant="body2">
                 {year}
               </YearText>
-              <IMDBText variant="body2">
-                IMDb: {score}
-              </IMDBText>
+              <Box sx={{ display: 'flex', alignItems: 'center', ml: 1 }}>
+                {hasScore ? (
+                  <>
+                    <StarIcon sx={{ color: '#FFD700', mr: 0.5,fontSize: 'large' }} />
+                    <IMDBText variant="body2">
+                      {score}
+                    </IMDBText>
+                  </>
+                ) : (
+                  <IMDBText variant="body2">
+                    Puan yok
+                  </IMDBText>
+                )}
+              </Box>
             </DetailsContainer>
           </TitleOverlay>
         </CustomCardMedia>

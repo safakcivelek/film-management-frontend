@@ -6,6 +6,7 @@ import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import StarIcon from '@mui/icons-material/Star';
 import { useNavigate } from 'react-router-dom';
+import formatDuration from'../../utils/formatDuration.js'
 
 const FilmDetailsCard = ({ film, onWatchClick, isPurchased, onBuyClick, alertMessage }) => {
     const directorName = film.director ? `${film.director.firstName} ${film.director.lastName}` : 'Bilinmiyor';
@@ -22,7 +23,13 @@ const FilmDetailsCard = ({ film, onWatchClick, isPurchased, onBuyClick, alertMes
                         component="img"
                         image={film.image}
                         alt={film.name}
-                        sx={{ width: '100%', height: '560px', objectFit: 'cover', borderTopLeftRadius: 2, borderBottomLeftRadius: 2 }}
+                        sx={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover',
+                            borderTopLeftRadius: 2,
+                            borderBottomLeftRadius: 2
+                        }}
                     />
                 </Grid>
                 <Grid item xs={2} md={0.5}></Grid>
@@ -45,11 +52,11 @@ const FilmDetailsCard = ({ film, onWatchClick, isPurchased, onBuyClick, alertMes
                         </Grid>
                         <Grid item sx={{ display: 'flex', alignItems: 'center', mr: 2 }}>
                             <AccessTimeIcon sx={{ color: '#FFD700', fontSize: 20 }} />
-                            <Typography variant="body2" sx={{ ml: 1, whiteSpace: 'nowrap' }}>{film.duration} dk</Typography>
+                            <Typography variant="body2" sx={{ ml: 1, whiteSpace: 'nowrap' }}>{formatDuration(film.duration)}</Typography>
                         </Grid>
                         <Grid item sx={{ display: 'flex', alignItems: 'center' }}>
                             <StarIcon sx={{ color: '#FFD700', fontSize: 20 }} />
-                            <Typography variant="body2" sx={{ ml: 1 }}>{film.score || 'N/A'}</Typography>
+                            <Typography variant="body2" sx={{ ml: 1 }}>{film.score || "Puan yok"}</Typography>
                         </Grid>
                     </Grid>
                     <Box sx={{ mt: 1 }}>
@@ -105,22 +112,22 @@ const FilmDetailsCard = ({ film, onWatchClick, isPurchased, onBuyClick, alertMes
                         <Grid item xs={12} sm={6}>
                             <Button
                                 variant="outlined"
-                                startIcon={isPurchased ? <EventAvailableIcon /> : <ShoppingCartIcon />} 
-                                sx={{ 
-                                    width: '100%', 
-                                    maxWidth: '280px', 
-                                    borderColor: isPurchased ? '#4CAF50' : '#D10024',  
-                                    color: isPurchased ? '#FFFFFF !important' : '#D10024',  
-                                    backgroundColor: isPurchased ? '#4CAF50' : 'transparent', 
-                                    '&:hover': { 
-                                        backgroundColor: isPurchased ? '#4CAF50' : '#D10024', 
-                                        color: 'white' 
-                                    } 
+                                startIcon={isPurchased ? <EventAvailableIcon /> : <ShoppingCartIcon />}
+                                sx={{
+                                    width: '100%',
+                                    maxWidth: '280px',
+                                    borderColor: isPurchased ? '#4CAF50' : '#D10024',
+                                    color: isPurchased ? '#FFFFFF !important' : '#D10024',
+                                    backgroundColor: isPurchased ? '#4CAF50' : 'transparent',
+                                    '&:hover': {
+                                        backgroundColor: isPurchased ? '#4CAF50' : '#D10024',
+                                        color: 'white'
+                                    }
                                 }}
-                                onClick={onBuyClick} 
-                                disabled={isPurchased}  
+                                onClick={onBuyClick}
+                                disabled={isPurchased}
                             >
-                                {isPurchased ? 'Satın Alındı' : 'Satın Al'}  
+                                {isPurchased ? 'Satın Alındı' : 'Satın Al'}
                             </Button>
                         </Grid>
                     </Grid>
