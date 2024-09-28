@@ -21,7 +21,7 @@ const StyledContainer = styled(Container)(({ theme }) => ({
   borderRadius: '8px',
   padding: '24px',
   border: '1px solid silver',
-  [theme.breakpoints.down('sm')]: {
+  [theme.breakpoints.down('md')]: {
     width: '95%',
     height: 'auto',
   },
@@ -53,14 +53,19 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
   },
 }));
 
-const StyledButton = styled(Button)(() => ({
-  backgroundColor: '#D10024',
+const StyledButton = styled(Button)(({ theme, loading }) => ({
+  //backgroundColor: '#D10024',
+  backgroundColor: loading ? '#D10024' : 'darkred',
   color: 'white',
   marginBottom: '16px',
   width: '100%',
-  height: '40px',
+  //height: '40px',
   '&:hover': {
-    backgroundColor: '#B0001B',
+    //backgroundColor: 'darkred',
+    backgroundColor: loading ? 'darkred' : '#D10024',
+  },
+  [theme.breakpoints.up('md')]: {
+    width: '90%',
   },
 }));
 
@@ -113,110 +118,109 @@ const RegisterPage = () => {
   return (
     <>
       <ToastContainer /> {/* Toast mesajlarını göstermek için gerekli */}
-    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: '#15161D' }}>
-      <Box sx={{ flex: 1, minHeight: '100px' }} />
-      <StyledContainer>
-        <Typography variant="h4" sx={{ mt: 6, mb: 7, color: '#D10024' }}>Hesabını Oluştur</Typography>
+      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: '#15161D' }}>
+        <Box sx={{ flex: 1, minHeight: '100px' }} />
+        <StyledContainer>
+          <Typography variant="h4" sx={{ mt: 6, mb: 7, color: '#D10024' }}>Hesabını Oluştur</Typography>
 
-        <Formik
-          initialValues={{
-            firstName: '',
-            lastName: '',
-            email: '',
-            password: '',
-            confirmPassword: '',
-          }}
-          validationSchema={validationSchema}
-          onSubmit={handleRegister}
-        >
-          {({ isSubmitting }) => (
-            <Form style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-              <Box sx={{ width: '90%', marginBottom: '40px' }}>
-                <Field
-                  name="email"
-                  as={StyledTextField}  // StyledTextField kullanıyoruz
-                  label="Email"
-                  fullWidth
-                  variant="outlined"
-                 
-                />
-                <ErrorMessage name="email" component={ErrorText} />
-              </Box>
-
-              <SideBySideBox>
-                <Box sx={{ width: '48%' }}>
+          <Formik
+            initialValues={{
+              firstName: '',
+              lastName: '',
+              email: '',
+              password: '',
+              confirmPassword: '',
+            }}
+            validationSchema={validationSchema}
+            onSubmit={handleRegister}
+          >
+            {({ isSubmitting }) => (
+              <Form style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <Box sx={{ width: '90%', marginBottom: '40px' }}>
                   <Field
-                    name="firstName"
+                    name="email"
                     as={StyledTextField}  // StyledTextField kullanıyoruz
-                    label="Ad"
+                    label="Email"
                     fullWidth
                     variant="outlined"
-                   
+
                   />
-                  <ErrorMessage name="firstName" component={ErrorText} />
+                  <ErrorMessage name="email" component={ErrorText} />
                 </Box>
 
-                <Box sx={{ width: '48%' }}>
-                  <Field
-                    name="lastName"
-                    as={StyledTextField}  // StyledTextField kullanıyoruz
-                    label="Soyad"
-                    fullWidth
-                    variant="outlined"
-                   
-                  />
-                  <ErrorMessage name="lastName" component={ErrorText} />
+                <SideBySideBox>
+                  <Box sx={{ width: '48%' }}>
+                    <Field
+                      name="firstName"
+                      as={StyledTextField}  // StyledTextField kullanıyoruz
+                      label="Ad"
+                      fullWidth
+                      variant="outlined"
+
+                    />
+                    <ErrorMessage name="firstName" component={ErrorText} />
+                  </Box>
+
+                  <Box sx={{ width: '48%' }}>
+                    <Field
+                      name="lastName"
+                      as={StyledTextField}  // StyledTextField kullanıyoruz
+                      label="Soyad"
+                      fullWidth
+                      variant="outlined"
+
+                    />
+                    <ErrorMessage name="lastName" component={ErrorText} />
+                  </Box>
+                </SideBySideBox>
+
+                <SideBySideBox>
+                  <Box sx={{ width: '48%' }}>
+                    <Field
+                      name="password"
+                      as={StyledTextField}  // StyledTextField kullanıyoruz
+                      label="Şifre"
+                      type="password"
+                      fullWidth
+                      variant="outlined"
+                    />
+                    <ErrorMessage name="password" component={ErrorText} />
+                  </Box>
+
+                  <Box sx={{ width: '48%' }}>
+                    <Field
+                      name="confirmPassword"
+                      as={StyledTextField}  // StyledTextField kullanıyoruz
+                      label="Şifreyi Onayla"
+                      type="password"
+                      fullWidth
+                      variant="outlined"
+
+                    />
+                    <ErrorMessage name="confirmPassword" component={ErrorText} />
+                  </Box>
+                </SideBySideBox>
+
+                <Box sx={{ width: '50%', display: 'flex', justifyContent: 'center' }}>
+                  <StyledButton
+                    type="submit"
+                    variant="contained"
+                    startIcon={<PersonAddIcon />}
+                    disabled={isSubmitting}
+                  >
+                    Kayıt Ol
+                  </StyledButton>
                 </Box>
-              </SideBySideBox>
+              </Form>
+            )}
+          </Formik>
 
-              <SideBySideBox>
-                <Box sx={{ width: '48%' }}>
-                  <Field
-                    name="password"
-                    as={StyledTextField}  // StyledTextField kullanıyoruz
-                    label="Şifre"
-                    type="password"
-                    fullWidth
-                    variant="outlined"
-                   
-                  />
-                  <ErrorMessage name="password" component={ErrorText} />
-                </Box>
-
-                <Box sx={{ width: '48%' }}>
-                  <Field
-                    name="confirmPassword"
-                    as={StyledTextField}  // StyledTextField kullanıyoruz
-                    label="Şifreyi Onayla"
-                    type="password"
-                    fullWidth
-                    variant="outlined"
-                    
-                  />
-                  <ErrorMessage name="confirmPassword" component={ErrorText} />
-                </Box>
-              </SideBySideBox>
-
-              <Box sx={{ width: '50%', display: 'flex', justifyContent: 'center' }}>
-                <StyledButton
-                  type="submit"
-                  variant="contained"
-                  startIcon={<PersonAddIcon />}
-                  disabled={isSubmitting}
-                >
-                  Kayıt Ol
-                </StyledButton>
-              </Box>
-            </Form>
-          )}
-        </Formik>
-
-        <Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.7)', mt: 3, mb: 3 }}>
-          Hesabınız var mı? <Link href="/login" sx={{ color: '#D10024' }}>Giriş Yap</Link>
-        </Typography>
-      </StyledContainer>
-      <Box sx={{ flex: 1, minHeight: '100px' }} />
-    </Box>
+          <Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.7)', mt: 3, mb: 3 }}>
+            Hesabınız var mı? <Link href="/login" sx={{ color: '#D10024' }}>Giriş Yap</Link>
+          </Typography>
+        </StyledContainer>
+        <Box sx={{ flex: 1, minHeight: '100px' }} />
+      </Box>
     </>
   );
 };

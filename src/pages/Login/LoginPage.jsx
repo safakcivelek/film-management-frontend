@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
-import { Box, Button, TextField, Typography, Link, Container } from '@mui/material';
+import React from 'react';
+import { Box, Button, Typography, Link, Container, TextField, CircularProgress } from '@mui/material';
 import { styled } from '@mui/system';
 import LoginIcon from '@mui/icons-material/Login';
-import AuthService from '../../services/authService';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import authService from '../../services/authService';
 import { toast } from 'react-toastify';
-
+import 'react-toastify/dist/ReactToastify.css';
 
 const StyledContainer = styled(Container)(({ theme }) => ({
   backgroundColor: '#1E1F29',
@@ -27,12 +29,7 @@ const StyledContainer = styled(Container)(({ theme }) => ({
 
 const StyledTextField = styled(TextField)(({ theme }) => ({
   backgroundColor: '#15161D',
-  marginBottom: '24px',
-  width: '100%',
-  [theme.breakpoints.up('md')]: {
-    width: '90%',
-    marginBottom: '40px',
-  },
+  borderRadius: '8px',
   '& .MuiInputBase-root': {
     color: 'white',
   },
@@ -50,42 +47,72 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
       borderColor: 'rgba(255, 255, 255, 0.7)',
     },
   },
+  [theme.breakpoints.up('md')]: {
+    width: '90%',
+    height: 'auto',
+  },
 }));
 
-const StyledButton = styled(Button)(({ theme }) => ({
-  backgroundColor: '#D10024',
+const StyledButton = styled(Button)(({ theme, loading }) => ({
+  backgroundColor: 'darkred',
   color: 'white',
   marginBottom: '16px',
   width: '100%',
+  '&:hover': {
+    backgroundColor: '#D10024',
+  },
+  '&.Mui-disabled': {
+    backgroundColor: 'darkred',
+    color: 'white',
+  },
   [theme.breakpoints.up('md')]: {
     width: '90%',
   },
-  '&:hover': {
-    backgroundColor: '#B0001B',
+}));
+
+const SideBySideBox = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  width: '100%',
+  marginBottom: '40px',
+  alignItems: 'center',
+  [theme.breakpoints.down('sm')]: {
+    flexDirection: 'column',
+    marginBottom: '20px',
   },
 }));
 
+const ErrorText = styled(Typography)(() => ({
+  color: '#D10024',
+  fontSize: '0.8rem',
+  marginTop: '4px',
+  textAlign: 'left',
+  width: '90%'
+}));
+
+// Yup doğrulama şeması
+const validationSchema = Yup.object({
+  email: Yup.string().email('Geçersiz email adresi').required('Email zorunludur*'),
+  password: Yup.string().required('Şifre zorunludur*'),
+});
+
 const LoginPage = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    setError('');
-
+  const handleLogin = async (values, { setSubmitting }) => {
     try {
-      const response = await AuthService.login(email, password); 
+      const response = await authService.login(values.email, values.password);
+      toast.success('Giriş başarılı!');
 
-      // Başarılı girişte token'ları localStorage'a kaydediyoruz
       localStorage.setItem('token', response.data.accessToken);
       localStorage.setItem('refreshToken', response.data.refreshToken);
 
-      // Kullanıcıyı girişten sonra yönlendiriyoruz
-      window.location.href = '/';
+      setTimeout(() => {
+        window.location.href = '/';
+      }, 2000);
 
     } catch (error) {
       toast.error('Giriş başarısız. Lütfen bilgilerinizi kontrol edin.');
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -93,28 +120,61 @@ const LoginPage = () => {
     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: '#15161D' }}>
       <Box sx={{ flex: 1, minHeight: '100px' }} />
       <StyledContainer>
-        <Typography variant="h5" sx={{ mb: 7, color: '#D10024' }}>ELECTROFILM</Typography>
-        <StyledTextField
-          label="Email"
-          type="email"
-          variant="outlined"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <StyledTextField
-          label="Şifre"
-          type="password"
-          variant="outlined"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <StyledButton
-          variant="contained"
-          startIcon={<LoginIcon />}
-          onClick={handleLogin}
+        <Typography
+          variant="h5"
+          sx={{mb: 7,color: '#D10024', fontSize: { xs: '1rem', sm: '1.8rem'}}}                                 
         >
-          Giriş Yap
-        </StyledButton>
+          ELECTROFILM
+        </Typography>
+
+        <Formik
+          initialValues={{ email: '', password: '' }}
+          validationSchema={validationSchema}
+          onSubmit={handleLogin}
+        >
+          {({ isSubmitting }) => (
+            <Form style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <SideBySideBox >
+                <Field
+                  as={StyledTextField}
+                  label="Email"
+                  type="email"
+                  name="email"
+                  variant="outlined"
+                  fullWidth
+                />
+                <ErrorText>
+                  <ErrorMessage name="email" />
+                </ErrorText>
+              </SideBySideBox>
+
+              <SideBySideBox >
+                <Field
+                  as={StyledTextField}
+                  label="Şifre"
+                  type="password"
+                  name="password"
+                  variant="outlined"
+                  fullWidth
+                />
+                <ErrorText>
+                  <ErrorMessage name="password" />
+                </ErrorText>
+              </SideBySideBox>
+
+              <StyledButton
+                type="submit"
+                variant="contained"
+                startIcon={isSubmitting ? <CircularProgress size={24} color="inherit" /> : <LoginIcon />}
+                disabled={isSubmitting}
+                loading={isSubmitting.toString()}
+              >
+                {isSubmitting ? 'Giriş Yapılıyor...' : 'Giriş Yap'}
+              </StyledButton>
+            </Form>
+          )}
+        </Formik>
+
         <Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.7)', mt: 3 }}>
           Hesabınız yok mu? <Link href="/register" sx={{ color: '#D10024' }}>Kayıt Ol</Link>
         </Typography>
