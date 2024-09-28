@@ -27,7 +27,7 @@ apiClient.interceptors.response.use(response => {
     if (!refreshToken) {
       localStorage.removeItem('token');
       localStorage.removeItem('refreshToken');
-      window.location.href = '/login';
+      //window.location.href = '/login';
       return Promise.reject(error);
     }
 
