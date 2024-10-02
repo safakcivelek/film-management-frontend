@@ -39,7 +39,7 @@ function NavbarUserMenu({ user, handleLogout }) {
         >
           <AccountCircle sx={{ fontSize: 26, mr: 1 }} />
           <Typography>
-            {user.email}
+            {user.fullName}
           </Typography>
         </Button>
       </Box>
@@ -79,7 +79,7 @@ function NavbarUserMenu({ user, handleLogout }) {
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
         <MenuItem onClick={handleMenuClose}>
-          <Avatar sx={{ width: 28, height: 28 }} /> {user.email}
+          <Avatar sx={{ width: 28, height: 28 }} /> {user.fullName}
         </MenuItem>
         <Divider />
         <MenuItem onClick={handleLogout}>

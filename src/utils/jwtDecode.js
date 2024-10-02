@@ -10,6 +10,7 @@ const decodeToken = () => {
       email: decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"], // Email adresini alıyoruz
       role: decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"], // Rolü alıyoruz
       id: decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"], // Kullanıcı ID'sini alıyoruz
+      fullName: `${decoded.FirstName} ${decoded.LastName}`, // FirstName ve LastName'i birleştiriyoruz
     };
   } catch (error) {
     console.error("Geçersiz token:", error);
