@@ -26,8 +26,14 @@ class AuthService extends BaseService {
         const data = { firstName, lastName, email, password, confirmPassword };
         return apiClient.post(`${this.apiUrl}/register`, data)
             .then(response => response.data)
-            .catch(this.handleError);
-    }  
+            .catch((error) => {
+                if (error.response && error.response.status === 400) {                   
+                    throw error;
+                }
+
+                return this.handleError(error);
+            });
+    }
 }
 
 export default new AuthService();
