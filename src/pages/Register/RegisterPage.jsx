@@ -9,8 +9,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const StyledContainer = styled(Container)(({ theme }) => ({
-  marginBottom:'100px',
-  marginTop:'100px',
+  marginBottom: '100px',
+  marginTop: '100px',
   backgroundColor: '#1E1F29',
   width: '90%',
   maxWidth: 610,
@@ -58,12 +58,9 @@ const StyledButton = styled(Button)(({ theme, loading }) => ({
   backgroundColor: loading ? '#D10024' : 'darkred',
   color: 'white',
   marginBottom: '16px',
-  width: '100%',
+  width: '90%',
   '&:hover': {
     backgroundColor: loading ? 'darkred' : '#D10024',
-  },
-  [theme.breakpoints.up('md')]: {
-    width: '90%',
   },
 }));
 
@@ -72,10 +69,6 @@ const SideBySideBox = styled(Box)(({ theme }) => ({
   justifyContent: 'space-between',
   width: '90%',
   marginBottom: '40px',
-  [theme.breakpoints.down('sm')]: {
-    flexDirection: 'column',
-    marginBottom: '40px',
-  },
 }));
 
 // Hata mesajı stili
@@ -115,10 +108,10 @@ const RegisterPage = () => {
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: '#15161D' }}>
-      
+
       <StyledContainer>
         <Typography variant="h4"
-          sx={{ mt: 7, mb: 7, color: '#D10024',fontSize: { xs: '1.5rem', sm: '1.8rem'}}}       
+          sx={{ mt: 7, mb: 7, color: '#D10024', fontSize: { xs: '1.5rem', sm: '1.8rem' } }}
         >
           Hesabını Oluştur
         </Typography>
@@ -200,17 +193,14 @@ const RegisterPage = () => {
                   <ErrorMessage name="confirmPassword" component={ErrorText} />
                 </Box>
               </SideBySideBox>
-
-              <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-                <StyledButton
-                  type="submit"
-                  variant="contained"
-                  startIcon={<PersonAddIcon />}
-                  disabled={isSubmitting}
-                >
-                  Kayıt Ol
-                </StyledButton>
-              </Box>
+              <StyledButton
+                type="submit"
+                variant="contained"
+                startIcon={<PersonAddIcon />}
+                disabled={isSubmitting}
+              >
+                Kayıt Ol
+              </StyledButton>
             </Form>
           )}
         </Formik>

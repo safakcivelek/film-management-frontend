@@ -9,6 +9,8 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const StyledContainer = styled(Container)(({ theme }) => ({
+  marginBottom:'100px',
+  marginTop:'100px',
   backgroundColor: '#1E1F29',
   width: '90%',
   maxWidth: 610,
@@ -20,16 +22,16 @@ const StyledContainer = styled(Container)(({ theme }) => ({
   borderRadius: '8px',
   padding: '24px',
   border: '1px solid silver',
-  margin: '0 auto',
   [theme.breakpoints.up('md')]: {
     width: 610,
     height: 550,
-  },
+  },   
 }));
 
 const StyledTextField = styled(TextField)(({ theme }) => ({
   backgroundColor: '#15161D',
   borderRadius: '8px',
+  width: '90%',
   '& .MuiInputBase-root': {
     color: 'white',
   },
@@ -57,16 +59,13 @@ const StyledButton = styled(Button)(({ theme, loading }) => ({
   backgroundColor: 'darkred',
   color: 'white',
   marginBottom: '16px',
-  width: '100%',
+  width: '90%',
   '&:hover': {
     backgroundColor: '#D10024',
   },
   '&.Mui-disabled': {
     backgroundColor: 'darkred',
     color: 'white',
-  },
-  [theme.breakpoints.up('md')]: {
-    width: '90%',
   },
 }));
 
@@ -118,7 +117,7 @@ const LoginPage = () => {
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: '#15161D' }}>
-      <Box sx={{ flex: 1, minHeight: '100px' }} />
+     
       <StyledContainer>
         <Typography
           variant="h5"
@@ -179,7 +178,7 @@ const LoginPage = () => {
           Hesabınız yok mu? <Link href="/register" sx={{ color: '#D10024' }}>Kayıt Ol</Link>
         </Typography>
       </StyledContainer>
-      <Box sx={{ flex: 1, minHeight: '100px' }} />
+     
     </Box>
   );
 };
