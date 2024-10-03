@@ -9,7 +9,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 
-export default function PurchaseDialog({ open, handleClose, message }) {
+export default function LoginDialog({ open, handleClose, action }) {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
   const navigate = useNavigate();
@@ -19,6 +19,28 @@ export default function PurchaseDialog({ open, handleClose, message }) {
     navigate('/login');
   };
 
+  const getDialogContent = () => {
+    switch (action) {
+      case 'purchase':
+        return {
+          title: 'Bilgilendirme !',
+          message: 'Filmi satın almak için giriş yapmalısınız.'
+        };
+      case 'rating':
+        return {
+          title: 'Bilgilendirme !',
+          message: 'Puan vermek için giriş yapmalısınız.'
+        };
+      default:
+        return {
+          title: 'Bilgilendirme !',
+          message: 'Bu işlemi gerçekleştirmek için giriş yapmalısınız.'
+        };
+    }
+  };
+
+  const { title, message } = getDialogContent();
+
   return (
     <Dialog
       fullScreen={fullScreen}
@@ -27,15 +49,15 @@ export default function PurchaseDialog({ open, handleClose, message }) {
       aria-labelledby="responsive-dialog-title"
       PaperProps={{
         style: {
-          backgroundColor: '#20232a', 
+          backgroundColor: '#20232a',
           color: 'white',
-          padding: '10px', 
-          width: '30%', 
+          padding: '10px',
+          width: '30%',
         },
       }}
       sx={{
         '& .MuiDialog-paper': {
-          maxWidth: '400px', 
+          maxWidth: '400px',
           backgroundColor: '#20232a',
         },
       }}
@@ -47,11 +69,11 @@ export default function PurchaseDialog({ open, handleClose, message }) {
       }}
     >
       <DialogTitle id="responsive-dialog-title" sx={{ color: 'white', textAlign: 'center' }}>
-        Bilgilendirme !
+        {title}
       </DialogTitle>
       <DialogContent>
         <DialogContentText sx={{ color: 'white', textAlign: 'center' }}>
-          Filmi satın almak için giriş yapmalısınız.
+          {message}
         </DialogContentText>
       </DialogContent>
       <DialogActions sx={{ justifyContent: 'center' }}>
