@@ -3,14 +3,18 @@ import { useNavigate } from 'react-router-dom';
 import { Typography, Container } from '@mui/material';
 import FilmDetailsCard from './FilmDetailsCard';
 import FilmVideoPlayer from './FilmVideoPlayer';
-import PurchaseDialog from './PurchaseDialog';
-import ConfirmPurchaseDialog from './ConfirmPurchaseDialog';
-import SuccessPurchaseDialog from './SuccessPurchaseDialog';
 import { useFilmDetail } from '../../contextApi/FilmDetailContext';
 import PurchaseService from '../../services/purchaseService';
+import ConfirmationDialog from './ConfirmationDialog';
+import LoginDialog from './LoginDialog';
+import SuccessDialog from './SuccessDialog';
+import { useAuth } from '../../contextApi/AuthContext';
+import FilmRatingService from '../../services/filmRatingService';
+import { toast } from 'react-toastify';
 
 const FilmDetailPage = () => {
-    const { film, loading, error,isPurchased, fetchFilmDetail } = useFilmDetail();
+    const { film, loading, error, isPurchased, fetchFilmDetail } = useFilmDetail();
+    const { user } = useAuth();
     const [alertMessage, setAlertMessage] = React.useState('');
     const [openDialog, setOpenDialog] = React.useState(false);
     const [openConfirmDialog, setOpenConfirmDialog] = React.useState(false);
@@ -19,8 +23,7 @@ const FilmDetailPage = () => {
     const navigate = useNavigate();
 
     const handleBuyClick = () => {
-        const token = localStorage.getItem('token');
-        if (token) {
+        if (user) {
             setOpenConfirmDialog(true);
         } else {
             setOpenDialog(true);
@@ -28,7 +31,7 @@ const FilmDetailPage = () => {
     };
 
     const handleConfirmPurchase = async () => {
-        try {         
+        try {
             const response = await PurchaseService.purchaseFilm(film.id)
             setOpenConfirmDialog(false);
             setOpenSuccessDialog(true);
@@ -42,15 +45,32 @@ const FilmDetailPage = () => {
         }
     };
 
+    const handleRatingSubmit = async (rating) => {
+        try {
+            if (!user) {
+                alert("Puanlama yapabilmek için giriş yapmalısınız.");
+                return;
+            }
+            const requestData = {
+                userId: user.id,
+                filmId: film.id,
+                rating,
+            };
+
+            // Puanı API'ye gönder
+            await FilmRatingService.submitRating(requestData);
+            toast.success("Puanınız kaydedildi!");
+
+        } catch (error) {
+            console.error("Puanlama hatası:", error);
+            alert("Puanlama sırasında bir hata oluştu. Lütfen tekrar deneyin.");
+        }
+    };
+
     const handleCloseDialog = () => {
         setOpenDialog(false);
         setOpenConfirmDialog(false);
         setOpenSuccessDialog(false);
-    };
-
-    const handleLogin = () => {
-        setOpenDialog(false);
-        navigate('/login');
     };
 
     if (loading) {
@@ -87,24 +107,26 @@ const FilmDetailPage = () => {
                 filmImage={film.image}
                 filmId={film.id}
                 averageRating={film.score}
+                handleRatingSubmit={handleRatingSubmit}
             />
 
-            <PurchaseDialog
+            <LoginDialog
                 open={openDialog}
                 handleClose={handleCloseDialog}
-                message={alertMessage}
-                handleLogin={handleLogin}
+                action="purchase"
             />
 
-            <ConfirmPurchaseDialog
+            <ConfirmationDialog
                 open={openConfirmDialog}
                 handleClose={handleCloseDialog}
                 handleConfirm={handleConfirmPurchase}
+                action="purchase"
             />
 
-            <SuccessPurchaseDialog
+            <SuccessDialog
                 open={openSuccessDialog}
                 handleClose={handleCloseDialog}
+                action="purchase"
             />
         </Container>
     );

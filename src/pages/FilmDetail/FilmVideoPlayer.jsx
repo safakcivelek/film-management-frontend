@@ -3,34 +3,9 @@ import { Paper, Typography, Box } from '@mui/material';
 import LockRoundedIcon from '@mui/icons-material/LockRounded';
 import StarRatingComponent from '../../components/StarRating';
 import { useAuth } from '../../contextApi/AuthContext';
-import { useFilmDetail } from '../../contextApi/FilmDetailContext';
-import FilmRatingSerice from '../../services/filmRatingService';
-import { toast } from 'react-toastify';
 
-const FilmVideoPlayer = ({ videoUrl, videoRef, isPurchased, filmImage,filmId }) => {
+const FilmVideoPlayer = ({ videoUrl, videoRef, isPurchased, filmImage,handleRatingSubmit }) => {
   const { user } = useAuth();
-  const { fetchFilmDetail } = useFilmDetail();
-
-  const handleRatingSubmit = async (rating) => {
-    try {
-        if (!user) {
-            alert("Puanlama yapabilmek için giriş yapmalısınız.");
-            return;
-        }
-        const requestData = {
-            userId: user.id, 
-            filmId: filmId,  
-            rating,           
-        };
-        
-        // Puanı API'ye gönder
-        await FilmRatingSerice.submitRating(requestData);
-        toast.success("Puanınız kaydedildi!");
-    } catch (error) {
-        console.error("Puanlama hatası:", error);
-        alert("Puanlama sırasında bir hata oluştu. Lütfen tekrar deneyin.");
-    }
-};
 
   return (
     <Paper ref={videoRef} sx={{ p: 3, backgroundColor: '#1E1F29', color: 'white', position: 'relative' }}>
