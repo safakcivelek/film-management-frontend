@@ -2,21 +2,30 @@ import React, { useState } from 'react';
 import { AiFillStar } from 'react-icons/ai';
 import { Typography, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Button } from '@mui/material';
 import { useFilmDetail } from '../contextApi/FilmDetailContext';
+import ConfirmationDialog from '../pages/FilmDetail/ConfirmationDialog';
+import LoginDialog from '../pages/FilmDetail/LoginDialog';
+import { useAuth } from '../contextApi/AuthContext';
 
 const StarRatingComponent = ({ onRatingSelect }) => {
-  const { film, fetchFilmDetail } = useFilmDetail(); 
+  const { film, fetchFilmDetail } = useFilmDetail();
+  const {user}=useAuth();
   const [hover, setHover] = useState(null);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [tempRating, setTempRating] = useState(null);
+  const [openLoginAlert, setOpenLoginAlert] = useState(false); // LoginAlert için durum
 
   const handleRatingClick = (starRatingValue) => {
-    setTempRating(starRatingValue);
-    setShowConfirmDialog(true);
+    if (user) {
+      setTempRating(starRatingValue);
+      setShowConfirmDialog(true);
+    } else {
+      setOpenLoginAlert(true); // Giriş yapılmamışsa LoginAlert modalını aç
+    }
   };
 
   const handleConfirm = async () => {
-    try {
-      await onRatingSelect(tempRating);
+    try {   
+      await onRatingSelect(tempRating);   
       await fetchFilmDetail(); // Puanlamayı yenile
     } catch (error) {
       console.error('Puanlama sırasında bir hata oluştu:', error);
@@ -80,28 +89,21 @@ const StarRatingComponent = ({ onRatingSelect }) => {
         </Typography>
       </div>
 
-      {/* Onay Modali */}
-      <Dialog
-        open={showConfirmDialog}
-        onClose={handleCancel}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">Puanlama Onayı</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            {tempRating} puan vermek istediğinizden emin misiniz?
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCancel} color="primary">
-            Hayır
-          </Button>
-          <Button onClick={handleConfirm} color="primary" autoFocus>
-            Evet
-          </Button>
-        </DialogActions>
-      </Dialog>
+      {/* Confirm Modal */}
+      <ConfirmationDialog
+        open={showConfirmDialog} // Modal açık mı?
+        handleClose={handleCancel} // Modal kapandığında yapılacak işlemler
+        tempRating={tempRating} // Kullanıcının seçtiği puan
+        handleConfirm={handleConfirm} // Onaylandığında yapılacak işlemler
+        action="rating"
+      />
+
+      {/* Login Alert Modal */}
+      <LoginDialog
+        open={openLoginAlert}
+        handleClose={() => setOpenLoginAlert(false)}
+        action="rating"
+      />
     </div>
   );
 };

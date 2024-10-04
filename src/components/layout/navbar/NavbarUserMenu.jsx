@@ -79,7 +79,7 @@ function NavbarUserMenu({ user, handleLogout }) {
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
         <MenuItem onClick={handleMenuClose}>
-          <Avatar sx={{ width: 28, height: 28 }} /> {user.fullName}
+          <Avatar sx={{ width: 28, height: 28 }} /> Hesabım
         </MenuItem>
         <Divider />
         <MenuItem onClick={handleLogout}>
