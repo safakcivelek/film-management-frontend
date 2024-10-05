@@ -25,14 +25,14 @@ const Footer = () => {
     <FooterContainer>
       <Box sx={{ px: { xs: 2, sm: 3, md: 20 } }}>
         <Grid container spacing={0} sx={{ mx: { xs: 0, md: 0 } }}>
-          
+
           <Grid item xs={12} md={3} sx={{ mt: 5, mb: 5 }}>
             <Typography variant="subtitle1" gutterBottom sx={{ color: 'white', fontWeight: 'bold' }}>
               DESTEK VE BİLGİ
             </Typography>
             <Box sx={{ mt: 4 }}>
-              <Link href="#" variant="body2" sx={{ display: 'block', color: '#B9BABC', mb: 2, textDecoration: 'none' }}>Hakkımızda</Link>
-              <Link href="#" variant="body2" sx={{ display: 'block', color: '#B9BABC', mb: 2, textDecoration: 'none' }}>İletişim</Link>
+              <Link href="/about" variant="body2" sx={{ display: 'block', color: '#B9BABC', mb: 2, textDecoration: 'none' }}>Hakkımızda</Link>
+              <Link href="/contact" variant="body2" sx={{ display: 'block', color: '#B9BABC', mb: 2, textDecoration: 'none' }}>İletişim</Link>
               <Link href="#" variant="body2" sx={{ display: 'block', color: '#B9BABC', mb: 2, textDecoration: 'none' }}>Gizlilik Politikası</Link>
               <Link href="#" variant="body2" sx={{ display: 'block', color: '#B9BABC', mb: 2, textDecoration: 'none' }}>Sipariş ve İade</Link>
               <Link href="#" variant="body2" sx={{ display: 'block', color: '#B9BABC', textDecoration: 'none' }}>Şartlar & Koşullar</Link>
@@ -45,19 +45,19 @@ const Footer = () => {
             <Box sx={{ mt: 4 }}>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
                 <LocationOnIcon sx={{ mr: 1, color: '#D10024' }} />
-                <Typography variant="body2" sx={{ color: '#B9BABC' }}>1734 Stonecoal Road</Typography>
+                <Typography variant="body2" sx={{ color: '#B9BABC' }}>İstanbul/Türkiye</Typography>
               </Box>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
                 <PhoneIcon sx={{ mr: 1, color: '#D10024' }} />
-                <Typography variant="body2" sx={{ color: '#B9BABC' }}>+021-95-51-84</Typography>
+                <Typography variant="body2" sx={{ color: '#B9BABC' }}>+90 (212) 555 55 54</Typography>
               </Box>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
                 <EmailIcon sx={{ mr: 1, color: '#D10024' }} />
-                <Typography variant="body2" sx={{ color: '#B9BABC' }}>email@email.com</Typography>
+                <Typography variant="body2" sx={{ color: '#B9BABC' }}>safakcivelek3@email.com</Typography>
               </Box>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
                 <FaxIcon sx={{ mr: 1, color: '#D10024' }} />
-                <Typography variant="body2" sx={{ color: '#B9BABC' }}>+021-95-51-85 (Fax)</Typography>
+                <Typography variant="body2" sx={{ color: '#B9BABC' }}>+90 (212) 555 55 55 (Fax)</Typography>
               </Box>
             </Box>
           </Grid>
@@ -68,43 +68,82 @@ const Footer = () => {
             <Box sx={{ mt: 4 }}>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
                 <FacebookIcon sx={{ mr: 1, color: '#B9BABC' }} />
-                <Typography variant="body2" sx={{ color: '#B9BABC' }}>Facebook</Typography>
+                <Typography variant="body2" sx={{ color: '#B9BABC' }}>
+                  <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" style={{ color: '#B9BABC', textDecoration: 'none' }}>
+                    Facebook
+                  </a>
+                </Typography>
               </Box>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
                 <TwitterIcon sx={{ mr: 1, color: '#B9BABC' }} />
-                <Typography variant="body2" sx={{ color: '#B9BABC' }}>Twitter</Typography>
+                <Typography variant="body2" sx={{ color: '#B9BABC' }}>
+                  <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer" style={{ color: '#B9BABC', textDecoration: 'none' }}>
+                    Twitter
+                  </a>
+                </Typography>
               </Box>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
                 <InstagramIcon sx={{ mr: 1, color: '#B9BABC' }} />
-                <Typography variant="body2" sx={{ color: '#B9BABC' }}>Instagram</Typography>
+                <Typography variant="body2" sx={{ color: '#B9BABC' }}>
+                  <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" style={{ color: '#B9BABC', textDecoration: 'none' }}>
+                    Instagram
+                  </a>
+                </Typography>
               </Box>
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <YouTubeIcon sx={{ mr: 1, color: '#B9BABC' }} />
-                <Typography variant="body2" sx={{ color: '#B9BABC' }}>YouTube</Typography>
+                <Typography variant="body2" sx={{ color: '#B9BABC' }}>
+                  <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" style={{ color: '#B9BABC', textDecoration: 'none' }}>
+                    YouTube
+                  </a>
+                </Typography>
               </Box>
             </Box>
           </Grid>
+
           <Grid item xs={12} md={3} sx={{ mt: 5, mb: 5 }}>
             <Typography variant="subtitle1" gutterBottom sx={{ color: 'white', fontWeight: 'bold' }}>
               POPÜLER TÜRLER
             </Typography>
             <Box sx={{ mt: 4, display: 'flex', flexWrap: 'wrap' }}>
               <Box sx={{ width: '50%' }}>
-                <Link href="#" variant="body2" sx={{ display: 'block', color: '#B9BABC', mb: 2, textDecoration: 'none' }}>Aksiyon</Link>
-                <Link href="#" variant="body2" sx={{ display: 'block', color: '#B9BABC', mb: 2, textDecoration: 'none' }}>Komedi</Link>
-                <Link href="#" variant="body2" sx={{ display: 'block', color: '#B9BABC', mb: 2, textDecoration: 'none' }}>Dram</Link>
-                <Link href="#" variant="body2" sx={{ display: 'block', color: '#B9BABC', mb: 2, textDecoration: 'none' }}>Korku</Link>
-                <Link href="#" variant="body2" sx={{ display: 'block', color: '#B9BABC', textDecoration: 'none' }}>Bilim Kurgu</Link>
+                <Typography variant="body2" sx={{ display: 'block', color: '#B9BABC', mb: 2 }}>
+                  Aksiyon
+                </Typography>
+                <Typography variant="body2" sx={{ display: 'block', color: '#B9BABC', mb: 2 }}>
+                  Fantastik
+                </Typography>
+                <Typography variant="body2" sx={{ display: 'block', color: '#B9BABC', mb: 2 }}>
+                  Dram
+                </Typography>
+                <Typography variant="body2" sx={{ display: 'block', color: '#B9BABC', mb: 2 }}>
+                  Tarih
+                </Typography>
+                <Typography variant="body2" sx={{ display: 'block', color: '#B9BABC' }}>
+                  Bilim Kurgu
+                </Typography>
               </Box>
               <Box sx={{ width: '50%' }}>
-                <Link href="#" variant="body2" sx={{ display: 'block', color: '#B9BABC', mb: 2, textDecoration: 'none' }}>Belgesel</Link>
-                <Link href="#" variant="body2" sx={{ display: 'block', color: '#B9BABC', mb: 2, textDecoration: 'none' }}>Romantik</Link>
-                <Link href="#" variant="body2" sx={{ display: 'block', color: '#B9BABC', mb: 2, textDecoration: 'none' }}>Animasyon</Link>
-                <Link href="#" variant="body2" sx={{ display: 'block', color: '#B9BABC', mb: 2, textDecoration: 'none' }}>Gerilim</Link>
-                <Link href="#" variant="body2" sx={{ display: 'block', color: '#B9BABC', textDecoration: 'none' }}>Müzikal</Link>
+                <Typography variant="body2" sx={{ display: 'block', color: '#B9BABC', mb: 2 }}>
+                  Romantik
+                </Typography>
+                <Typography variant="body2" sx={{ display: 'block', color: '#B9BABC', mb: 2 }}>
+                  Biyografi
+                </Typography>
+                <Typography variant="body2" sx={{ display: 'block', color: '#B9BABC', mb: 2 }}>
+                  Macera
+                </Typography>
+                <Typography variant="body2" sx={{ display: 'block', color: '#B9BABC', mb: 2 }}>
+                  Suç
+                </Typography>
+                <Typography variant="body2" sx={{ display: 'block', color: '#B9BABC' }}>
+                  Gerilim
+                </Typography>
               </Box>
             </Box>
           </Grid>
+
+
         </Grid>
         <Box sx={{ textAlign: 'center', mt: 5, pt: 2, borderTop: '1px solid #B9BABC' }}>
           <Typography variant="body2" sx={{ color: '#B9BABC' }}>
