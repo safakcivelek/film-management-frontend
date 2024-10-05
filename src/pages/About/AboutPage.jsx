@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Button, Grid } from '@mui/material';
+import { Box, Typography, Button, Grid, Container } from '@mui/material';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
@@ -14,10 +14,10 @@ const SocialButton = ({ icon: Icon, label, href }) => (
     sx={{
       color: 'white',
       borderColor: '#D10024',
-      marginBottom: '10px',
-      width: '100%', 
-      height: '40px', 
-      fontSize: '14px', 
+      marginBottom: '20px', 
+      width: '100%',
+      height: '40px',
+      fontSize: '14px',
       '&:hover': {
         backgroundColor: '#D10024',
         color: 'white',
@@ -31,12 +31,49 @@ const SocialButton = ({ icon: Icon, label, href }) => (
 
 const AboutPage = () => {
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: '#15161D', paddingTop: '120px', paddingBottom: '120px', position: 'relative' }}>
-      <Typography variant="h3" sx={{ mb: 4, color: 'white', fontWeight: 'bold' }}>Hakkımızda</Typography>
-      <Typography variant="body1" sx={{ mb: 4, color: 'rgba(255, 255, 255, 0.7)', textAlign: 'center', width: '50%' }}>
-        ELECTROFILM, film severler için en yeni ve klasik filmleri sunan bir platformdur. Amacımız, kullanıcılara en iyi film izleme deneyimini sunmaktır. Platformumuz, film bilgilerini, kullanıcı yorumlarını ve yüksek kaliteli film afişlerini içerir. Ayrıca, çeşitli film türlerinde geniş bir yelpazeye sahibiz ve her zevke uygun filmler sunuyoruz. Kullanıcılarımızın geri bildirimleri bizim için çok değerlidir. İletişim sayfamızdan bize ulaşabilir ve platformumuzu daha iyi hale getirmek için önerilerde bulunabilirsiniz. Daha fazla bilgi ve güncellemeler için sosyal medya hesaplarımızı takip edin.
+    <Container
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        backgroundColor: '#1E1F29', 
+        padding: '40px',
+        borderRadius: '8px',
+        border: '1px solid silver',
+        marginTop: '150px',
+        marginBottom: '150px',
+        width: { xs: '90%', sm: '80%', md: '60%' },
+      }}
+    >
+      <Typography
+        variant="h3"
+        sx={{
+          mb: 4,
+          color: 'white',
+          fontWeight: 'bold',
+          textAlign: 'center',
+          fontSize: {
+            xs: '1.5rem',  
+            sm: '2rem',    
+            md: '2.5rem',  
+            lg: '3rem',    
+          },
+        }}
+      >
+        Hakkımızda
       </Typography>
-      <Grid container spacing={2} justifyContent="center" sx={{ width: '50%' }}>
+      <Typography
+        variant="body1"
+        sx={{
+          mb: 6,
+          color: 'rgba(255, 255, 255, 0.7)',
+          textAlign: 'center',
+          width: '100%', 
+        }}
+      >
+        ELECTROFILM, film severler için en yeni ve klasik filmleri sunan bir platformdur. Amacımız, kullanıcılara en iyi film izleme deneyimini sunmaktır. Platformumuz, film bilgilerini ve yüksek kaliteli film afişlerini içerir. Ayrıca, çeşitli film türlerinde geniş bir yelpazeye sahibiz ve her zevke uygun filmler sunuyoruz. Kullanıcılarımızın geri bildirimleri bizim için çok değerlidir ve bu sayede platformumuzu sürekli olarak geliştirmekteyiz. Daha fazla bilgi ve güncellemeler için sosyal medya hesaplarımızı takip edin ve heyecan verici yeni filmler hakkında bilgi sahibi olun.
+      </Typography>
+      <Grid container spacing={4} justifyContent="center" sx={{ width: '100%' }}>
         <Grid item xs={12} sm={6} md={3}>
           <SocialButton icon={FacebookIcon} label="Facebook" href="https://www.facebook.com" />
         </Grid>
@@ -50,7 +87,7 @@ const AboutPage = () => {
           <SocialButton icon={YouTubeIcon} label="YouTube" href="https://www.youtube.com" />
         </Grid>
       </Grid>
-    </Box>
+    </Container>
   );
 };
 
