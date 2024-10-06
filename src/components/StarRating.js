@@ -12,14 +12,14 @@ const StarRatingComponent = ({ onRatingSelect }) => {
   const [hover, setHover] = useState(null);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [tempRating, setTempRating] = useState(null);
-  const [openLoginAlert, setOpenLoginAlert] = useState(false); // LoginAlert için durum
+  const [openLoginAlert, setOpenLoginAlert] = useState(false); 
 
   const handleRatingClick = (starRatingValue) => {
     if (user) {
       setTempRating(starRatingValue);
       setShowConfirmDialog(true);
     } else {
-      setOpenLoginAlert(true); // Giriş yapılmamışsa LoginAlert modalını aç
+      setOpenLoginAlert(true); 
     }
   };
 
@@ -78,13 +78,26 @@ const StarRatingComponent = ({ onRatingSelect }) => {
   };
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center' }}>
-      <Typography variant="h5" component="span" sx={{ color: 'white', marginRight: '18px' }}>
-        Puan:
-      </Typography>
+    <div style={{ display: 'flex', alignItems: 'center', flexDirection: { xs: 'column', sm: 'row' } }}>
+      <Typography
+    variant="h5"
+    component="span"
+    sx={{
+      color: 'white',
+      marginRight: { xs: '9px', sm: '9px' },  
+      fontSize: { xs: '1.2rem', sm: '1.3rem', md: '1.5rem' },  
+      textAlign: { xs: 'center', sm: 'left' } 
+    }}
+  >
+    Puan:
+  </Typography>
       <div style={{ display: 'flex', alignItems: 'center' }}>
         {[...Array(5)].map((_, index) => renderStar(index))}
-        <Typography variant="h5" component="span" sx={{ color: 'white', marginLeft: '8px' }}>
+        <Typography variant="h5" component="span" sx={{ 
+          color: 'white',
+           marginLeft: '7px',
+           fontSize: { xs: '1.2rem', sm: '1.3rem', md: '1.5rem' }
+           }}>
           ({(film?.score ? film.score.toFixed(1) : '0')})
         </Typography>
       </div>

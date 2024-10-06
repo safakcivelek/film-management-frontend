@@ -10,7 +10,12 @@ const FilmVideoPlayer = ({ videoUrl, videoRef, isPurchased, filmImage,handleRati
   return (
     <Paper ref={videoRef} sx={{ p: 3, backgroundColor: '#1E1F29', color: 'white', position: 'relative' }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
-        <Typography variant="h5" component="div">
+        <Typography variant="h5" component="div" sx={{
+          fontSize: { xs: '1.25rem', sm: '1.5rem', md: '1.75rem' },
+          mb: { xs: 2, sm: 0 }, 
+          textAlign: { xs: 'center', sm: 'left' },
+          display: { xs: 'none', sm: 'block' }, // Mobilde gizlenir
+        }}>
           Filmi İzle
         </Typography>
         <StarRatingComponent onRatingSelect={handleRatingSubmit} />
