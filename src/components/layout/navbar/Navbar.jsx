@@ -33,9 +33,9 @@ function Navbar() {
   };
 
   const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
+    <Box sx={{ textAlign: 'center' }}>
       <Typography variant="h6" sx={{ my: 2, color: '#D10024', fontWeight: 'bold', fontSize: '0.9rem' }}>ELECTROFILM</Typography>
-      <List>
+      <List>  
         <NavbarSearchBar isMobile={true} />
         <ListItem button component={Link} to="/">
           <ListItemText primary="ANASAYFA" sx={{ fontSize: '0.9rem', textTransform: 'uppercase' }} />
@@ -78,40 +78,40 @@ function Navbar() {
               <NavbarUserMenu user={user} handleLogout={handleLogout} handleMenuClick={handleMenuClick} handleMenuClose={handleMenuClose} anchorEl={anchorEl} />
             ) : (
               <>
-                <Button 
-                  variant="outlined" 
-                  color="inherit" 
-                  sx={{ 
-                    fontSize: '0.8rem', 
-                    textTransform: 'uppercase', 
-                    borderColor: '#FFFFFF', 
-                    color: '#FFFFFF', 
-                    ml: 2, 
+                <Button
+                  variant="outlined"
+                  color="inherit"
+                  sx={{
+                    fontSize: '0.8rem',
+                    textTransform: 'uppercase',
+                    borderColor: '#FFFFFF',
+                    color: '#FFFFFF',
+                    ml: 2,
                     '&:hover': {
-                      backgroundColor: 'rgba(255, 255, 255, 0.1)', 
+                      backgroundColor: 'rgba(255, 255, 255, 0.1)',
                       borderColor: '#FFFFFF'
                     }
-                  }} 
-                  component={Link} 
+                  }}
+                  component={Link}
                   to="/login"
                 >
                   Oturum Aç
                 </Button>
-                <Button 
-                  variant="outlined" 
-                  color="inherit" 
-                  sx={{ 
-                    fontSize: '0.8rem', 
-                    textTransform: 'uppercase', 
-                    borderColor: '#FFFFFF', 
-                    color: '#FFFFFF', 
-                    ml: 2, 
+                <Button
+                  variant="outlined"
+                  color="inherit"
+                  sx={{
+                    fontSize: '0.8rem',
+                    textTransform: 'uppercase',
+                    borderColor: '#FFFFFF',
+                    color: '#FFFFFF',
+                    ml: 2,
                     '&:hover': {
-                      backgroundColor: 'rgba(255, 255, 255, 0.1)',  
+                      backgroundColor: 'rgba(255, 255, 255, 0.1)',
                       borderColor: '#FFFFFF'
                     }
-                  }} 
-                  component={Link} 
+                  }}
+                  component={Link}
                   to="/register"
                 >
                   Kaydol

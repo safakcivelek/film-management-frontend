@@ -4,6 +4,7 @@ import { styled } from '@mui/system';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { Helmet } from 'react-helmet-async';
 
 const ContactContainer = styled(Box)({
   backgroundColor: '#1E1F29',
@@ -54,6 +55,35 @@ const StyledButton = styled(Button)(({ theme, loading }) => ({
   },
 }));
 
+const StyledModalBox = styled(Box)(({ theme }) => ({
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: '80%',
+  maxWidth: '400px',
+  bgcolor: '#1E1F29',
+  backgroundColor: '#1E1F29',
+  border: '2px solid #4CAF50',
+  borderRadius: '8px',
+  boxShadow: 24,
+  padding: '24px',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  textAlign: 'center',
+  overflow: 'hidden',
+  boxSizing: 'border-box',
+  // sm boyutları için stil ayarı
+  [theme.breakpoints.down('sm')]: {
+    width: '70%',
+    padding: '16px',
+    overflow: 'hidden',
+    boxSizing: 'border-box',
+  },
+}));
+
+
 const validationSchema = Yup.object({
   name: Yup.string()
     .min(2, 'Adınız en az 2 karakter olmalıdır.')
@@ -101,6 +131,9 @@ const ContactPage = () => {
         paddingBottom: '50px',
       }}
     >
+      <Helmet>
+        <title>İletişim | ELECTROFILM</title>
+      </Helmet>
       <ContactContainer maxWidth="lg">
         <Typography
           variant="h3"
@@ -110,10 +143,10 @@ const ContactPage = () => {
             fontWeight: 'bold',
             textAlign: 'center',
             fontSize: {
-              xs: '1.5rem',  
-              sm: '2rem',    
-              md: '2.5rem',  
-              lg: '3rem',    
+              xs: '1.5rem',
+              sm: '2rem',
+              md: '2.5rem',
+              lg: '3rem',
             },
           }}
         >
@@ -192,24 +225,7 @@ const ContactPage = () => {
 
       {/* Modal Bileşeni */}
       <Modal open={openModal} onClose={handleCloseModal}>
-        <Box
-          sx={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: 400,
-            bgcolor: '#1E1F29',
-            border: '2px solid #4CAF50',
-            borderRadius: '8px',
-            boxShadow: 24,
-            p: 4,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            textAlign: 'center',
-          }}
-        >
+        <StyledModalBox>
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <CheckCircleIcon sx={{ color: '#4CAF50', marginRight: 1 }} />
             <Typography variant="h6" component="h2" sx={{ color: 'white' }}>
@@ -222,8 +238,9 @@ const ContactPage = () => {
           <Button onClick={handleCloseModal} variant="contained" sx={{ mt: 3, backgroundColor: '#4CAF50' }}>
             Kapat
           </Button>
-        </Box>
+        </StyledModalBox>
       </Modal>
+
     </Container>
   );
 };

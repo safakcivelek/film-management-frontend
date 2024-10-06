@@ -7,6 +7,7 @@ import SelectedFilmDetails from './SelectedFilmDetails';
 import BackgroundImage from './BackgroundImage';
 import { useNavigate } from 'react-router-dom';
 import { useFilms } from '../../contextApi/HomePageFilmContext';
+import { Helmet } from 'react-helmet-async';
 
 const HomePage = () => {
   const { films, selectedFilm, setSelectedFilm, loading, error } = useFilms();
@@ -31,6 +32,9 @@ const HomePage = () => {
 
   return (
     <>
+    <Helmet>
+        <title>ELECTROFILM - Film İzle</title>
+      </Helmet>
       <Box sx={{ mb: 4, position: 'relative', height: { xs: 'auto', md: '865px' }, overflow: 'hidden' }}>
         {selectedFilm && <BackgroundImage selectedFilm={selectedFilm} />}
         <Container maxWidth="lg" sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, alignItems: 'center', height: '100%', ml: { xs: 0, md: 20 }, p: { xs: 2, md: 0 } }}>

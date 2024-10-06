@@ -9,6 +9,7 @@ import { useFilteredFilms } from '../../contextApi/FilmFilterContext';
 import { useEffect, useState } from 'react';
 import LoadMoreButton from '../../components/films/LoadMoreButton';
 import { Info } from '@mui/icons-material';
+import { Helmet } from 'react-helmet-async';
 
 
 const FilmListPage = () => {
@@ -72,40 +73,45 @@ const FilmListPage = () => {
     setStart(prevStart => prevStart + limit);
   };
 
- // if (loading) return <p>Yükleniyor...</p>;
+  // if (loading) return <p>Yükleniyor...</p>;
   if (error) return <p>Hata: {error}</p>;
 
   return (
-    <Box sx={{ px: { xs: 2, sm: 3, md: 20 }, py: 4 }}>
-      <Box sx={{ backgroundColor: '#1E1F29', p: 0, mt: 4, borderRadius: 1.5, border: '1px solid rgb(41 41 55)' }}>
-        <FilmFilter filters={filters} updateFilters={handleFilterChange} />
-      </Box>
-
-      <Box sx={{ mb: 3, mt: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Typography  component="div" sx={{ color: 'white',fontSize:'1.1rem' }}>
-          Toplam <span style={{ color: '#D10024' }}>{filterFilms.length}</span> film bulundu
-        </Typography>
-
-        <SortSelect sortOrder={sortOrder} handleSortChange={handleSortChange} />
-      </Box>
-
-      <FilmList films={filterFilms} />
-
-      {filterFilms.length < totalCount && hasMore ? (
-        <LoadMoreButton
-          onLoadMore={loadMoreFilms}
-          isVisible={filterFilms.length > 0 && filterFilms.length < totalCount && !loading && hasMore}
-        />
-      ) : (
-        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', mt: 4 }}>
-          <Info sx={{ color: '#2196F3', mr: 1 }} />
-          <Typography  sx={{ textAlign: 'center', color: 'gray',fontSize:'1.1rem' }}>
-            Tüm filmler listelendi
-          </Typography>
+    <>
+      <Helmet>
+        <title>Film Listeleri | ELECTROFILM</title>
+      </Helmet>
+      <Box sx={{ px: { xs: 2, sm: 3, md: 20 }, py: 4 }}>
+        <Box sx={{ backgroundColor: '#1E1F29', p: 0, mt: 4, borderRadius: 1.5, border: '1px solid rgb(41 41 55)' }}>
+          <FilmFilter filters={filters} updateFilters={handleFilterChange} />
         </Box>
-      )}
 
-    </Box>
+        <Box sx={{ mb: 3, mt: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <Typography component="div" sx={{ color: 'white', fontSize: '1.1rem' }}>
+            Toplam <span style={{ color: '#D10024' }}>{filterFilms.length}</span> film bulundu
+          </Typography>
+
+          <SortSelect sortOrder={sortOrder} handleSortChange={handleSortChange} />
+        </Box>
+
+        <FilmList films={filterFilms} />
+
+        {filterFilms.length < totalCount && hasMore ? (
+          <LoadMoreButton
+            onLoadMore={loadMoreFilms}
+            isVisible={filterFilms.length > 0 && filterFilms.length < totalCount && !loading && hasMore}
+          />
+        ) : (
+          <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', mt: 4 }}>
+            <Info sx={{ color: '#2196F3', mr: 1 }} />
+            <Typography sx={{ textAlign: 'center', color: 'gray', fontSize: '1.1rem' }}>
+              Tüm filmler listelendi
+            </Typography>
+          </Box>
+        )}
+
+      </Box>
+    </>
   );
 };
 
