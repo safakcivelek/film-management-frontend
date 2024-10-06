@@ -1,5 +1,5 @@
-import React from 'react';
-import { Box, Button, Typography, Link, Container, TextField, CircularProgress } from '@mui/material';
+import React, { useState } from 'react';
+import { Box, Button, Typography, Link, Container, TextField, CircularProgress, IconButton, InputAdornment } from '@mui/material';
 import { styled } from '@mui/system';
 import LoginIcon from '@mui/icons-material/Login';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
@@ -7,10 +7,12 @@ import * as Yup from 'yup';
 import authService from '../../services/authService';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Helmet } from 'react-helmet-async';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 const StyledContainer = styled(Container)(({ theme }) => ({
-  marginBottom:'100px',
-  marginTop:'100px',
+  marginBottom: '100px',
+  marginTop: '100px',
   backgroundColor: '#1E1F29',
   width: '90%',
   maxWidth: 610,
@@ -25,7 +27,7 @@ const StyledContainer = styled(Container)(({ theme }) => ({
   [theme.breakpoints.up('md')]: {
     width: 610,
     height: 550,
-  },   
+  },
 }));
 
 const StyledTextField = styled(TextField)(({ theme }) => ({
@@ -89,6 +91,7 @@ const ErrorText = styled(Typography)(() => ({
   width: '90%'
 }));
 
+
 // Yup doğrulama şeması
 const validationSchema = Yup.object({
   email: Yup.string().email('Geçersiz email adresi').required('Email zorunludur*'),
@@ -96,6 +99,8 @@ const validationSchema = Yup.object({
 });
 
 const LoginPage = () => {
+  const [showPassword, setShowPassword] = useState(false); // Şifre görünürlüğü için state
+
   const handleLogin = async (values, { setSubmitting }) => {
     try {
       const response = await authService.login(values.email, values.password);
@@ -116,70 +121,91 @@ const LoginPage = () => {
   };
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: '#15161D' }}>
-     
-      <StyledContainer>
-        <Typography
-          variant="h5"
-          sx={{mb: 7,color: '#D10024', fontSize: { xs: '1rem', sm: '1.8rem'}}}                                 
-        >
-          ELECTROFILM
-        </Typography>
+    <>
+      <Helmet>
+        <title>Oturum Aç | ELECTROFILM</title>
+      </Helmet>
+      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: '#15161D' }}>
+        <StyledContainer>
+          <Typography
+            variant="h5"
+            sx={{ mb: 7, color: '#D10024', fontSize: { xs: '1rem', sm: '1.8rem' } }}
+          >
+            ELECTROFILM
+          </Typography>
+          <Formik
+            initialValues={{ email: '', password: '' }}
+            validationSchema={validationSchema}
+            onSubmit={handleLogin}
+          >
+            {({ isSubmitting }) => (
+              <Form style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <SideBySideBox >
+                  <Field
+                    as={StyledTextField}
+                    label="Email"
+                    type="email"
+                    name="email"
+                    variant="outlined"
+                    fullWidth
+                  />
+                  <ErrorText>
+                    <ErrorMessage name="email" />
+                  </ErrorText>
+                </SideBySideBox>
 
-        <Formik
-          initialValues={{ email: '', password: '' }}
-          validationSchema={validationSchema}
-          onSubmit={handleLogin}
-        >
-          {({ isSubmitting }) => (
-            <Form style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-              <SideBySideBox >
-                <Field
-                  as={StyledTextField}
-                  label="Email"
-                  type="email"
-                  name="email"
-                  variant="outlined"
-                  fullWidth
-                />
-                <ErrorText>
-                  <ErrorMessage name="email" />
-                </ErrorText>
-              </SideBySideBox>
+                <SideBySideBox >
+                  <Field
+                    as={StyledTextField}
+                    label="Şifre"
+                    type={showPassword ? 'text' : 'password'}
+                    name="password"
+                    variant="outlined"
+                    fullWidth
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            onClick={() => setShowPassword(!showPassword)}
+                            edge="end"
+                            sx={{ color: 'white' }}
+                          >
+                            {showPassword ? (
+                              <Visibility fontSize="small" /> 
+                            ) : (
+                              <VisibilityOff fontSize="small" /> 
+                            )}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
 
-              <SideBySideBox >
-                <Field
-                  as={StyledTextField}
-                  label="Şifre"
-                  type="password"
-                  name="password"
-                  variant="outlined"
-                  fullWidth
-                />
-                <ErrorText>
-                  <ErrorMessage name="password" />
-                </ErrorText>
-              </SideBySideBox>
+                  />
+                  <ErrorText>
+                    <ErrorMessage name="password" />
+                  </ErrorText>
+                </SideBySideBox>
 
-              <StyledButton
-                type="submit"
-                variant="contained"
-                startIcon={isSubmitting ? <CircularProgress size={24} color="inherit" /> : <LoginIcon />}
-                disabled={isSubmitting}
-                loading={isSubmitting.toString()}
-              >
-                {isSubmitting ? 'Giriş Yapılıyor...' : 'Giriş Yap'}
-              </StyledButton>
-            </Form>
-          )}
-        </Formik>
+                <StyledButton
+                  type="submit"
+                  variant="contained"
+                  startIcon={isSubmitting ? <CircularProgress size={24} color="inherit" /> : <LoginIcon />}
+                  disabled={isSubmitting}
+                  loading={isSubmitting.toString()}
+                >
+                  {isSubmitting ? 'Giriş Yapılıyor...' : 'Giriş Yap'}
+                </StyledButton>
+              </Form>
+            )}
+          </Formik>
 
-        <Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.7)', mt: 3 }}>
-          Hesabınız yok mu? <Link href="/register" sx={{ color: '#D10024' }}>Kayıt Ol</Link>
-        </Typography>
-      </StyledContainer>
-     
-    </Box>
+          <Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.7)', mt: 3 }}>
+            Hesabınız yok mu? <Link href="/register" sx={{ color: '#D10024' }}>Kayıt Ol</Link>
+          </Typography>
+        </StyledContainer>
+
+      </Box>
+    </>
   );
 };
 
