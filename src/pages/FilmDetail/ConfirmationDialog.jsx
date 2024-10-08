@@ -45,7 +45,7 @@ export default function ConfirmationDialog({ open, handleClose, handleConfirm, a
           backgroundColor: '#20232a',
           color: 'white',
           padding: '10px',
-          width: '30%',
+          width: '80%',
         },
       }}
       sx={{

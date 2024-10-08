@@ -52,7 +52,9 @@ export default function LoginDialog({ open, handleClose, action }) {
           backgroundColor: '#20232a',
           color: 'white',
           padding: '10px',
-          width: '30%',
+          width: '80%', 
+          maxWidth: '400px', 
+          maxHeight: fullScreen ? '22vh' : 'auto',
         },
       }}
       sx={{
