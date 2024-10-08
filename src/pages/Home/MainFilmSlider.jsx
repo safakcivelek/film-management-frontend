@@ -5,7 +5,7 @@ import { useFilms } from '../../contextApi/HomePageFilmContext';
 
 const MainFilmSlider = () => {
   const { films, setSelectedFilm, selectedFilm } = useFilms();
-  const filmsToDisplay = films.slice(0, 6) || []; // İlk 6 filmi alıyoruz
+  const filmsToDisplay = films.slice(0, 6) || []; 
   const [startIndex, setStartIndex] = useState(0);
 
   if (!films || films.length === 0) {
@@ -35,14 +35,21 @@ const MainFilmSlider = () => {
   };
 
   return (
-    <Box sx={{ position: 'relative', width: '350px' }}>
+    <Box sx={{
+      position: 'relative',
+      width: { xs: '100%', sm: '350px' },
+      margin: { xs: '0 auto', sm: 'initial' }, // Mobilde ortala
+      display: 'flex',
+      flexDirection: 'column', // Mobilde yukarıdan aşağıya hizala
+      alignItems: 'center' 
+    }}>
       <IconButton
         onClick={handleSlideUp}
         sx={{
           position: 'absolute',
-          top: '-20px', 
+          top: '-20px',
           left: '50%',
-          transform: 'translateX(-75%)',
+          transform: 'translateX(-50%)',
           backgroundColor: '#1E1F29',
           borderRadius: '4px',
           width: '50px',
@@ -61,7 +68,7 @@ const MainFilmSlider = () => {
           key={film.id}
           sx={{
             position: 'relative',
-            width: '305px',
+            width: '90%', 
             height: '170px',
             marginBottom: '20px',
             marginTop: '20px',
@@ -82,7 +89,7 @@ const MainFilmSlider = () => {
               width: '100%',
               height: '100%',
               borderRadius: '8px',
-              zIndex: 0,                       
+              zIndex: 0,
             }}
           />
         </Box>
@@ -92,9 +99,9 @@ const MainFilmSlider = () => {
         onClick={handleSlideDown}
         sx={{
           position: 'absolute',
-          bottom: '-20px', 
+          bottom: '-20px',
           left: '50%',
-          transform: 'translateX(-75%)',
+          transform: 'translateX(-50%)',
           backgroundColor: '#1E1F29',
           borderRadius: '4px',
           width: '50px',

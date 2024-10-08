@@ -6,21 +6,34 @@ import { useFilms } from '../../contextApi/HomePageFilmContext';
 import formatDuration from '../../utils/formatDuration';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 
-
 const SelectedFilmDetails = ({ handleWatchNow }) => {
     const { selectedFilm } = useFilms();
 
     const filmScore = selectedFilm.score && selectedFilm.score > 0 ? selectedFilm.score : "Puan Yok";
 
     return (
-        <Box sx={{ flexGrow: 1, ml: { xs: 0, md: 10 }, mt: { xs: 4, md: 0 } }}>
+        <Box 
+          sx={{ 
+            flexGrow: 1, 
+            ml: { xs: 0, md: 10 }, 
+            mt: { xs: 4, md: 0 }, 
+            display: 'flex', 
+            justifyContent: { xs: 'center', md: 'flex-start' }, // Mobilde ortalama
+            alignItems: 'center', // İçeriği ortalamak için
+            textAlign: { xs: 'center', md: 'left' }, // Mobilde metinleri ortalama
+          }}
+        >
             <Paper sx={{
                 p: { xs: 2, md: 2 },
                 backgroundColor: 'rgba(0, 0, 0, 0.2)',
                 color: 'white',
                 width: '100%',
                 maxWidth: '600px',
-                height: { xs: 'auto', md: '250px' }
+                height: { xs: 'auto', md: '250px' },
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: { xs: 'center', md: 'flex-start' }, // Mobilde içerikleri ortala
             }}>
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
@@ -37,7 +50,7 @@ const SelectedFilmDetails = ({ handleWatchNow }) => {
                             {selectedFilm.name}
                         </Typography>
 
-                        <Box sx={{ display: 'flex', flexWrap: 'wrap', mb: 2 }}>
+                        <Box sx={{ display: 'flex', flexWrap: 'wrap', mb: 2, justifyContent: { xs: 'center', md: 'flex-start' } }}>
                             {selectedFilm.genres?.length > 0 ? (
                                 selectedFilm.genres.map((genre, index) => (
                                     <Box
@@ -95,7 +108,7 @@ const SelectedFilmDetails = ({ handleWatchNow }) => {
                         >
                             {selectedFilm.description}
                         </Typography>
-                        <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                        <Box sx={{ display: 'flex', alignItems: 'center', mb: 2, justifyContent: { xs: 'center', md: 'flex-start' } }}>
                             <StarIcon sx={{ color: '#FFD700',fontSize: 18, mr: 1 }} />
                             <Typography variant="body1" sx={{ mr: 3 }}>
                                 {filmScore}

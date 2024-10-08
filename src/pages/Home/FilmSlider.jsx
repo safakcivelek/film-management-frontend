@@ -31,26 +31,26 @@ const FilmSlider = ({ films }) => {
         <IconButton
           onClick={handleSlideLeft}
           sx={{
-            position: 'absolute',
-            left: '-35px',
-            top: '50%',
-            transform: 'translateY(-50%)',
+            position: { xs: 'absolute', md: 'absolute' },
+            left: { xs: '50%', md: '-35px' },
+            top: { xs: 'calc(100% + 10px)', md: '50%' },
+            transform: { xs: 'translateX(-50%)', md: 'translateY(-50%)' },
             backgroundColor: '#1E1F29',
-            borderRadius: '8px',
-            width: '25px',
-            height: '80px', 
+            borderRadius: '4px',
+            width: { xs: '40px', md: '25px' }, 
+            height: { xs: '25px', md: '80px' }, 
             zIndex: 2,
             '&:hover': {
               backgroundColor: '#B0001B',
             },
           }}
         >
-          <ArrowBackIosIcon sx={{ fontSize: '24px', color: 'white' }} />
+          <ArrowBackIosIcon sx={{ fontSize: { xs: '18px', md: '24px' }, color: 'white' }} />
         </IconButton>
       )}
       <Grid container spacing={2} sx={{ overflow: 'hidden', width: '100%' }}>
         {visibleFilms.map((film, index) => (
-          <Grid item xs={12} sm={6} md={2} key={index}>
+          <Grid item xs={6} sm={6} md={2} key={index}>
             <FilmCard
               id={film.id}
               name={film.name}
@@ -65,21 +65,21 @@ const FilmSlider = ({ films }) => {
         <IconButton
           onClick={handleSlideRight}
           sx={{
-            position: 'absolute',
-            right: '-20px', 
-            top: '50%',
-            transform: 'translateY(-50%)',
+            position: { xs: 'absolute', md: 'absolute' },
+            right: { xs: '50%', md: '-20px' },
+            top: { xs: 'calc(100% + 10px)', md: '50%' }, 
+            transform: { xs: 'translateX(50%)', md: 'translateY(-50%)' },
             backgroundColor: '#1E1F29',
-            borderRadius: '8px',
-            width: '25px',
-            height: '80px', 
+            borderRadius: '4px',
+            width: { xs: '40px', md: '25px' }, 
+            height: { xs: '25px', md: '80px' }, 
             zIndex: 2,
             '&:hover': {
               backgroundColor: '#B0001B',
             },
           }}
         >
-          <ArrowForwardIosIcon sx={{ fontSize: '24px', color: 'white' }} />
+          <ArrowForwardIosIcon sx={{ fontSize: { xs: '18px', md: '24px' }, color: 'white' }} />
         </IconButton>
       )}
     </Box>
