@@ -3,8 +3,13 @@ import { Box, IconButton, TextField } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 function NavbarSearchBar({ isMobile }) {
+  const theme = useTheme();
+  const isBelow1300 = useMediaQuery('(max-width:1300px)'); 
+  const isBelow1050 = useMediaQuery('(max-width:1050px)'); 
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
@@ -16,8 +21,8 @@ function NavbarSearchBar({ isMobile }) {
     }
   };
 
-   // Eğer sayfa değişirse arama terimi temizlenir
-   useEffect(() => {
+  // Eğer sayfa değişirse arama terimi temizlenir
+  useEffect(() => {
     if (location.pathname !== currentPath) {
       setSearchTerm(''); // Yalnızca sayfa değiştiğinde temizler
       setCurrentPath(location.pathname); // Yeni sayfayı currentPath olarak ayarlar
@@ -38,12 +43,11 @@ function NavbarSearchBar({ isMobile }) {
         size="small"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        onKeyDown={(e) => e.key === 'Enter' && handleSearch()} 
-
+        onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
         sx={{
           bgcolor: 'white',
           borderRadius: '4px',
-          width: isMobile ? '100%' : '486px',
+          width: isMobile ? '100%' : isBelow1050 ? '100px' : isBelow1300 ? '250px' : '486px', 
           ml: 0,
           height: '43px',
           borderTopLeftRadius: 0,

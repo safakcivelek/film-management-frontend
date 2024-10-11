@@ -15,26 +15,34 @@ const SelectedFilmDetails = ({ handleWatchNow }) => {
         <Box 
           sx={{ 
             flexGrow: 1, 
-            ml: { xs: 0, md: 10 }, 
+            ml: { xs: 0, md: 10 },             
             mt: { xs: 4, md: 0 }, 
             display: 'flex', 
-            justifyContent: { xs: 'center', md: 'flex-start' }, // Mobilde ortalama
-            alignItems: 'center', // İçeriği ortalamak için
-            textAlign: { xs: 'center', md: 'left' }, // Mobilde metinleri ortalama
+            justifyContent: { xs: 'center', md: 'flex-start' }, 
+            alignItems: 'center',
+            textAlign: { xs: 'center', md: 'left' },
           }}
         >
-            <Paper sx={{
+            <Paper 
+              sx={{
                 p: { xs: 2, md: 2 },
                 backgroundColor: 'rgba(0, 0, 0, 0.2)',
                 color: 'white',
-                width: '100%',
-                maxWidth: '600px',
+                width: { xs: '90%', sm: '300px', md: '600px' }, 
                 height: { xs: 'auto', md: '250px' },
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
-                alignItems: { xs: 'center', md: 'flex-start' }, // Mobilde içerikleri ortala
-            }}>
+                alignItems: { xs: 'center', md: 'flex-start' },
+                
+                '@media (max-width:1300px)': {
+                    width: '490px', 
+                },
+                '@media (max-width:1070px)': {
+                    width: '300px', 
+                }
+              }}
+            >
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
                         <Typography
@@ -109,7 +117,7 @@ const SelectedFilmDetails = ({ handleWatchNow }) => {
                             {selectedFilm.description}
                         </Typography>
                         <Box sx={{ display: 'flex', alignItems: 'center', mb: 2, justifyContent: { xs: 'center', md: 'flex-start' } }}>
-                            <StarIcon sx={{ color: '#FFD700',fontSize: 18, mr: 1 }} />
+                            <StarIcon sx={{ color: '#FFD700', fontSize: 18, mr: 1 }} />
                             <Typography variant="body1" sx={{ mr: 3 }}>
                                 {filmScore}
                             </Typography>

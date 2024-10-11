@@ -37,11 +37,15 @@ const MainFilmSlider = () => {
   return (
     <Box sx={{
       position: 'relative',
-      width: { xs: '100%', sm: '350px' },
-      margin: { xs: '0 auto', sm: 'initial' }, // Mobilde ortala
+      width: { xs: '100%', sm: '350px', md: '400px' },
+      margin: { xs: '0 auto', sm: 'initial' }, 
       display: 'flex',
-      flexDirection: 'column', // Mobilde yukarıdan aşağıya hizala
-      alignItems: 'center' 
+      flexDirection: 'column', 
+      alignItems: 'center',
+      '@media (max-width:1300px)': {
+        width: '300px', 
+        marginLeft: '20px', 
+      },
     }}>
       <IconButton
         onClick={handleSlideUp}

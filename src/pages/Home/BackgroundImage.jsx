@@ -24,7 +24,7 @@ const BackgroundImage = () => {
                 top: 0,
                 left: 0,
                 width: '100%',
-                height: { xs: 'auto', md: '1080px' },
+                height: { xs: '1080px', md: '1080px' },
                 backgroundImage: `
                     radial-gradient(circle at center, rgba(0, 0, 0, 0.00), rgba(0, 0, 0, 0.85) 85%), 
                     url(${currentImage})

@@ -62,7 +62,7 @@ function Navbar() {
   return (
     <Box className="navbar" sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ bgcolor: '#1E1F29' }}>
-        <Toolbar sx={{ mx: { xs: 2, sm: 3, md: 20 }, height: '90px', minHeight: '90px', alignItems: 'center' }}>
+        <Toolbar sx={{ mx: { xs: 2, sm: 3, md: 20 }, height: '90px', minHeight: '90px', alignItems: 'center',justifyContent: 'center', px: 2 }}>
           <IconButton edge="start" color="inherit" aria-label="menu" onClick={handleDrawerToggle} sx={{ display: isMobile ? 'inline-flex' : 'none' }}>
             <MenuIcon sx={{ fontSize: '1.8rem' }} />
           </IconButton>
@@ -82,6 +82,7 @@ function Navbar() {
                   variant="outlined"
                   color="inherit"
                   sx={{
+                    whiteSpace: 'nowrap', minWidth: '100px',
                     fontSize: '0.8rem',
                     textTransform: 'uppercase',
                     borderColor: '#FFFFFF',
