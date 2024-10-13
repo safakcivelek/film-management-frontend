@@ -11,6 +11,7 @@ import SuccessDialog from './SuccessDialog';
 import { useAuth } from '../../contextApi/AuthContext';
 import FilmRatingService from '../../services/filmRatingService';
 import { toast } from 'react-toastify';
+import LoadingSpinner from '../../components/LoadingSpinner';
 
 const FilmDetailPage = () => {
     const { film, loading, error, isPurchased, fetchFilmDetail } = useFilmDetail();
@@ -72,10 +73,8 @@ const FilmDetailPage = () => {
         setOpenConfirmDialog(false);
         setOpenSuccessDialog(false);
     };
-
-    if (loading) {
-        return <Typography variant="h6" component="div" sx={{ color: 'white' }}>Yükleniyor...</Typography>;
-    }
+    
+    if (loading) { return <LoadingSpinner />;} 
 
     if (error) {
         return <Typography variant="h6" component="div" sx={{ color: 'white' }}>{error}</Typography>;

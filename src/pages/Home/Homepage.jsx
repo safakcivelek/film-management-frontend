@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Container } from '@mui/material';
+import { Box, CircularProgress, Container, Typography } from '@mui/material';
 import PopularFilmsList from './PopularFilmsList';
 import BestFilmsList from './BestFilmsList';
 import MainFilmSlider from './MainFilmSlider';
@@ -8,6 +8,7 @@ import BackgroundImage from './BackgroundImage';
 import { useNavigate } from 'react-router-dom';
 import { useFilms } from '../../contextApi/HomePageFilmContext';
 import { Helmet } from 'react-helmet-async';
+import LoadingSpinner from '../../components/LoadingSpinner';
 
 const HomePage = () => {
   const { films, selectedFilm, setSelectedFilm, loading, error } = useFilms();
@@ -19,7 +20,7 @@ const HomePage = () => {
     }
   };
 
-  if (loading) return <p>Yükleniyor...</p>;
+  if (loading) { return <LoadingSpinner />;}  
   if (error) return <p>Hata: {error}</p>;
   if (!films || films.length === 0 || !selectedFilm) {
     return (
@@ -28,10 +29,10 @@ const HomePage = () => {
       </div>
     );
   }
-  
+
   return (
     <>
-    <Helmet>
+      <Helmet>
         <title>ELECTROFILM - Film İzle</title>
       </Helmet>
       <Box sx={{ mb: 4, position: 'relative', height: { xs: 'auto', md: '865px' }, overflow: 'hidden' }}>

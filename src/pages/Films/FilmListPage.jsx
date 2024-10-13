@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react';
 import LoadMoreButton from '../../components/films/LoadMoreButton';
 import { Info } from '@mui/icons-material';
 import { Helmet } from 'react-helmet-async';
+import LoadingSpinner from '../../components/LoadingSpinner';
 
 
 const FilmListPage = () => {
@@ -19,6 +20,8 @@ const FilmListPage = () => {
   const [sortOrder, setSortOrder] = useState('');
   const [start, setStart] = useState(0);
   const limit = 6;
+  const [initialLoading, setInitialLoading] = useState(true); // YENİ state
+
 
   const queryParams = getQueryParams();
 
@@ -60,7 +63,8 @@ const FilmListPage = () => {
     const dynamicQuery = { filter: dynamicFilter, sort: dynamicSort };
 
     setStart(0);
-    fetchFilteredFilms(0, limit, dynamicQuery);
+    fetchFilteredFilms(0, limit, dynamicQuery)
+    .finally(() => setInitialLoading(false));
   }, [filters, sortOptions]);
 
   // Load more butonuna tıklandığında çağrılacak fonksiyon
@@ -72,8 +76,8 @@ const FilmListPage = () => {
     fetchFilteredFilms(start + limit, limit, dynamicQuery);
     setStart(prevStart => prevStart + limit);
   };
-
-  // if (loading) return <p>Yükleniyor...</p>;
+  
+  if (initialLoading) { return <LoadingSpinner />;}  
   if (error) return <p>Hata: {error}</p>;
 
   return (
